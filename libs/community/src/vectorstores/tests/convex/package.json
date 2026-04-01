@@ -1,10 +1,10 @@
 {
   "name": "langchain-convex-tests",
   "version": "0.0.1",
-  "private": true,
   "type": "module",
+  "private": true,
   "dependencies": {
-    "@langchain/core": "^1.0.0-alpha.6",
-    "convex": "1.4.1"
+    "convex": "1.4.1",
+    "@langchain/core": "^1.0.0-alpha.6"
   }
 }

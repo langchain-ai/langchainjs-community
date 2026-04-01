@@ -25,7 +25,8 @@ test.skip("Test ChatMinimax", async () => {
     ],
   });
   const message = new HumanMessage("Hello!");
-// @ts-expect-error unused var
+  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+  // @ts-expect-error unused var
   const res = await chat.invoke([message]);
   // console.log({ res });
 });
@@ -34,7 +35,8 @@ test.skip("Test ChatMinimax with SystemChatMessage", async () => {
   const chat = new ChatMinimax();
   const system_message = new SystemMessage("You are to chat with a user.");
   const message = new HumanMessage("Hello!");
-// @ts-expect-error unused var
+  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+  // @ts-expect-error unused var
   const res = await chat.invoke([system_message, message]);
   // console.log({ res });
 });
@@ -97,7 +99,8 @@ test.skip("Test ChatMinimax tokenUsage", async () => {
     }),
   });
   const message = new HumanMessage("Hello");
-// @ts-expect-error unused var
+  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+  // @ts-expect-error unused var
   const res = await model.invoke([message]);
   // console.log({ res });
 
@@ -123,7 +126,8 @@ test.skip("Test ChatMinimax tokenUsage with a batch", async () => {
       },
     }),
   });
-// @ts-expect-error unused var
+  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+  // @ts-expect-error unused var
   const res = await model.generate([
     [new HumanMessage("Hello")],
     [new HumanMessage("Hi")],
@@ -178,7 +182,9 @@ test.skip("OpenAI Chat, docs, prompt templates", async () => {
     new SystemMessagePromptTemplate(systemPrompt),
     HumanMessagePromptTemplate.fromTemplate("{text}"),
   ]);
-// @ts-expect-error unused var
+
+  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+  // @ts-expect-error unused var
   const responseA = await chat.generatePrompt([
     await chatPrompt.formatPromptValue({
       input_language: "English",
@@ -211,7 +217,8 @@ test.skip("Test OpenAI with specific roles in ChatMessage", async () => {
     "system"
   );
   const user_message = new ChatMessage("Hello!", "user");
-// @ts-expect-error unused var
+  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+  // @ts-expect-error unused var
   const res = await chat.invoke([system_message, user_message]);
   // console.log({ res });
 });
@@ -335,7 +342,9 @@ test.skip("Test ChatMinimax Plugins", async () => {
   }).withConfig({
     plugins: ["plugin_web_search"],
   });
-// @ts-expect-error unused var
+
+  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+  // @ts-expect-error unused var
   const result = await model.invoke([
     new HumanMessage({
       content: " What is the weather like in NewYork tomorrow?",

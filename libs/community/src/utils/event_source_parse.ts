@@ -131,7 +131,8 @@ export function getLines(
               fieldLength = position - lineStart;
             }
             break;
-          // @ts-expect-error TS7029: '\r' intentionally falls through to '\n'.
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore:7029 \r case below should fallthrough to \n:
           case ControlChars.CarriageReturn:
             discardTrailingNewline = true;
           // eslint-disable-next-line no-fallthrough

@@ -6,7 +6,8 @@ import {
 } from "../../utils/iflytek_websocket_stream.js";
 
 class WebSocketStream extends BaseWebSocketStream {
-  // @ts-expect-error ws accepts this override shape at runtime.
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   openWebSocket(url: string, options: WebSocketStreamOptions): WebSocket {
     return new WebSocket(url, options.protocols ?? []);
   }

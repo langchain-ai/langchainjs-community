@@ -36,7 +36,8 @@ describe("VercelKVStore", () => {
       encoder.encode(value1),
       encoder.encode(value2),
     ]);
-// @ts-expect-error unused var
+    // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+    // @ts-expect-error unused var
     for await (const key of store.yieldKeys()) {
       // console.log(key);
     }

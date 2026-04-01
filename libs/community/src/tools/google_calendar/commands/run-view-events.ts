@@ -67,14 +67,13 @@ const runViewEvents = async (
               start,
               end,
             }: // oxlint-disable-next-line typescript/no-explicit-any
-            any) =>
-              ({
-                status,
-                summary,
-                description,
-                start,
-                end,
-              })
+            any) => ({
+              status,
+              summary,
+              description,
+              start,
+              end,
+            })
           )
         : [];
 

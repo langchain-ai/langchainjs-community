@@ -7,7 +7,8 @@ test.skip("Test FigmaFileLoader", async () => {
     nodeIds: (process.env.FIGMA_NODE_IDS ?? "").split(","),
     fileKey: process.env.FIGMA_FILE_KEY!,
   });
-// @ts-expect-error unused var
+  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+  // @ts-expect-error unused var
   const documents = await loader.load();
   // console.log(documents[0].pageContent);
 });

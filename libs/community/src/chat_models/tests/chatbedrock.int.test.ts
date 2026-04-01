@@ -366,7 +366,8 @@ test.skip("Tool calling agent with Anthropic", async () => {
     tools,
   });
   const input = "what is the current weather in SF?";
-// @ts-expect-error unused var
+  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+  // @ts-expect-error unused var
   const result = await agentExecutor.invoke({
     input,
   });

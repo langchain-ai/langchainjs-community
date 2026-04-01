@@ -152,7 +152,8 @@ export class ChromeAI extends LLM<ChromeAICallOptions> {
     // oxlint-disable-next-line typescript/no-explicit-any
     let aiInstance: any;
     try {
-      // @ts-expect-error experimental browser-only global
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore Experimental browser-only global
       aiInstance = LanguageModel;
       // oxlint-disable-next-line typescript/no-explicit-any
     } catch (e: any) {

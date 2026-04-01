@@ -32,9 +32,8 @@
     "format:check": "oxfmt -c ../../.oxfmtrc.json --check src/"
   },
   "dependencies": {
-    "@langchain/classic": "workspace:*",
-    "@langchain/fireworks": "workspace:*",
-    "@langchain/openai": "workspace:*",
+    "@langchain/classic": "^1.0.27",
+    "@langchain/openai": "^1.4.1",
     "binary-extensions": "^2.2.0",
     "flat": "^5.0.2",
     "js-yaml": "^4.1.1",
@@ -73,8 +72,7 @@
     "@huggingface/transformers": "^3.8.1",
     "@ibm-cloud/watsonx-ai": "^1.7.9",
     "@lancedb/lancedb": "^0.19.1",
-    "@langchain/core": "workspace:^",
-    "@langchain/standard-tests": "workspace:*",
+    "@langchain/core": "^1.1.38",
     "@langchain/tsconfig": "workspace:*",
     "@layerup/layerup-security": "^1.5.12",
     "@libsql/client": "^0.17.0",
@@ -225,7 +223,7 @@
     "@huggingface/transformers": "^3.8.1",
     "@ibm-cloud/watsonx-ai": "*",
     "@lancedb/lancedb": "^0.19.1",
-    "@langchain/core": "workspace:^",
+    "@langchain/core": "^1.1.38",
     "@layerup/layerup-security": "^1.5.12",
     "@libsql/client": "^0.17.0",
     "@mendable/firecrawl-js": "^4.15.2",
@@ -3475,11 +3473,11 @@
   ],
   "module": "./dist/index.js",
   "inlinedDependencies": {
-    "@aws-sdk/types": "3.973.5",
+    "@aws-sdk/types": "3.973.6",
     "@azure/abort-controller": "2.1.2",
     "@azure/core-auth": "1.10.1",
     "@azure/core-util": "1.13.1",
-    "@smithy/types": "4.13.0",
-    "@supabase/postgrest-js": "2.95.3"
+    "@smithy/types": "4.13.1",
+    "@supabase/postgrest-js": "2.101.1"
   }
 }

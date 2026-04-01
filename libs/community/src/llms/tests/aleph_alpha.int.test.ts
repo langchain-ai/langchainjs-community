@@ -4,7 +4,8 @@ import { AlephAlpha } from "../aleph_alpha.js";
 describe("Aleph Alpha", () => {
   test("test call", async () => {
     const aleph_alpha = new AlephAlpha({});
-// @ts-expect-error unused var
+    // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+    // @ts-expect-error unused var
     const result = await aleph_alpha.invoke(
       "What is a good name for a company that makes colorful socks?"
     );
@@ -13,7 +14,8 @@ describe("Aleph Alpha", () => {
 
   test("test translation call", async () => {
     const aleph_alpha = new AlephAlpha({});
-// @ts-expect-error unused var
+    // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+    // @ts-expect-error unused var
     const result = await aleph_alpha.invoke(
       `Translate "I love programming" into German.`
     );
@@ -22,7 +24,8 @@ describe("Aleph Alpha", () => {
 
   test("test JSON output call", async () => {
     const aleph_alpha = new AlephAlpha({});
-// @ts-expect-error unused var
+    // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
+    // @ts-expect-error unused var
     const result = await aleph_alpha.invoke(
       `Output a JSON object with three string fields: "name", "birthplace", "bio".`
     );

@@ -26,7 +26,8 @@ export const encodeApiKey = (apiSecretKey?: string, cache = true): string => {
       timestamp: Math.round(Date.now() * 1000),
     };
     // algorithm = "HS256", headers = { "alg": "HS256", "sign_type": "SIGN" }
-    // @ts-expect-error jsonwebtoken types do not model this custom header shape.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const ret = jsonwebtoken.sign(payload, secret, {
       algorithm: "HS256",
       header: { alg: "HS256", sign_type: "SIGN" },
