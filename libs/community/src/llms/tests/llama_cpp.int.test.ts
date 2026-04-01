@@ -6,16 +6,14 @@ const llamaPath = getEnvironmentVariable("LLAMA_PATH")!;
 
 test.skip("Test Llama_CPP", async () => {
   const model = await LlamaCpp.initialize({ modelPath: llamaPath });
-  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-  // @ts-expect-error unused var
+// @ts-expect-error unused var
   const res = await model.invoke("Where do Llamas live?");
   // console.log(res);
 }, 100000);
 
 test.skip("Test Llama_CPP", async () => {
   const model = await LlamaCpp.initialize({ modelPath: llamaPath });
-  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-  // @ts-expect-error unused var
+// @ts-expect-error unused var
   const res = await model.invoke("Where do Pandas live?");
   // console.log(res);
 }, 100000);
@@ -61,8 +59,7 @@ test.skip("Test Llama_CPP", async () => {
     modelPath: llamaPath,
     gbnf: gbnfListGrammer,
   });
-  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-  // @ts-expect-error unused var
+// @ts-expect-error unused var
   const res = await model.invoke(
     "Can you give me a list of 3 cute llama names?"
   );
@@ -91,8 +88,7 @@ test.skip("Test Llama_CPP", async () => {
     modelPath: llamaPath,
     jsonSchema: schemaJSON,
   });
-  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-  // @ts-expect-error unused var
+// @ts-expect-error unused var
   const res = await model.invoke("Where do llamas live?");
   // console.log(res);
 }, 100000);

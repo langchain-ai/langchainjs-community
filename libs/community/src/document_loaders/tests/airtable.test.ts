@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import { Document } from "@langchain/core/documents";
 import { expect, vi } from "vitest";
 import { AirtableLoader } from "../web/airtable.js";

@@ -17,7 +17,7 @@ export type RemoteRetrieverAuth = false | { bearer: string };
 /**
  * Type for the JSON response values from the remote server.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 export type RemoteRetrieverValues = Record<string, any>;
 
 /**

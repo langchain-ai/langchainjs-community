@@ -283,7 +283,7 @@ export class VectaraStore extends VectorStore {
           }
         } catch (e) {
           const error = new Error(`Error ${(e as Error).message}`);
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // oxlint-disable-next-line typescript/no-explicit-any
           (error as any).code = 500;
           throw error;
         }
@@ -345,7 +345,7 @@ export class VectaraStore extends VectorStore {
               result.status?.code
             }: ${JSON.stringify(result.message)}`
           );
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // oxlint-disable-next-line typescript/no-explicit-any
           (error as any).code = 500;
           throw error;
         } else {
@@ -356,7 +356,7 @@ export class VectaraStore extends VectorStore {
         const error = new Error(
           `Error ${(e as Error).message} while adding document`
         );
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // oxlint-disable-next-line typescript/no-explicit-any
         (error as any).code = 500;
         throw error;
       }

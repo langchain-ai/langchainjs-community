@@ -3,8 +3,7 @@ import { HuggingFaceInference } from "../hf.js";
 
 test.skip("Test HuggingFace", async () => {
   const model = new HuggingFaceInference({ temperature: 0.1, topP: 0.5 });
-  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-  // @ts-expect-error unused var
+// @ts-expect-error unused var
   const res = await model.invoke("1 + 1 =");
   // console.log(res);
 }, 50000);

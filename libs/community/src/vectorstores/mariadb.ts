@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import mariadb, { type Pool, type PoolConfig } from "mariadb";
 import { VectorStore } from "@langchain/core/vectorstores";
 import type { EmbeddingsInterface } from "@langchain/core/embeddings";

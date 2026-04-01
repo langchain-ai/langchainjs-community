@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import { vi, test, expect } from "vitest";
 import { SearchIndexingBufferedSender } from "@azure/search-documents";
 import { FakeEmbeddings } from "@langchain/core/utils/testing";

@@ -26,8 +26,7 @@ describe("RedisByteStore", () => {
       value1,
       value2,
     ]);
-    // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-    // @ts-expect-error unused var
+// @ts-expect-error unused var
     for await (const key of store.yieldKeys()) {
       // console.log(key);
     }

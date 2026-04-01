@@ -33,12 +33,12 @@ class FakeDatadogLLMObsTracer extends DatadogLLMObsTracer {
 beforeEach(() => {
   const oldFetch = global.fetch;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   global.fetch = vi.fn().mockImplementation(async (url: any, init?: any) => {
     if (!url.startsWith(BASE_URL)) return await oldFetch(url, init);
     const resp: Response = new Response();
     return resp;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
   }) as any;
 });
 

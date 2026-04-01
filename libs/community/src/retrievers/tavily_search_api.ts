@@ -110,7 +110,7 @@ export class TavilySearchAPIRetriever extends BaseRetriever {
     if (!Array.isArray(json.results)) {
       throw new Error(`Could not parse Tavily results. Please try again.`);
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const docs: Document[] = json.results.map((result: any) => {
       const pageContent = this.includeRawContent
         ? result.raw_content

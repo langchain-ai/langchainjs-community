@@ -51,7 +51,7 @@ export class ProxyParamsDuplicator {
     const proxyHandler: ProxyHandler<SupabaseFilter> = {
       get: (target, prop, receiver) => {
         if (typeof target[prop as SupabaseFilterProps] === "function") {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // oxlint-disable-next-line typescript/no-explicit-any
           return (...args: any[]) => {
             if (this.duplicationAllowedOps.includes(String(prop))) {
               switch (String(prop)) {

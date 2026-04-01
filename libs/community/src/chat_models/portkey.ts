@@ -40,7 +40,7 @@ function portkeyResponseToChatMessage(message: Message): BaseMessage {
 }
 
 function _convertDeltaToMessageChunk(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   delta: Record<string, any>
 ) {
   const { role } = delta;

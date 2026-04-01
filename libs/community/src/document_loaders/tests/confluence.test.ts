@@ -38,12 +38,12 @@ test("Test ConfluenceLoader and fetchConfluenceData calls", async () => {
     .spyOn(loader, "fetchConfluenceData")
     .mockImplementationOnce(
       () =>
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // oxlint-disable-next-line typescript/no-explicit-any
         Promise.resolve({ size: 2, results: fakeResponse }) as any
     )
     .mockImplementationOnce(
       () =>
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // oxlint-disable-next-line typescript/no-explicit-any
         Promise.resolve({ size: 2, results: fakeResponse }) as any
     )
     .mockImplementationOnce(() => Promise.resolve({ size: 0, results: [] }));

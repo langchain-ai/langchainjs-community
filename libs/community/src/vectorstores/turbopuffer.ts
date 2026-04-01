@@ -144,7 +144,7 @@ export class TurbopufferVectorStore extends VectorStore {
             response.status
           }\nFull response: ${await response.text()}`
         );
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // oxlint-disable-next-line typescript/no-explicit-any
         (error as any).response = response;
         throw error;
       }

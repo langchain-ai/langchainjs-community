@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import { vi } from "vitest";
 import { LLMResult } from "@langchain/core/outputs";
 import { Ratelimit } from "@upstash/ratelimit";
@@ -19,13 +18,14 @@ const createResponse = (
   remaining: number,
   reset: number
   // pending: Promise<unknown>
-) => ({
-  success,
-  limit,
-  remaining,
-  reset,
-  // pending: pending
-});
+) =>
+  ({
+    success,
+    limit,
+    remaining,
+    reset,
+    // pending: pending
+  });
 
 const createRatelimitMock = () => {
   const ratelimit = new Ratelimit({
@@ -170,14 +170,14 @@ describe("UpstashRatelimitHandler", () => {
   test("should reset handler with new identifier", () => {
     const newHandler = handlerWithBothLimits.reset("user456");
     expect(newHandler.identifier).toBe("user456");
-    // @ts-ignore field is private but we will check it for testing
+    // @ts-expect-error access private field for regression coverage
     expect(newHandler._checked).toBeFalsy();
   });
 
   test("should reset handler without new identifier", () => {
     const newHandler = handlerWithBothLimits.reset();
     expect(newHandler.identifier).toBe("user123");
-    // @ts-ignore field is private but we will check it for testing
+    // @ts-expect-error access private field for regression coverage
     expect(newHandler._checked).toBeFalsy();
   });
 

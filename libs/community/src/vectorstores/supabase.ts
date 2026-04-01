@@ -17,9 +17,9 @@ interface SearchEmbeddingsParams {
   filter?: SupabaseMetadata | SupabaseFilterRPCCall;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 export type SupabaseMetadata = Record<string, any>;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 export type SupabaseFilter = PostgrestFilterBuilder<any, any, any>;
 export type SupabaseFilterRPCCall = (rpcCall: SupabaseFilter) => SupabaseFilter;
 

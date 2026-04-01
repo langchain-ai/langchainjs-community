@@ -36,17 +36,17 @@ type PrismaNamespace = {
 type PrismaClient = {
   $queryRaw<T = unknown>(
     query: TemplateStringsArray | Sql,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     ...values: any[]
   ): Promise<T>;
   $executeRaw(
     query: TemplateStringsArray | Sql,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     ...values: any[]
-  ): // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): // oxlint-disable-next-line typescript/no-explicit-any
   Promise<any>;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   $transaction<P extends Promise<any>[]>(arg: [...P]): Promise<any>;
 };
 
@@ -456,7 +456,7 @@ export class PrismaVectorStore<
     query: string,
     k?: number,
     filter?: this["FilterType"]
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
   ): Promise<[DocumentInterface<Record<string, any>>, number][]> {
     return super.similaritySearchWithScore(query, k, filter);
   }

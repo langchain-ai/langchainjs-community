@@ -136,7 +136,7 @@ export class VercelPostgres extends VectorStore {
    * @returns The SQL placeholders for the row values.
    */
   protected generatePlaceholderForRowAt(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     row: (string | Record<string, any>)[],
     index: number
   ): string {
@@ -152,7 +152,7 @@ export class VercelPostgres extends VectorStore {
    * @returns The complete SQL INSERT INTO query string.
    */
   protected async runInsertQuery(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     rows: (string | Record<string, any>)[][],
     useIdColumn: boolean
   ) {

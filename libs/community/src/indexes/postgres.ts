@@ -54,7 +54,7 @@ export class PostgresRecordManager implements RecordManagerInterface {
         CREATE INDEX IF NOT EXISTS namespace_index ON ${this.finalTableName} (namespace);
         CREATE INDEX IF NOT EXISTS group_id_index ON ${this.finalTableName} (group_id);`);
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (e: any) {
       // This error indicates that the table already exists
       // Due to asynchronous nature of the code, it is possible that

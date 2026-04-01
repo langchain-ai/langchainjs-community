@@ -6,8 +6,7 @@ test.skip("Test TaskadeProjectLoader", async () => {
     personalAccessToken: process.env.TASKADE_PERSONAL_ACCESS_TOKEN!,
     projectId: process.env.TASKADE_PROJECT_ID!,
   });
-  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-  // @ts-expect-error unused var
+// @ts-expect-error unused var
   const documents = await loader.load();
   // console.log(documents[0].pageContent);
 });

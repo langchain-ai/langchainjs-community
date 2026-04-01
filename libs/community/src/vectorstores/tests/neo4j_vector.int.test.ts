@@ -62,7 +62,7 @@ describe("Neo4j Vector", () => {
     expect(password).toBeDefined();
 
     const embeddings = new FakeEmbeddingsWithOsDimension();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadatas: any[] = [];
 
     const neo4jVectorStore = await Neo4jVectorStore.fromTexts(
@@ -105,7 +105,7 @@ describe("Neo4j Vector", () => {
     expect(password).toBeDefined();
 
     const embeddings = new FakeEmbeddingsWithOsDimension();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadatas: any[] = [];
 
     const neo4jVectorStore = await Neo4jVectorStore.fromTexts(
@@ -149,7 +149,7 @@ describe("Neo4j Vector", () => {
     expect(password).toBeDefined();
 
     const embeddings = new FakeEmbeddingsWithOsDimension();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadatas: any[] = [];
 
     const neo4jVectorStore = await Neo4jVectorStore.fromTexts(
@@ -201,7 +201,7 @@ describe("Neo4j Vector", () => {
     expect(password).toBeDefined();
 
     const embeddings = new FakeEmbeddingsWithOsDimension();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadatas: any[] = [];
 
     const neo4jVectorStore = await Neo4jVectorStore.fromTexts(
@@ -257,7 +257,7 @@ describe("Neo4j Vector", () => {
     expect(password).toBeDefined();
 
     const embeddings = new FakeEmbeddingsWithOsDimension();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadatas: any[] = [];
 
     const neo4jVectorStore = await Neo4jVectorStore.fromTexts(
@@ -303,7 +303,7 @@ describe("Neo4j Vector", () => {
     expect(password).toBeDefined();
 
     const embeddings = new FakeEmbeddingsWithOsDimension();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadatas: any[] = [];
 
     const neo4jVectorStore = await Neo4jVectorStore.fromTexts(
@@ -364,7 +364,7 @@ describe("Neo4j Vector", () => {
     expect(password).toBeDefined();
 
     const embeddings = new FakeEmbeddingsWithOsDimension();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadatas: any[] = [];
 
     const neo4jVectorStore = await Neo4jVectorStore.fromTexts(
@@ -425,7 +425,7 @@ describe("Neo4j Vector", () => {
     expect(password).toBeDefined();
 
     const embeddings = new FakeEmbeddingsWithOsDimension();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadatas: any[] = [];
 
     const neo4jVectorStore = await Neo4jVectorStore.fromTexts(
@@ -487,7 +487,7 @@ describe("Neo4j Vector", () => {
     expect(password).toBeDefined();
 
     const embeddings = new FakeEmbeddingsWithOsDimension();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadatas: any[] = [];
 
     const neo4jVectorStore = await Neo4jVectorStore.fromTexts(
@@ -534,7 +534,7 @@ describe("Neo4j Vector", () => {
     expect(password).toBeDefined();
 
     const embeddings = new FakeEmbeddingsWithOsDimension();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadatas: any[] = [];
 
     const foo = await Neo4jVectorStore.fromTexts(
@@ -624,7 +624,7 @@ describe("Neo4j Vector", () => {
     expect(password).toBeDefined();
 
     const embeddings = new FakeEmbeddingsWithOsDimension();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadatas: any[] = [];
 
     const neo4jVectorStore = await Neo4jVectorStore.fromTexts(

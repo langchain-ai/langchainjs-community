@@ -29,7 +29,7 @@ interface DataType {
   id: string;
   embedding: number[];
   document: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   metadata: Record<string, any>;
 }
 
@@ -40,7 +40,7 @@ interface DataType {
  * instance of `AnalyticDBVectorStore` from texts or documents.
  */
 export class AnalyticDBVectorStore extends VectorStore {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   declare FilterType: Record<string, any>;
 
   private pool: Pool;

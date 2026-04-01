@@ -459,7 +459,7 @@ export class MatchingEngine extends VectorStore implements MatchingEngineArgs {
   }
 
   // TODO: Refactor this into a utility type and use with pinecone as well?
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   cleanMetadata(documentMetadata: Record<string, any>): {
     [key: string]: string | number | boolean | string[] | null;
   } {
@@ -469,7 +469,7 @@ export class MatchingEngine extends VectorStore implements MatchingEngineArgs {
 
     function getStringArrays(
       prefix: string,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       m: Record<string, any>
     ): Record<string, string[]> {
       let ret: Record<string, string[]> = {};
@@ -525,7 +525,7 @@ export class MatchingEngine extends VectorStore implements MatchingEngineArgs {
    * @returns a Restriction[] (or an array of a subclass, from the FilterType)
    */
   metadataToRestrictions(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     documentMetadata: Record<string, any>
   ): this["FilterType"] {
     const metadata = this.cleanMetadata(documentMetadata);

@@ -20,7 +20,7 @@ describe("GithubRepoLoader recursion", () => {
         json: () => Promise.resolve(responseData),
         text: () => Promise.resolve("this is a file full of stuff"),
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     }) as any;
   });
 
@@ -93,7 +93,7 @@ describe("GithubRepoLoader URL encoding", () => {
       });
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     global.fetch = mockFetch as any;
 
     const loader = new GithubRepoLoader(

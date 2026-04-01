@@ -59,7 +59,7 @@ interface FilterTypeValue {
   lte?: number;
   lt?: number;
   regexp?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   terms_set?: Record<string, any>;
   wildcard?: string;
 }
@@ -164,7 +164,7 @@ export class OpenSearchVectorStore extends VectorStore {
     const documentIds =
       options?.ids ?? Array.from({ length: vectors.length }, () => uuid.v4());
     const operations = vectors.flatMap((embedding, idx) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       const document: Record<string, any> = [
         {
           index: {
@@ -228,7 +228,7 @@ export class OpenSearchVectorStore extends VectorStore {
 
     const { body } = await this.client.search(search);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     return body.hits.hits.map((hit: any) => [
       new Document({
         pageContent: hit._source[this.textFieldName],

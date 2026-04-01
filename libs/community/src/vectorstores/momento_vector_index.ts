@@ -1,5 +1,5 @@
 /* eslint-disable no-instanceof/no-instanceof */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import {
   ALL_VECTOR_METADATA,
   IVectorIndexClient,

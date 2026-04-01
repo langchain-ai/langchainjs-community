@@ -181,7 +181,7 @@ export class AI21 extends LLM implements AI21Input {
         const error = new Error(
           `AI21 call failed with status code ${response.status}`
         );
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // oxlint-disable-next-line typescript/no-explicit-any
         (error as any).response = response;
         throw error;
       }

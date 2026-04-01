@@ -58,7 +58,7 @@ export interface WatsonxLLMParams {
   truncateInputTokens?: number;
   returnOptions?: ReturnOptionProperties;
   includeStopSequence?: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   headers?: Record<string, any>;
   signal?: AbortSignal;
 }
@@ -389,7 +389,7 @@ export class WatsonxLLM<
     if (this.idOrName) return undefined;
 
     if (this.modelGateway) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       const modelGatewayParams: Record<string, any> = {
         ...this?.modelGatewayKwargs,
         ...parameters?.modelGatewayKwargs,

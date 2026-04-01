@@ -7,7 +7,7 @@ import neo4j, {
 import { sha256 } from "@langchain/core/utils/hash";
 import { GraphDocument } from "./document.js";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 type Any = any;
 
 interface Neo4jGraphConfig {

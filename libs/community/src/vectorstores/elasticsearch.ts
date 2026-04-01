@@ -63,15 +63,15 @@ export interface ElasticClientArgs {
 /**
  * Type representing a filter object in Elasticsearch.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 type ElasticFilter = object | { field: string; operator: string; value: any }[];
 
 type ElasticMetadataTerms = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   must: { [operator: string]: { [field: string]: any } }[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   must_not: { [operator: string]: { [field: string]: any } }[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   should?: { [operator: string]: { [field: string]: any } }[];
   minimum_should_match?: number;
 };
@@ -248,7 +248,7 @@ export class ElasticVectorSearch extends VectorStore {
       },
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     return result.hits.hits.map((hit: any) => [
       new Document({
         pageContent: hit._source.text,
@@ -301,7 +301,7 @@ export class ElasticVectorSearch extends VectorStore {
       ...(filterClauses && { query: filterClauses }),
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     return result.hits.hits.map((hit: any) => [
       new Document({
         pageContent: hit._source.text,

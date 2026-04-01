@@ -144,7 +144,7 @@ export class RecursiveUrlLoader
   }
 
   private extractMetadata(rawHtml: string, url: string) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const metadata: Record<string, any> = { source: url };
     const { document } = new JSDOM(rawHtml, { virtualConsole }).window;
 

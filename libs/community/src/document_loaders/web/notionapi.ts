@@ -20,8 +20,8 @@ import { Document } from "@langchain/core/documents";
 import { AsyncCaller } from "@langchain/core/utils/async_caller";
 import { BaseDocumentLoader } from "@langchain/core/document_loaders/base";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type GuardType<T> = T extends (x: any, ...rest: any) => x is infer U
+// oxlint-disable-next-line typescript/no-explicit-any
+type GuardType<T> = T extends ((x: any, ...rest: any) => x is infer U)
   ? U
   : never;
 

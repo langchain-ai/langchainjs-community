@@ -6,7 +6,7 @@ describe("Sanity check tests", () => {
   it("should sanitize int with illegal value", () => {
     try {
       HanaDB.sanitizeInt("HUGO");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (error: any) {
       expect(error.message).toContain("must not be smaller than 0");
     }
@@ -25,7 +25,7 @@ describe("Sanity check tests", () => {
   it("should sanitize int with illegal negative value", () => {
     try {
       HanaDB.sanitizeInt(-2, -1);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (error: any) {
       expect(error.message).toContain("must not be smaller than -1");
     }

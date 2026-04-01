@@ -154,7 +154,7 @@ async function* createOllamaStream(
         `Ollama call failed with status code ${response.status}: ${responseText}`
       );
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     (error as any).response = response;
     throw error;
   }

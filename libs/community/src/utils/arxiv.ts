@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import { Document } from "@langchain/core/documents";
 import { XMLParser } from "fast-xml-parser";
 

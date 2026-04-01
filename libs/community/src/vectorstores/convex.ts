@@ -156,9 +156,9 @@ export class ConvexVectorStore<
     this.metadataField =
       config.metadataField ?? ("metadata" as MetadataFieldName);
     this.insert =
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       config.insert ?? (makeFunctionReference("langchain/db:insert") as any);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     this.get = config.get ?? (makeFunctionReference("langchain/db:get") as any);
   }
 
@@ -182,7 +182,7 @@ export class ConvexVectorStore<
           this.ctx.runMutation(this.insert, {
             table: this.table,
             document,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // oxlint-disable-next-line typescript/no-explicit-any
           } as any)
         )
       );
@@ -226,7 +226,7 @@ export class ConvexVectorStore<
 
     const documents = await Promise.all(
       idsAndScores.map(({ _id }) =>
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // oxlint-disable-next-line typescript/no-explicit-any
         this.ctx.runQuery(this.get, { id: _id } as any)
       )
     );

@@ -78,7 +78,7 @@ type Result = {
   item_types: string[];
   se_results_count: number;
   items_count: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   items: any[];
 };
 
@@ -177,7 +177,7 @@ export class DataForSeoAPISearch extends Tool {
    * @returns {Promise<Array<any>>}
    * @description Fetches the results from the API for the given keyword.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   async results(keyword: string): Promise<Array<any>> {
     const res = await this.getResponseJson(keyword);
     return this.filterResults(res, this.jsonResultTypes);
@@ -264,7 +264,7 @@ export class DataForSeoAPISearch extends Tool {
     return response;
   }
 
-  /* eslint-disable @typescript-eslint/no-explicit-any */
+  /* oxlint-disable typescript/no-explicit-any */
   /**
    * @method filterResults
    * @param {ApiResponse} res
@@ -299,7 +299,7 @@ export class DataForSeoAPISearch extends Tool {
     return output;
   }
 
-  /* eslint-disable @typescript-eslint/no-explicit-any */
+  /* oxlint-disable typescript/no-explicit-any */
   /**
    * @method cleanupUnnecessaryItems
    * @param {any} d

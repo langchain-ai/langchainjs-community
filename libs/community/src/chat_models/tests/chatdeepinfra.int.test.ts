@@ -8,8 +8,7 @@ describe("ChatDeepInfra", () => {
   test("call", async () => {
     const deepInfraChat = new ChatDeepInfra({ maxTokens: 20 });
     const message = new HumanMessage("1 + 1 = ");
-    // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-    // @ts-expect-error unused var
+// @ts-expect-error unused var
     const res = await deepInfraChat.invoke([message]);
     // console.log({ res });
   });
@@ -17,8 +16,7 @@ describe("ChatDeepInfra", () => {
   test("generate", async () => {
     const deepInfraChat = new ChatDeepInfra({ maxTokens: 20 });
     const message = new HumanMessage("1 + 1 = ");
-    // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-    // @ts-expect-error unused var
+// @ts-expect-error unused var
     const res = await deepInfraChat.generate([[message]]);
     // console.log(JSON.stringify(res, null, 2));
   });
@@ -43,8 +41,7 @@ describe("ChatDeepInfra", () => {
         },
       },
     ]);
-    // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-    // @ts-expect-error unused var
+// @ts-expect-error unused var
     const res = await deepInfraChat.invoke(
       "What is the current weather in SF?"
     );

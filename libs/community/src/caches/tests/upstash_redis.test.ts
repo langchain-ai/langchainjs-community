@@ -13,7 +13,7 @@ test("UpstashRedisCache", async () => {
       return null;
     }),
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   const cache = new UpstashRedisCache({ client: redis as any });
   expect(await cache.lookup("foo", "bar")).toEqual([{ text: "baz" }]);
 });

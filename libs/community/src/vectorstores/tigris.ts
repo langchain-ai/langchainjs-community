@@ -9,7 +9,7 @@ import { Document } from "@langchain/core/documents";
  * TigrisVectorStore instance.
  */
 export type TigrisLibArgs = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   index: any;
 };
 
@@ -18,7 +18,7 @@ export type TigrisLibArgs = {
  * Tigris, an open-source Serverless NoSQL Database and Search Platform.
  */
 export class TigrisVectorStore extends VectorStore {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   index?: any;
 
   _vectorstoreType(): string {
@@ -105,7 +105,7 @@ export class TigrisVectorStore extends VectorStore {
       return [];
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     return result.map(([document, score]: [any, any]) => [
       new Document({
         pageContent: document.content,

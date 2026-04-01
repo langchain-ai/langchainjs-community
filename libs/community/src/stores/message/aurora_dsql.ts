@@ -123,7 +123,7 @@ export class AuroraDsqlChatMessageHistory extends BaseListChatMessageHistory {
     try {
       await this.pool.query(query);
       await this.createIndex();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (e: any) {
       // This error indicates that the table already exists
       // Due to asynchronous nature of the code, it is possible that

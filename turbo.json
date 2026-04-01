@@ -37,7 +37,9 @@
       "inputs": [
         "src/**/*.ts",
         "src/**/*.tsx",
-        "eslint.config.ts"
+        "tsconfig.json",
+        "package.json",
+        "../../.oxlintrc.json"
       ],
       "outputs": []
     },
@@ -45,7 +47,9 @@
       "inputs": [
         "src/**/*.ts",
         "src/**/*.tsx",
-        "eslint.config.ts"
+        "tsconfig.json",
+        "package.json",
+        "../../.oxlintrc.json"
       ],
       "outputs": [],
       "cache": false
@@ -55,7 +59,9 @@
     },
     "format:check": {
       "inputs": [
-        "src/**"
+        "src/**",
+        "package.json",
+        "../../.oxfmtrc.json"
       ],
       "outputs": []
     },

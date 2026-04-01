@@ -98,7 +98,7 @@ const getTimezoneOffsetInHours = () => {
 /**
  * Helper functions to create the response objects for the Google Routes API.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 function createDeparture(transitDetails: any): Departure {
   const { stopDetails, localizedValues } = transitDetails;
   return {
@@ -109,7 +109,7 @@ function createDeparture(transitDetails: any): Departure {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 function createArrival(transitDetails: any): Arrival {
   const { stopDetails, localizedValues } = transitDetails;
   return {
@@ -120,9 +120,9 @@ function createArrival(transitDetails: any): Arrival {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 function createTravelInstructions(stepsOverview: any): travelInstructions[] {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   return stepsOverview.multiModalSegments.map((segment: any) => ({
     ...(segment.navigationInstruction
       ? {
@@ -133,7 +133,7 @@ function createTravelInstructions(stepsOverview: any): travelInstructions[] {
   }));
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 function createLocalizedValues(route: any): localizedValues {
   const { distance, duration, transitFare } = route.localizedValues;
   return {
@@ -143,7 +143,7 @@ function createLocalizedValues(route: any): localizedValues {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 function createTransitDetails(transitDetails: any): transitDetails {
   const { name, nameShort, vehicle } = transitDetails.transitLine;
   return {
@@ -153,19 +153,19 @@ function createTransitDetails(transitDetails: any): transitDetails {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 function createRouteLabel(route: any): string[] {
   return route.routeLabels;
 }
 
 function filterRoutes(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   route: any,
   travel_mode: string
 ): FilteredTransitRoute | FilteredRoute {
   if (travel_mode === "TRANSIT") {
     const transitStep = route.legs[0].steps.find(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       (step: any) => step.transitDetails
     );
     const filteredRoute: FilteredTransitRoute = {
@@ -400,7 +400,7 @@ export class GoogleRoutesAPI extends StructuredTool {
     }
 
     const routes: FilteredTransitRoute[] | FilteredRoute[] = json.routes.map(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       (route: any) => filterRoutes(route, travel_mode)
     );
 

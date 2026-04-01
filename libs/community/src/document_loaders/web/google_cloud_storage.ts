@@ -81,7 +81,7 @@ export class GoogleCloudStorageLoader extends BaseDocumentLoader {
       this._fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
       this._fs.writeFileSync(filePath, buffer);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (e: any) {
       throw new Error(
         `Failed to download file ${this.file} from google cloud storage bucket ${this.bucket}: ${e.message}`

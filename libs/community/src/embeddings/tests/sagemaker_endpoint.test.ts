@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import { test, expect, describe, vi, beforeEach } from "vitest";
 import { SageMakerEndpointEmbeddings } from "../sagemaker_endpoint.js";
 

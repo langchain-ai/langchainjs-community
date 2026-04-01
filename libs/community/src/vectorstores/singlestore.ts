@@ -13,7 +13,7 @@ import { VectorStore } from "@langchain/core/vectorstores";
 import { Document, DocumentInterface } from "@langchain/core/documents";
 import { Callbacks } from "@langchain/core/callbacks/manager";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 export type Metadata = Record<string, any>;
 
 export type DistanceMetrics = "DOT_PRODUCT" | "EUCLIDEAN_DISTANCE";
@@ -474,7 +474,6 @@ export class SingleStoreVectorStore extends VectorStore {
     filter?: Metadata,
     _callbacks?: Callbacks | undefined
   ): Promise<DocumentInterface<Metadata>[]> {
-    // @typescript-eslint/no-explicit-any
     const queryVector = await this.embeddings.embedQuery(query);
     return this.similaritySearchTextAndVectorWithScore(
       query,
@@ -498,7 +497,6 @@ export class SingleStoreVectorStore extends VectorStore {
     filter?: Metadata,
     _callbacks?: Callbacks | undefined
   ): Promise<[DocumentInterface<Metadata>, number][]> {
-    // @typescript-eslint/no-explicit-any
     const queryVector = await this.embeddings.embedQuery(query);
     return this.similaritySearchTextAndVectorWithScore(
       query,

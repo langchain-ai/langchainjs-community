@@ -136,14 +136,14 @@ export class ConvexKVStore<
     this.keyField = config.keyField ?? ("key" as KeyFieldName);
     this.valueField = config.valueField ?? ("value" as ValueFieldName);
     this.upsert =
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       config.upsert ?? (makeFunctionReference("langchain/db:upsert") as any);
     this.lookup =
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       config.lookup ?? (makeFunctionReference("langchain/db:lookup") as any);
     this.deleteMany =
       config.deleteMany ??
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       (makeFunctionReference("langchain/db:deleteMany") as any);
   }
 
@@ -160,7 +160,7 @@ export class ConvexKVStore<
           index: this.index,
           keyField: this.keyField,
           key,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // oxlint-disable-next-line typescript/no-explicit-any
         } as any)) as any;
         return found.length > 0 ? found[0][this.valueField] : undefined;
       })
@@ -184,7 +184,7 @@ export class ConvexKVStore<
             keyField: this.keyField,
             key,
             document: { [this.keyField]: key, [this.valueField]: value },
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // oxlint-disable-next-line typescript/no-explicit-any
           } as any)
         )
       );
@@ -204,7 +204,7 @@ export class ConvexKVStore<
           index: this.index,
           keyField: this.keyField,
           key,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // oxlint-disable-next-line typescript/no-explicit-any
         } as any)
       )
     );

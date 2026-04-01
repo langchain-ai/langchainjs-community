@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import hdbClient from "hdb";
 import { Document } from "@langchain/core/documents";
 import { FakeEmbeddings } from "@langchain/core/utils/testing";

@@ -12,7 +12,7 @@ import {
 import { ToolCall, ToolCallChunk } from "@langchain/core/messages/tool";
 import { concat } from "@langchain/core/utils/stream";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 export function extractToolCalls(content: Record<string, any>[]) {
   const toolCalls: ToolCall[] = [];
   for (const block of content) {
@@ -109,7 +109,7 @@ function _ensureMessageContents(
 
 export function _convertLangChainToolCallToAnthropic(
   toolCall: ToolCall
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
 ): Record<string, any> {
   if (toolCall.id === undefined) {
     throw new Error(`Anthropic requires all tool calls to have an "id".`);
@@ -380,7 +380,7 @@ export function isAnthropicTool(
 }
 
 export function _makeMessageChunkFromAnthropicEvent(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   data: Record<string, any>,
   fields: {
     coerceContentToString?: boolean;
@@ -388,7 +388,7 @@ export function _makeMessageChunkFromAnthropicEvent(
 ): AIMessageChunk | null {
   if (data.type === "message_start") {
     const { content, usage, ...additionalKwargs } = data.message;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const filteredAdditionalKwargs: Record<string, any> = {};
     for (const [key, value] of Object.entries(additionalKwargs)) {
       if (value !== undefined && value !== null) {
@@ -601,7 +601,7 @@ export function extractToolUseContent(
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 export function _toolsInParams(params: Record<string, any>): boolean {
   return !!(params.tools && params.tools.length > 0);
 }

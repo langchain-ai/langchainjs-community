@@ -123,7 +123,7 @@ describe("ChatAlibabaTongyi integration", () => {
 
     const stream = await model.stream("Use calculator to add 9 and 11.");
     let hasToolCallChunks = false;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     let aggregated: any;
     for await (const chunk of stream) {
       if ((chunk.tool_call_chunks?.length ?? 0) > 0) {

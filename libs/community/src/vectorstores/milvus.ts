@@ -386,7 +386,7 @@ export class Milvus extends VectorStore {
     searchResp.results.forEach((result) => {
       const fields = {
         pageContent: "",
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // oxlint-disable-next-line typescript/no-explicit-any
         metadata: {} as Record<string, any>,
       };
       Object.keys(result).forEach((key) => {
@@ -869,7 +869,7 @@ function getVectorFieldDim(vectors: number[][]) {
   return vectors[0].length;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 function checkJsonString(value: string): { isJson: boolean; obj: any } {
   try {
     const result = JSON.parse(value);

@@ -332,7 +332,7 @@ test.skip("Test FaissStore Exceptions", async () => {
 
   const vectorStore3 = new FaissStore(new FakeEmbeddings(), {});
   await expect(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     await vectorStore3.delete({ ids: null as any });
   }).rejects.toThrow("No documentIds provided to delete.");
 

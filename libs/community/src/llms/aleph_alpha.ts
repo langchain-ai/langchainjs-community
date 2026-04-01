@@ -280,7 +280,7 @@ export class AlephAlpha extends LLM implements AlephAlphaInput {
         const error = new Error(
           `Aleph Alpha call failed with status ${response.status} and body ${text}`
         );
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // oxlint-disable-next-line typescript/no-explicit-any
         (error as any).response = response;
         throw error;
       }

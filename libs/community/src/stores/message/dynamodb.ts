@@ -199,7 +199,7 @@ export class DynamoDBChatMessageHistory extends BaseListChatMessageHistory {
             x.type !== undefined && x.data.content !== undefined
         );
       return mapStoredMessagesToChatMessages(messages);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (error: any) {
       throw new Error(`Error getting messages: ${error.message}`);
     }
@@ -231,7 +231,7 @@ export class DynamoDBChatMessageHistory extends BaseListChatMessageHistory {
           "SET #m = list_append(if_not_exists(#m, :empty_list), :m)",
       };
       await this.client.send(new UpdateItemCommand(params));
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (error: any) {
       throw new Error(`Error adding message: ${error.message}`);
     }
@@ -266,7 +266,7 @@ export class DynamoDBChatMessageHistory extends BaseListChatMessageHistory {
           "SET #m = list_append(if_not_exists(#m, :empty_list), :m)",
       };
       await this.client.send(new UpdateItemCommand(params));
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (error: any) {
       throw new Error(`Error adding messages: ${error.message}`);
     }
@@ -282,7 +282,7 @@ export class DynamoDBChatMessageHistory extends BaseListChatMessageHistory {
         Key: this.dynamoKey,
       };
       await this.client.send(new DeleteItemCommand(params));
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (error: any) {
       throw new Error(`Error clearing messages: ${error.message}`);
     }

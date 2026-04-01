@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 /* eslint-disable dot-notation */
 import { z } from "zod";
 import { DynamicStructuredTool } from "@langchain/core/tools";

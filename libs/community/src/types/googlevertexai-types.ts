@@ -73,12 +73,12 @@ export interface GoogleVertexAIBaseLLMInput<AuthOptions>
     GoogleVertexAIModelParams {}
 
 export interface GoogleResponse {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   data: any;
 }
 
 export interface GoogleVertexAIBasePrediction {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   safetyAttributes?: any;
 }
 

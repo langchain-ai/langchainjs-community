@@ -319,7 +319,7 @@ export class BedrockLLMInputOutputAdapter {
    * @param responseBody The response body from the service.
    * @returns The generated text.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   static prepareOutput(provider: string, responseBody: any): string {
     if (provider === "anthropic") {
       return responseBody.completion;
@@ -339,7 +339,7 @@ export class BedrockLLMInputOutputAdapter {
 
   static prepareMessagesOutput(
     provider: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     response: any,
     fields?: {
       coerceContentToString?: boolean;
@@ -431,7 +431,7 @@ export class BedrockLLMInputOutputAdapter {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 function parseMessage(responseBody: any, asChunk?: boolean): ChatGeneration {
   const { content, id, ...generationInfo } = responseBody;
   let parsedContent;
@@ -483,7 +483,7 @@ function parseMessage(responseBody: any, asChunk?: boolean): ChatGeneration {
 }
 
 function parseMessageCohere(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   responseBody: any,
   asChunk?: boolean
 ): ChatGeneration {

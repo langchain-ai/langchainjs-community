@@ -491,7 +491,7 @@ export abstract class BaseChatIflytekXinghuo
   }
 
   /** @ignore */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   _combineLLMOutput(): Record<string, any> | undefined {
     return [];
   }

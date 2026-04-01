@@ -4,7 +4,7 @@ import { test, expect } from "vitest";
 import { OpenAI, ChatOpenAI } from "@langchain/openai";
 import { RedisCache } from "../ioredis.js";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 let client: any;
 
 describe("Test RedisCache", () => {

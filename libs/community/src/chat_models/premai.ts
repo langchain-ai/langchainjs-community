@@ -133,7 +133,7 @@ function premResponseToChatMessage(
 }
 
 function _convertDeltaToMessageChunk(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   delta: Record<string, any>
 ) {
   const { role } = delta;
@@ -285,19 +285,19 @@ export class ChatPrem<
 
   async completionWithRetry(
     request: ChatCompletionCreateParamsStreaming,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     options?: any
   ): Promise<AsyncIterable<ChatCompletionStreamingCompletionData>>;
 
   async completionWithRetry(
     request: ChatCompletionCreateParams,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     options?: any
   ): Promise<CreateChatCompletionResponse>;
 
   async completionWithRetry(
     request: ChatCompletionCreateParamsStreaming,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     options?: any
   ): Promise<
     | AsyncIterable<ChatCompletionStreamingCompletionData>

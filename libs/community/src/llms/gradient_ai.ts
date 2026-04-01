@@ -64,7 +64,7 @@ export class GradientLLM extends LLM<BaseLLMCallOptions> {
   lc_serializable = true;
 
   // Gradient AI does not export the BaseModel type. Once it does, we can use it here.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   model: any;
 
   constructor(fields: GradientLLMParams) {

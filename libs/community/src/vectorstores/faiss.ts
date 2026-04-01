@@ -441,7 +441,7 @@ export class FaissStore extends SaveableVectorStore {
       } = await import("faiss-node");
 
       return { IndexFlatL2 };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (err: any) {
       throw new Error(
         `Could not import faiss-node. Please install faiss-node as a dependency with, e.g. \`npm install -S faiss-node\`.\n\nError: ${err?.message}`
@@ -459,7 +459,7 @@ export class FaissStore extends SaveableVectorStore {
       } = await import("pickleparser");
 
       return { Parser, NameRegistry };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (err: any) {
       throw new Error(
         `Could not import pickleparser. Please install pickleparser as a dependency with, e.g. \`npm install -S pickleparser\`.\n\nError: ${err?.message}`

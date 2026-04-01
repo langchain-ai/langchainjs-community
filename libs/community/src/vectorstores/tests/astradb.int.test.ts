@@ -155,7 +155,7 @@ describe.skip("AstraDBVectorStore", () => {
       });
       await store.initialize();
       fail("Should have thrown error");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (e: any) {
       expect(e.message).toContain(
         "already exists with different collection options"
@@ -173,7 +173,7 @@ describe.skip("AstraDBVectorStore", () => {
     try {
       await store.similaritySearch("test");
       fail("Should have thrown error");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (e: any) {
       expect(e.message).toContain("langchain_test");
     }

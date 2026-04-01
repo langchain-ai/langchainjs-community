@@ -4,8 +4,7 @@ import { AI21 } from "../ai21.js";
 describe.skip("AI21", () => {
   test("test call", async () => {
     const ai21 = new AI21({});
-    // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-    // @ts-expect-error unused var
+// @ts-expect-error unused var
     const result = await ai21.invoke(
       "What is a good name for a company that makes colorful socks?"
     );
@@ -14,8 +13,7 @@ describe.skip("AI21", () => {
 
   test("test translation call", async () => {
     const ai21 = new AI21({});
-    // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-    // @ts-expect-error unused var
+// @ts-expect-error unused var
     const result = await ai21.invoke(
       `Translate "I love programming" into German.`
     );
@@ -24,8 +22,7 @@ describe.skip("AI21", () => {
 
   test("test JSON output call", async () => {
     const ai21 = new AI21({});
-    // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-    // @ts-expect-error unused var
+// @ts-expect-error unused var
     const result = await ai21.invoke(
       `Output a JSON object with three string fields: "name", "birthplace", "bio".`
     );

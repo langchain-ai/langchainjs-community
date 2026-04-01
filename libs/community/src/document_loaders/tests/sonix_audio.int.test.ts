@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import { test, vi, expect } from "vitest";
 import { SonixSpeechRecognitionService } from "sonix-speech-recognition";
 import {

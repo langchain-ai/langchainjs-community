@@ -92,7 +92,7 @@ const defaultVectorColumnLength = -1; // -1 means dynamic length
  * `HanaDB`.
  */
 export interface HanaDBArgs {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   connection: any;
   distanceStrategy?: DistanceStrategy;
   tableName?: string;
@@ -104,7 +104,7 @@ export interface HanaDBArgs {
 }
 
 export class HanaDB extends VectorStore {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   private connection: any;
 
   private distanceStrategy: DistanceStrategy;
@@ -145,10 +145,10 @@ export class HanaDB extends VectorStore {
     this.connection = args.connection;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   private executeQuery(client: any, query: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       client.exec(query, (err: Error, result: any) => {
         if (err) {
           reject(err);
@@ -159,10 +159,10 @@ export class HanaDB extends VectorStore {
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   private prepareQuery(client: any, query: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       client.prepare(query, (err: Error, statement: any) => {
         if (err) {
           reject(err);
@@ -173,10 +173,10 @@ export class HanaDB extends VectorStore {
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   private executeStatement(statement: any, params: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       statement.exec(params, (err: Error, res: any) => {
         if (err) {
           reject(err);
@@ -868,7 +868,7 @@ export class HanaDB extends VectorStore {
     const statement = await this.prepareQuery(client, query);
     const resultSet = await this.executeStatement(statement, queryTuple);
     const result: Array<[Document, number, number[]]> = resultSet.map(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       (row: any) => {
         const metadata = JSON.parse(row[this.metadataColumn].toString("utf8"));
         const doc: Document = {

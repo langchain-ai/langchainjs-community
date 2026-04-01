@@ -2,14 +2,14 @@ import { HumanMessage } from "@langchain/core/messages";
 import { formatMessagesForAnthropic } from "../anthropic.js";
 
 function formatSingleContent(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   content: any[]
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
 ): any[] {
   const { messages } = formatMessagesForAnthropic([
     new HumanMessage({ content }),
   ]);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   return (messages[0] as any).content;
 }
 

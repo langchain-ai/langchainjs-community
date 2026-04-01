@@ -163,7 +163,7 @@ export class Writer extends LLM implements WriterInput {
           res.completionResponse?.choices?.[0].text ?? "No completion found."
         );
       } catch (e) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // oxlint-disable-next-line typescript/no-explicit-any
         (e as any).response = (e as any).rawResponse;
         throw e;
       }

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 /* eslint-disable dot-notation */
 import { Gateway } from "@ibm-cloud/watsonx-ai/gateway";
 import { vi, expect, describe, test } from "vitest";

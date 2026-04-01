@@ -185,7 +185,7 @@ function convertPropertiesToRecord(
   }, {});
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 function mapToBaseNode(node: any): Node {
   return new Node({
     id: node.id,
@@ -201,7 +201,7 @@ function mapToBaseRelationship({
 }: {
   fallbackRelationshipType: string | null;
 }) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   return function (relationship: any): Relationship {
     return new Relationship({
       source: new Node({
@@ -244,7 +244,7 @@ export interface LLMGraphTransformerProps {
 }
 
 export class LLMGraphTransformer {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   chain: any;
 
   allowedNodes: string[] = [];

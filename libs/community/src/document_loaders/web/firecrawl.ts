@@ -98,7 +98,7 @@ export class FireCrawlLoader extends BaseDocumentLoader {
     let firecrawlDocs: FirecrawlDocument[];
 
     if (this.mode === "scrape") {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       const response = await app.scrapeUrl(this.url, this.params as any);
       if (!response.success) {
         throw new Error(

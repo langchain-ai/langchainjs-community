@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 import { vi, test, expect, beforeEach } from "vitest";
 import { FakeEmbeddings } from "@langchain/core/utils/testing";
 import { Document } from "@langchain/core/documents";

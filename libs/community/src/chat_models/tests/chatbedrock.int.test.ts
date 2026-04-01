@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 
 import { test, expect } from "vitest";
 import { HumanMessage } from "@langchain/core/messages";
@@ -366,8 +366,7 @@ test.skip("Tool calling agent with Anthropic", async () => {
     tools,
   });
   const input = "what is the current weather in SF?";
-  // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
-  // @ts-expect-error unused var
+// @ts-expect-error unused var
   const result = await agentExecutor.invoke({
     input,
   });

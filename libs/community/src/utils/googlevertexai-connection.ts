@@ -114,7 +114,7 @@ export function complexValue(value: unknown): unknown {
       };
     } else {
       const ret: Record<string, unknown> = {};
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       const v: Record<string, any> = value;
       Object.keys(v).forEach((key) => {
         ret[key] = complexValue(v[key]);
@@ -372,15 +372,15 @@ export class GoogleVertexAIStream {
   }
 
   // Set up a potential Promise that the handler can resolve.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   _chunkResolution: (chunk: any) => void;
 
   // If there is no Promise (it is null), the handler must add it to the queue
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   _chunkPending: Promise<any> | null = null;
 
   // A queue that will collect chunks while there is no Promise
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   _chunkQueue: any[] = [];
 
   /**
@@ -389,7 +389,7 @@ export class GoogleVertexAIStream {
    * If not, then add it to the queue.
    * @param chunk
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   _handleChunk(chunk: any): void {
     if (this._chunkPending) {
       this._chunkResolution(chunk);
@@ -403,7 +403,7 @@ export class GoogleVertexAIStream {
    * Get the next chunk that is coming from the stream.
    * This chunk may be null, usually indicating the last chunk in the stream.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   async nextChunk(): Promise<any> {
     if (this._chunkQueue.length > 0) {
       // If there is data in the queue, return the next queue chunk

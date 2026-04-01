@@ -6,7 +6,7 @@ const QUERY_1 = "What is 2 + 2?";
 const MOCK_ANSWER = "[MOCK_ANSWER]";
 
 describe("wolfram alpha test suite", () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   let fetchMock: any;
 
   beforeEach(() => {

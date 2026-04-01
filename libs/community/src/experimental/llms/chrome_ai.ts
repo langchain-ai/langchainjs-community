@@ -149,13 +149,12 @@ export class ChromeAI extends LLM<ChromeAICallOptions> {
    * to set up a chat session in advance.
    */
   protected async createSession() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     let aiInstance: any;
     try {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore Experimental browser-only global
+      // @ts-expect-error experimental browser-only global
       aiInstance = LanguageModel;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
     } catch (e: any) {
       throw new Error(
         `Could not initialize ChromeAI instance. Make sure you are running a version of Chrome with the proper experimental flags enabled.\n\nError message: ${e.message}`
@@ -188,7 +187,7 @@ export class ChromeAI extends LLM<ChromeAICallOptions> {
 
       const stream = session.promptStreaming(prompt);
       const iterableStream =
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // oxlint-disable-next-line typescript/no-explicit-any
         IterableReadableStream.fromReadableStream<any>(stream);
 
       for await (const chunk of iterableStream) {

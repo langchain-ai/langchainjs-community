@@ -1,0 +1,104 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "import", "typescript"],
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/dist-cjs/**",
+    "**/*.js",
+    "**/*.cjs",
+    "**/*.mjs",
+    "**/*.d.ts",
+    "**/build/**",
+    "**/.turbo/**",
+    "**/coverage/**",
+    "**/.next/**",
+    "**/scripts/**",
+    "**/.eslintrc.cjs",
+    "**/eslint.config.js",
+    "**/eslint.config.ts",
+    "**/tsdown.config.ts",
+    "**/vitest.config.ts",
+    "**/src/utils/@cfworker/**",
+    "**/src/utils/fast-json-patch/**",
+    "**/src/utils/js-sha1/**",
+    "**/src/utils/js-sha256/**",
+    "**/src/utils/sax-js/**",
+    "**/src/util/@cfworker/**",
+    "**/src/util/fast-json-patch/**",
+    "**/src/util/js-sha1/**"
+  ],
+  "rules": {
+    "eslint/no-unused-vars": [
+      "error",
+      {
+        "args": "none",
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "typescript/no-explicit-any": "error",
+    "typescript/ban-ts-comment": "error",
+    "typescript/no-use-before-define": [
+      "error",
+      {
+        "functions": false
+      }
+    ],
+    "import/extensions": ["error", "ignorePackages"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.test.ts", "**/*.test-d.ts", "**/*.spec.ts"]
+      }
+    ],
+    "import/no-cycle": "off",
+    "import/default": "off",
+    "import/no-relative-packages": "off",
+    "import/no-unresolved": "off",
+    "eslint/keyword-spacing": "error",
+    "eslint/no-void": "error",
+    "eslint/no-param-reassign": "error",
+    "eslint/no-empty": [
+      "error",
+      {
+        "allowEmptyCatch": true
+      }
+    ],
+    "eslint/new-cap": [
+      "error",
+      {
+        "properties": false,
+        "capIsNew": false
+      }
+    ],
+    "eslint/no-constructor-return": "error",
+    "eslint/no-constant-condition": "error",
+    "eslint/default-case": "error",
+    "eslint/prefer-template": "error",
+    "eslint/dot-notation": "error",
+    "typescript/no-empty-interface": "off",
+    "typescript/no-empty-object-type": "off",
+    "typescript/no-unnecessary-parameter-property-assignment": "off",
+    "typescript/no-unsafe-function-type": "off",
+    "typescript/no-wrapper-object-types": "off"
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.ts",
+        "**/*.test-d.ts",
+        "**/*.spec.ts",
+        "**/tests/**/*.ts"
+      ],
+      "rules": {
+        "eslint/no-unused-vars": "off",
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ]
+}

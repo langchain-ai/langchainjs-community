@@ -975,7 +975,7 @@ export class BedrockChat
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   _readChunks(reader: any) {
     function _concatChunks(a: Uint8Array, b: Uint8Array) {
       const newBuffer = new Uint8Array(a.length + b.length);

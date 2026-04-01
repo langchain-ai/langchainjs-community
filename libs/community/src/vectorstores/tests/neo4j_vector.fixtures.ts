@@ -59,7 +59,7 @@ export const DOCUMENTS: Document[] = texts.map(
 );
 
 interface TestCase {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line typescript/no-explicit-any
   filter: Record<string, any>;
   expected: number[];
 }

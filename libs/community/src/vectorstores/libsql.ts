@@ -7,7 +7,7 @@ import {
   WhereCondition,
 } from "../utils/sqlite_where_builder.js";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 type MetadataDefault = Record<string, any>;
 
 /**
@@ -157,7 +157,7 @@ export class LibSQLVectorStore<
 
     const results = await this.db.execute(sql);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     return results.rows.map((row: any) => {
       const metadata = JSON.parse(row.metadata);
 

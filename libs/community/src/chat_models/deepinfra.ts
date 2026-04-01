@@ -126,7 +126,7 @@ function convertMessagesToDeepInfraParams(
     if (typeof message.content !== "string") {
       throw new Error("Non string message content not supported");
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const completionParam: Record<string, any> = {
       role: messageToRole(message),
       content: message.content,
@@ -162,7 +162,7 @@ function deepInfraResponseToChatMessage(
       for (const rawToolCall of message.tool_calls ?? []) {
         try {
           toolCalls.push(parseToolCall(rawToolCall, { returnId: true }));
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // oxlint-disable-next-line typescript/no-explicit-any
         } catch (e: any) {
           invalidToolCalls.push(makeInvalidToolCall(rawToolCall, e.message));
         }
