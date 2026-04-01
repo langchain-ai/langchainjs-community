@@ -1,7 +1,7 @@
 import path from "node:path";
 import fs from "node:fs/promises";
 import type { Plugin } from "rolldown";
-import { isSafeProjectPath, toPosixPath } from "../utils.ts";
+import { getPackageRoot, isSafeProjectPath, toPosixPath } from "../utils.ts";
 
 /**
  * Options for configuring the CJS compatibility plugin.
@@ -75,6 +75,7 @@ export interface CjsCompatPluginOptions {
 export function cjsCompatPlugin(param: CjsCompatPluginOptions = {}): Plugin {
   const defaultBuildMode =
     process.env.BUILD_MODE === "prerelease" ? "generate" : "clean";
+  const packagePath = getPackageRoot();
   const options = {
     enabled: true,
     mode: defaultBuildMode,
@@ -102,7 +103,7 @@ export function cjsCompatPlugin(param: CjsCompatPluginOptions = {}): Plugin {
         // which break split("/") operations and import path generation.
         const relativePath = toPosixPath(
           path.relative(
-            path.join(process.env.INIT_CWD ?? "", "src"),
+            path.join(packagePath, "src"),
             entrypointPath
           )
         );
@@ -180,7 +181,7 @@ export function cjsCompatPlugin(param: CjsCompatPluginOptions = {}): Plugin {
         if (!options.enabled) return;
 
         const packageJsonPath = path.resolve(
-          process.env.INIT_CWD ?? "",
+          packagePath,
           "package.json"
         );
         if (isSafeProjectPath(packageJsonPath)) {

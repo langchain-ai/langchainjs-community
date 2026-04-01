@@ -1,7 +1,7 @@
 import path from "node:path";
 import type { Plugin } from "rolldown";
 import type { PackageJson } from "type-fest";
-import { formatWithPrettier } from "../utils.ts";
+import { formatWithPrettier, getPackageRoot } from "../utils.ts";
 import { pathToFileURL } from "node:url";
 
 /**
@@ -135,15 +135,10 @@ export function importConstantsPlugin(
     entrypoints: [],
     ...param,
   } as Required<ImportConstantsPluginOptions>;
+  const packagePath = getPackageRoot();
 
-  const packageJsonPath = path.resolve(
-    process.env.INIT_CWD ?? "",
-    "./package.json"
-  );
-  const outputPath = path.resolve(
-    process.env.INIT_CWD ?? "",
-    options.outputPath
-  );
+  const packageJsonPath = path.resolve(packagePath, "./package.json");
+  const outputPath = path.resolve(packagePath, options.outputPath);
 
   return {
     name: "import-constants",

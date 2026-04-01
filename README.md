@@ -10,6 +10,7 @@ The repo also includes internal tooling used to build and validate the package i
 - `internal/build`: shared build utilities built around `tsdown`
 - `internal/tsconfig`: shared TypeScript configuration for workspace packages
 - `.github/workflows`: CI for formatting, linting, unit tests, and scheduled standard integration tests
+- `.changeset`: release metadata and versioning files for Changesets
 
 For end-user installation and package-specific usage examples, see `libs/community/README.md`.
 
@@ -67,6 +68,7 @@ GitHub Actions in this repo cover:
 - lint checks for `@langchain/community`
 - unit tests and standard unit tests
 - scheduled or manually triggered standard integration tests for selected providers
+- Changesets-based release PRs and npm publishing from `main`
 
 If you are working on the main package, the most relevant local verification loop is usually:
 

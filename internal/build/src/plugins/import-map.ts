@@ -1,6 +1,6 @@
 import path from "node:path";
 import type { Plugin } from "rolldown";
-import { formatWithPrettier } from "../utils.ts";
+import { formatWithPrettier, getPackageRoot } from "../utils.ts";
 
 /**
  * Configuration for an extra import map entry that should be included
@@ -85,11 +85,9 @@ export function importMapPlugin(param: ImportMapPluginOptions = {}): Plugin {
     extraEntries: [],
     ...param,
   } as Required<ImportMapPluginOptions>;
+  const packagePath = getPackageRoot();
 
-  const outputPath = path.resolve(
-    process.env.INIT_CWD ?? "",
-    options.outputPath
-  );
+  const outputPath = path.resolve(packagePath, options.outputPath);
 
   return {
     name: "import-map",
@@ -131,7 +129,7 @@ export function importMapPlugin(param: ImportMapPluginOptions = {}): Plugin {
         ...entrypoints.map(([key, entrypointPath]) => {
           // Get relative path of the entrypoint from the package root
           const relativePath = path.relative(
-            path.join(process.env.INIT_CWD ?? "", "src"),
+            path.join(packagePath, "src"),
             entrypointPath
           );
 

@@ -49,18 +49,8 @@
         "functions": false
       }
     ],
-    "import/extensions": ["error", "ignorePackages"],
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": ["**/*.test.ts", "**/*.test-d.ts", "**/*.spec.ts"]
-      }
-    ],
     "import/no-cycle": "off",
     "import/default": "off",
-    "import/no-relative-packages": "off",
-    "import/no-unresolved": "off",
-    "eslint/keyword-spacing": "error",
     "eslint/no-void": "error",
     "eslint/no-param-reassign": "error",
     "eslint/no-empty": [
@@ -80,7 +70,6 @@
     "eslint/no-constant-condition": "error",
     "eslint/default-case": "error",
     "eslint/prefer-template": "error",
-    "eslint/dot-notation": "error",
     "typescript/no-empty-interface": "off",
     "typescript/no-empty-object-type": "off",
     "typescript/no-unnecessary-parameter-property-assignment": "off",
@@ -96,8 +85,7 @@
         "**/tests/**/*.ts"
       ],
       "rules": {
-        "eslint/no-unused-vars": "off",
-        "import/no-extraneous-dependencies": "off"
+        "eslint/no-unused-vars": "off"
       }
     }
   ]

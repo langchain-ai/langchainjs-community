@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import ts from "typescript";
 import type { Plugin, PluginContext } from "rolldown";
-import { formatWithPrettier } from "../utils.ts";
+import { formatWithPrettier, getPackageRoot } from "../utils.ts";
 
 /**
  * Configuration options for the lc-secrets plugin.
@@ -98,7 +98,7 @@ export function lcSecretsPlugin(options: SecretPluginOptions = {}): Plugin {
     ...options,
   };
 
-  const packagePath = process.env.INIT_CWD ?? "";
+  const packagePath = getPackageRoot();
   const outputPath = path.resolve(packagePath, opts.outputPath);
 
   return {
@@ -152,7 +152,7 @@ export function lcSecretsPlugin(options: SecretPluginOptions = {}): Plugin {
  */
 function scanForSecrets(excludePatterns: string[]): SecretInfo[] {
   const secrets: SecretInfo[] = [];
-  const packagePath = process.env.INIT_CWD ?? "";
+  const packagePath = getPackageRoot();
 
   // Find tsconfig.json
   const tsConfigPath = path.resolve(packagePath, "tsconfig.json");

@@ -3,6 +3,17 @@ import prettier from "prettier";
 
 export const PROJECT_ROOT = process.cwd();
 
+export function getPackageRoot() {
+  // pnpm filtered runs keep INIT_CWD at the workspace root, but npm_package_json
+  // still points at the package whose script is executing.
+  const packageJsonPath = process.env.npm_package_json;
+  if (packageJsonPath) {
+    return path.dirname(path.resolve(packageJsonPath));
+  }
+
+  return process.cwd();
+}
+
 /**
  * Converts a file path to use POSIX-style forward slashes.
  *
