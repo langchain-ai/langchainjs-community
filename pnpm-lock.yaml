@@ -306,6 +306,9 @@ importers:
       '@langchain/core':
         specifier: ^1.1.38
         version: 1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0))
+      '@langchain/standard-tests':
+        specifier: workspace:*
+        version: link:../../internal/standard-tests
       '@langchain/tsconfig':
         specifier: workspace:*
         version: link:../../internal/tsconfig

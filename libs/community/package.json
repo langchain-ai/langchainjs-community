@@ -73,6 +73,7 @@
     "@ibm-cloud/watsonx-ai": "^1.7.9",
     "@lancedb/lancedb": "^0.19.1",
     "@langchain/core": "^1.1.38",
+    "@langchain/standard-tests": "workspace:*",
     "@langchain/tsconfig": "workspace:*",
     "@layerup/layerup-security": "^1.5.12",
     "@libsql/client": "^0.17.0",
