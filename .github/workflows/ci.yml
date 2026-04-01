@@ -4,9 +4,8 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "libs/community/**"
-      - "internal/build/**"
-      - "internal/tsconfig/**"
+      - "libs/**"
+      - "internal/**"
       - "package.json"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
@@ -16,9 +15,8 @@ on:
       - ".github/workflows/ci.yml"
   pull_request:
     paths:
-      - "libs/community/**"
-      - "internal/build/**"
-      - "internal/tsconfig/**"
+      - "libs/**"
+      - "internal/**"
       - "package.json"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"

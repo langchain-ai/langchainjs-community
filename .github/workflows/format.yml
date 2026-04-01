@@ -4,7 +4,8 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "libs/community/**"
+      - "libs/**"
+      - "internal/**"
       - "package.json"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
@@ -14,7 +15,8 @@ on:
       - ".github/workflows/format.yml"
   pull_request:
     paths:
-      - "libs/community/**"
+      - "libs/**"
+      - "internal/**"
       - "package.json"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
