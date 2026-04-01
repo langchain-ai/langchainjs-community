@@ -1,0 +1,137 @@
+name: Standard Tests (Community)
+
+on:
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: Standard integration suite to run
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - alibaba-tongyi
+          - bedrock
+          - fireworks
+          - ibm
+          - togetherai
+  schedule:
+    - cron: "0 13 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PUPPETEER_SKIP_DOWNLOAD: "true"
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "true"
+
+jobs:
+  standard-tests:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Standard Tests (Alibaba Tongyi)
+            provider: alibaba-tongyi
+            test_path: src/chat_models/tests/chatalitongyi.standard.int.test.ts
+          - name: Standard Tests (Bedrock)
+            provider: bedrock
+            test_path: src/chat_models/tests/chatbedrock.standard.int.test.ts
+          - name: Standard Tests (Fireworks)
+            provider: fireworks
+            test_path: src/chat_models/tests/chatfireworks.standard.int.test.ts
+          - name: Standard Tests (IBM)
+            provider: ibm
+            test_path: src/chat_models/tests/ibm.standard.int.test.ts
+          - name: Standard Tests (TogetherAI)
+            provider: togetherai
+            test_path: src/chat_models/tests/chattogetherai.standard.int.test.ts
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: Check provider credentials
+        id: credentials
+        env:
+          ALIBABA_API_KEY: ${{ secrets.ALIBABA_API_KEY }}
+          ALIBABA_REGION: ${{ secrets.ALIBABA_REGION }}
+          BEDROCK_AWS_ACCESS_KEY_ID: ${{ secrets.BEDROCK_AWS_ACCESS_KEY_ID }}
+          BEDROCK_AWS_SECRET_ACCESS_KEY: ${{ secrets.BEDROCK_AWS_SECRET_ACCESS_KEY }}
+          FIREWORKS_API_KEY: ${{ secrets.FIREWORKS_API_KEY }}
+          TOGETHER_AI_API_KEY: ${{ secrets.TOGETHER_AI_API_KEY }}
+          WATSONX_AI_APIKEY: ${{ secrets.WATSONX_AI_APIKEY }}
+          WATSONX_AI_PROJECT_ID: ${{ secrets.WATSONX_AI_PROJECT_ID }}
+          WATSONX_AI_SERVICE_URL: ${{ secrets.WATSONX_AI_SERVICE_URL }}
+        run: |
+          should_run=true
+          requested_provider="${{ github.event_name == 'workflow_dispatch' && github.event.inputs.provider || 'all' }}"
+
+          if [ "${requested_provider}" != "all" ] && [ "${requested_provider}" != "${{ matrix.provider }}" ]; then
+            should_run=false
+          fi
+
+          case "${{ matrix.provider }}" in
+            alibaba-tongyi)
+              if [ -z "${ALIBABA_API_KEY}" ]; then
+                should_run=false
+              fi
+              ;;
+            bedrock)
+              if [ -z "${BEDROCK_AWS_ACCESS_KEY_ID}" ] || [ -z "${BEDROCK_AWS_SECRET_ACCESS_KEY}" ]; then
+                should_run=false
+              fi
+              ;;
+            fireworks)
+              if [ -z "${FIREWORKS_API_KEY}" ]; then
+                should_run=false
+              fi
+              ;;
+            ibm)
+              if [ -z "${WATSONX_AI_APIKEY}" ] || [ -z "${WATSONX_AI_PROJECT_ID}" ] || [ -z "${WATSONX_AI_SERVICE_URL}" ]; then
+                should_run=false
+              fi
+              ;;
+            togetherai)
+              if [ -z "${TOGETHER_AI_API_KEY}" ]; then
+                should_run=false
+              fi
+              ;;
+          esac
+
+          echo "should_run=${should_run}" >> "$GITHUB_OUTPUT"
+      - name: Skip missing credentials
+        if: steps.credentials.outputs.should_run != 'true'
+        run: echo "Skipping ${{ matrix.provider }} standard tests because the provider was not selected or the required secrets are not configured."
+      - name: Setup pnpm
+        if: steps.credentials.outputs.should_run == 'true'
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+      - name: Use Node.js
+        if: steps.credentials.outputs.should_run == 'true'
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - name: Install dependencies
+        if: steps.credentials.outputs.should_run == 'true'
+        run: pnpm install --frozen-lockfile
+      - name: Build `@langchain/community`
+        if: steps.credentials.outputs.should_run == 'true'
+        run: pnpm --filter @langchain/community run build:compile
+      - name: Run standard integration tests
+        if: steps.credentials.outputs.should_run == 'true'
+        env:
+          ALIBABA_API_KEY: ${{ secrets.ALIBABA_API_KEY }}
+          ALIBABA_REGION: ${{ secrets.ALIBABA_REGION || 'singapore' }}
+          BEDROCK_AWS_ACCESS_KEY_ID: ${{ secrets.BEDROCK_AWS_ACCESS_KEY_ID }}
+          BEDROCK_AWS_REGION: ${{ secrets.BEDROCK_AWS_REGION || 'us-east-1' }}
+          BEDROCK_AWS_SECRET_ACCESS_KEY: ${{ secrets.BEDROCK_AWS_SECRET_ACCESS_KEY }}
+          FIREWORKS_API_KEY: ${{ secrets.FIREWORKS_API_KEY }}
+          TOGETHER_AI_API_KEY: ${{ secrets.TOGETHER_AI_API_KEY }}
+          WATSONX_AI_APIKEY: ${{ secrets.WATSONX_AI_APIKEY }}
+          WATSONX_AI_PROJECT_ID: ${{ secrets.WATSONX_AI_PROJECT_ID }}
+          WATSONX_AI_SERVICE_URL: ${{ secrets.WATSONX_AI_SERVICE_URL }}
+        run: pnpm --filter @langchain/community run test:single ${{ matrix.test_path }}
