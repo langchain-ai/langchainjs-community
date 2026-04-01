@@ -55,4 +55,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Check linting
-        run: pnpm --filter @langchain/community run lint
+        run: pnpm run lint

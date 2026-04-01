@@ -47,4 +47,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Check formatting
-        run: pnpm --filter @langchain/community run format:check
+        run: pnpm run format:check
