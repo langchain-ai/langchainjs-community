@@ -2,12 +2,9 @@
   "extends": "@langchain/tsconfig/base.json",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
   },
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules"],
-  "references": [
-    { "path": "../../langchain-core" },
-    { "path": "../../providers/langchain-openai" }
-  ]
+  "references": [{ "path": "../../langchain-core" }],
 }
