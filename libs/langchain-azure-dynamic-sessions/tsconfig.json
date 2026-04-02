@@ -2,9 +2,8 @@
   "extends": "@langchain/tsconfig/base.json",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "dist",
+    "outDir": "dist"
   },
   "include": ["src/**/*"],
-  "exclude": ["dist", "node_modules"],
-  "references": [{ "path": "../../langchain-core" }],
+  "exclude": ["dist", "node_modules"]
 }
