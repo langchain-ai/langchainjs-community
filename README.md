@@ -1,18 +1,27 @@
 # LangChain.js Community Monorepo
 
-This repository contains the community workspace for LangChain.js. Its main package is [`@langchain/community`](https://www.npmjs.com/package/@langchain/community), which provides third-party integrations built on top of `@langchain/core`.
+This repository contains the community workspace for LangChain.js. It includes the main [`@langchain/community`](https://www.npmjs.com/package/@langchain/community) package plus several standalone provider packages built on top of `@langchain/core`.
 
-The repo also includes internal tooling used to build and validate the package in a consistent way across the workspace.
+The repo also includes internal tooling used to build, test, and validate packages consistently across the workspace.
 
 ## What's In This Repo
 
 - `libs/community`: the `@langchain/community` package source, tests, and package-level documentation
+- `libs/langchain-*`: standalone integration packages published from this repo, including:
+  - `@langchain/azure-cosmosdb`
+  - `@langchain/azure-dynamic-sessions`
+  - `@langchain/baidu-qianfan`
+  - `@langchain/cerebras`
+  - `@langchain/mixedbread-ai`
+  - `@langchain/nomic`
+  - `@langchain/yandex`
 - `internal/build`: shared build utilities built around `tsdown`
+- `internal/standard-tests`: shared standard test harnesses used by workspace packages
 - `internal/tsconfig`: shared TypeScript configuration for workspace packages
 - `.github/workflows`: CI for formatting, linting, unit tests, and scheduled standard integration tests
 - `.changeset`: release metadata and versioning files for Changesets
 
-For end-user installation and package-specific usage examples, see `libs/community/README.md`.
+For end-user installation and package-specific usage examples, see the `README.md` file inside the relevant package under `libs/`.
 
 ## Requirements
 
@@ -47,7 +56,11 @@ pnpm --filter @langchain/community run test
 pnpm --filter @langchain/community run test:watch
 pnpm --filter @langchain/community run test:standard:unit
 pnpm --filter @langchain/community run format:check
+pnpm --filter @langchain/nomic run build:compile
+pnpm --filter @langchain/cerebras run test
 ```
+
+You can replace the package name in `--filter` with any workspace package, such as `@langchain/yandex` or `@langchain/azure-cosmosdb`.
 
 ## Workspace Tooling
 
@@ -64,13 +77,12 @@ This monorepo uses:
 
 GitHub Actions in this repo cover:
 
-- formatting checks for `@langchain/community`
-- lint checks for `@langchain/community`
-- unit tests and standard unit tests
+- formatting and lint checks across the workspace
+- unit tests and standard unit tests for relevant packages
 - scheduled or manually triggered standard integration tests for selected providers
 - Changesets-based release PRs and npm publishing from `main`
 
-If you are working on the main package, the most relevant local verification loop is usually:
+If you are working on `@langchain/community`, the most relevant local verification loop is usually:
 
 ```bash
 pnpm --filter @langchain/community run build:compile
@@ -80,7 +92,7 @@ pnpm --filter @langchain/community run lint
 
 ## Contributing
 
-Changes are typically made in `libs/community`, with shared tooling changes living under `internal/`.
+Changes are typically made in one of the package folders under `libs/`, with shared tooling and test infrastructure living under `internal/`.
 
 Before opening a pull request:
 
@@ -90,9 +102,10 @@ pnpm lint
 pnpm test:unit
 ```
 
-If your change affects provider-specific standard tests, use the package-level scripts and CI workflows to validate the relevant suite.
+If your change affects a specific provider package or standard test suite, use that package's scripts and CI workflows to validate the relevant build, unit tests, or integration tests.
 
 ## Related Docs
 
-- Package docs: `libs/community/README.md`
+- Package docs: `libs/*/README.md`
 - Build tooling docs: `internal/build/README.md`
+- Standard test harness docs: `internal/standard-tests/README.md`
