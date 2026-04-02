@@ -7,8 +7,6 @@
   "types": "./src/index.ts",
   "scripts": {
     "build": "exit 0",
-    "lint": "oxlint -c ../../.oxlintrc.json src/",
-    "lint:fix": "oxlint -c ../../.oxlintrc.json src/ --fix",
     "format": "oxfmt -c ../../.oxfmtrc.json --write src/",
     "format:check": "oxfmt -c ../../.oxfmtrc.json --check src/"
   },

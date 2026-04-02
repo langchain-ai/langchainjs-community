@@ -1,29 +1,27 @@
-name: Unit Tests (Community)
+name: Unit Tests
 
 on:
   push:
     branches: ["main"]
     paths:
-      - "libs/community/**"
-      - "internal/build/**"
-      - "internal/tsconfig/**"
+      - "libs/**"
+      - "internal/**"
       - "package.json"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
       - ".nvmrc"
-      - ".github/workflows/unit-tests-community.yml"
+      - ".github/workflows/unit-tests.yml"
   pull_request:
     paths:
-      - "libs/community/**"
-      - "internal/build/**"
-      - "internal/tsconfig/**"
+      - "libs/**"
+      - "internal/**"
       - "package.json"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
       - ".nvmrc"
-      - ".github/workflows/unit-tests-community.yml"
+      - ".github/workflows/unit-tests.yml"
   workflow_dispatch:
 
 permissions:
@@ -52,10 +50,10 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Build `@langchain/community`
-        run: pnpm --filter @langchain/community run build:compile
+      - name: Build all packages
+        run: pnpm run build
       - name: Run unit tests
-        run: pnpm --filter @langchain/community run test
+        run: pnpm run test:unit
 
   standard-unit-tests:
     name: Standard Unit Tests
@@ -71,7 +69,7 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Build `@langchain/community`
-        run: pnpm --filter @langchain/community run build:compile
+      - name: Build all packages
+        run: pnpm run build
       - name: Run standard unit tests
-        run: pnpm --filter @langchain/community run test:standard:unit
+        run: pnpm run test:standard:unit
