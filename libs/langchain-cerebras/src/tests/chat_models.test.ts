@@ -67,7 +67,7 @@ describe("withStructuredOutput - StandardSchema", () => {
               type: "tool_call",
             },
           ],
-        })
+        }),
       );
 
     const schema = makeSerializableSchema();
@@ -96,7 +96,7 @@ describe("withStructuredOutput - StandardSchema", () => {
               type: "tool_call",
             },
           ],
-        })
+        }),
       );
 
     const schema = makeSerializableSchema();

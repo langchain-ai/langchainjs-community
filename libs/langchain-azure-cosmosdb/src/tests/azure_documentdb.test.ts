@@ -131,7 +131,7 @@ test("AzureDocumentDBVectorStore adds vectors", async () => {
         pageContent: "test",
         metadata: { a: 1 },
       },
-    ]
+    ],
   );
 
   const mockCollection = client.db().collection();
@@ -146,7 +146,7 @@ test("AzureDocumentDBVectorStore initializes from texts", async () => {
     ["test", "hello", "world"],
     {},
     embeddings,
-    { client: client as any }
+    { client: client as any },
   );
 
   expect(store).toBeDefined();
@@ -179,7 +179,7 @@ test("AzureDocumentDBVectorStore initializes from documents", async () => {
       new Document({ pageContent: "pool" }),
     ],
     embeddings,
-    { client: client as any }
+    { client: client as any },
   );
 
   expect(store).toBeDefined();

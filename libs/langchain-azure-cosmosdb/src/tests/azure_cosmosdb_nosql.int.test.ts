@@ -88,14 +88,14 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     // - AZURE_OPENAI_API_EMBEDDINGS_DEPLOYMENT_NAME
     // - AZURE_OPENAI_API_VERSION
     expect(
-      process.env.OPENAI_API_KEY || process.env.AZURE_OPENAI_API_KEY
+      process.env.OPENAI_API_KEY || process.env.AZURE_OPENAI_API_KEY,
     ).toBeDefined();
 
     let client: CosmosClient;
 
     if (process.env.AZURE_COSMOSDB_NOSQL_CONNECTION_STRING) {
       client = new CosmosClient(
-        process.env.AZURE_COSMOSDB_NOSQL_CONNECTION_STRING
+        process.env.AZURE_COSMOSDB_NOSQL_CONNECTION_STRING,
       );
     } else if (process.env.AZURE_COSMOSDB_NOSQL_ENDPOINT) {
       client = new CosmosClient({
@@ -104,7 +104,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
       });
     } else {
       throw new Error(
-        "Please set the environment variable AZURE_COSMOSDB_NOSQL_CONNECTION_STRING or AZURE_COSMOSDB_NOSQL_ENDPOINT"
+        "Please set the environment variable AZURE_COSMOSDB_NOSQL_CONNECTION_STRING or AZURE_COSMOSDB_NOSQL_ENDPOINT",
       );
     }
 
@@ -124,7 +124,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("performs similarity search", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       expect(vectorStore).toBeDefined();
@@ -142,14 +142,14 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("performs similarity search with score", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
 
       const results = await vectorStore.similaritySearchWithScore(
         "sandwich",
-        1
+        1,
       );
 
       expect(results.length).toEqual(1);
@@ -160,7 +160,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("performs similarity search with filter clause", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -178,7 +178,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("performs similarity search with parameterized filter clause", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -199,7 +199,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("performs similarity search including vectors in results", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -207,7 +207,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
       const results: Document[] = await vectorStore.similaritySearch(
         "sandwich",
         1,
-        { includeEmbeddings: true }
+        { includeEmbeddings: true },
       );
 
       expect(results.length).toEqual(1);
@@ -220,7 +220,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("works with the retriever interface", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -244,7 +244,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("returns results above threshold", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -255,7 +255,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
         {
           searchType: AzureCosmosDBNoSQLSearchType.VectorScoreThreshold,
           threshold: 0.1,
-        }
+        },
       );
 
       expect(results.length).toBeGreaterThan(0);
@@ -268,7 +268,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("filters out results below threshold", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -280,7 +280,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
         {
           searchType: AzureCosmosDBNoSQLSearchType.VectorScoreThreshold,
           threshold: 0.99,
-        }
+        },
       );
 
       // Should return fewer results than total documents
@@ -296,7 +296,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("performs full-text search using FullTextContains", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        fullTextConfig
+        fullTextConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -315,7 +315,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("performs full-text ranking search", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        fullTextConfig
+        fullTextConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -335,7 +335,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("full-text ranking requires fullTextRankFilter", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        fullTextConfig
+        fullTextConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -343,7 +343,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
       await expect(
         vectorStore.similaritySearch("query", 10, {
           searchType: AzureCosmosDBNoSQLSearchType.FullTextRanking,
-        })
+        }),
       ).rejects.toThrow(/fullTextRankFilter is required/);
     });
   });
@@ -356,7 +356,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("performs hybrid search combining vector and full-text", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        fullTextConfig
+        fullTextConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -367,7 +367,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
         {
           searchType: AzureCosmosDBNoSQLSearchType.Hybrid,
           fullTextRankFilter: [{ searchField: "text", searchText: "sandwich" }],
-        }
+        },
       );
 
       expect(results.length).toBeGreaterThan(0);
@@ -379,7 +379,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("performs hybrid search with score threshold", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        fullTextConfig
+        fullTextConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -391,7 +391,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
           searchType: AzureCosmosDBNoSQLSearchType.HybridScoreThreshold,
           fullTextRankFilter: [{ searchField: "text", searchText: "sandwich" }],
           threshold: 0.1,
-        }
+        },
       );
 
       expect(results.length).toBeGreaterThan(0);
@@ -403,7 +403,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("hybrid search requires fullTextRankFilter", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        fullTextConfig
+        fullTextConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -411,14 +411,14 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
       await expect(
         vectorStore.similaritySearch("query", 10, {
           searchType: AzureCosmosDBNoSQLSearchType.Hybrid,
-        })
+        }),
       ).rejects.toThrow(/fullTextRankFilter is required/);
     });
 
     test("hybrid score threshold search requires fullTextRankFilter", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        fullTextConfig
+        fullTextConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -426,7 +426,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
       await expect(
         vectorStore.similaritySearch("query", 10, {
           searchType: AzureCosmosDBNoSQLSearchType.HybridScoreThreshold,
-        })
+        }),
       ).rejects.toThrow(/fullTextRankFilter is required/);
     });
   });
@@ -442,7 +442,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
         texts,
         {},
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       const output = await vectorStore.maxMarginalRelevanceSearch("foo", {
@@ -466,7 +466,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
         texts,
         {},
         embeddings,
-        baseConfig
+        baseConfig,
       );
 
       const queryEmbedding = await embeddings.embedQuery("foo");
@@ -476,7 +476,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
           k: 3,
           fetchK: 20,
           lambda: 0.1,
-        }
+        },
       );
 
       expect(docs.length).toBe(3);
@@ -494,7 +494,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("uses vector search by default", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -502,7 +502,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
       // No searchType in filter — should use default (vector)
       const results = await vectorStore.similaritySearchWithScore(
         "sandwich",
-        1
+        1,
       );
 
       expect(results.length).toEqual(1);
@@ -516,7 +516,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
         {
           ...baseConfig,
           defaultSearchType: AzureCosmosDBNoSQLSearchType.VectorScoreThreshold,
-        }
+        },
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -526,7 +526,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
       const results = await vectorStore.similaritySearchWithScore(
         "sandwich",
         10,
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
 
       expect(results.length).toBeGreaterThan(0);
@@ -542,7 +542,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
           ...baseConfig,
           // Default is vector_score_threshold
           defaultSearchType: AzureCosmosDBNoSQLSearchType.VectorScoreThreshold,
-        }
+        },
       );
 
       await vectorStore.addDocuments(testDocuments);
@@ -551,7 +551,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
       const results = await vectorStore.similaritySearchWithScore(
         "sandwich",
         10,
-        { searchType: AzureCosmosDBNoSQLSearchType.Vector }
+        { searchType: AzureCosmosDBNoSQLSearchType.Vector },
       );
 
       // Plain vector search returns all results regardless of score
@@ -567,7 +567,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("deletes documents by id", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       const ids = await vectorStore.addDocuments([
@@ -590,7 +590,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("deletes documents by filter", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       await vectorStore.addDocuments([
@@ -618,7 +618,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("deletes all documents", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       const documents = Array.from({ length: 101 }, (_, i) => ({
@@ -650,7 +650,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
     test("getContainer returns the underlying container", async () => {
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       await vectorStore.addDocuments([
@@ -666,7 +666,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
       // Skip if endpoint is not defined (needed for managed identity)
       if (!process.env.AZURE_COSMOSDB_NOSQL_ENDPOINT) {
         console.log(
-          "Skipping managed identity test: AZURE_COSMOSDB_NOSQL_ENDPOINT not set"
+          "Skipping managed identity test: AZURE_COSMOSDB_NOSQL_ENDPOINT not set",
         );
         return;
       }
@@ -676,7 +676,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
       // with RBAC does not have permission to create them.
       const vectorStoreCS = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
       await vectorStoreCS.addDocuments([{ pageContent: "init", metadata: {} }]);
 
@@ -692,7 +692,7 @@ describe("AzureCosmosDBNoSQLVectorStore", () => {
 
       const vectorStore = new AzureCosmosDBNoSQLVectorStore(
         new OpenAIEmbeddings(),
-        baseConfig
+        baseConfig,
       );
 
       expect(vectorStore).toBeDefined();

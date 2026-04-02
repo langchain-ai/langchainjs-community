@@ -117,7 +117,7 @@ export class AzureCosmsosDBNoSQLChatMessageHistory extends BaseListChatMessageHi
   }
 
   private initializeClient(
-    input: AzureCosmosDBNoSQLChatMessageHistoryInput
+    input: AzureCosmosDBNoSQLChatMessageHistoryInput,
   ): CosmosClient {
     const connectionString =
       input.connectionString ??
@@ -127,7 +127,7 @@ export class AzureCosmsosDBNoSQLChatMessageHistory extends BaseListChatMessageHi
 
     if (!input.client && !connectionString && !endpoint) {
       throw new Error(
-        "CosmosClient, connection string, or endpoint must be provided."
+        "CosmosClient, connection string, or endpoint must be provided.",
       );
     }
 

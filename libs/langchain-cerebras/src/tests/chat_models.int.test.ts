@@ -128,7 +128,7 @@ test("invoke with bound tools", async () => {
       ],
       {
         tool_choice: "auto",
-      }
+      },
     )
     .invoke([message]);
   expect(typeof res.tool_calls?.[0].args).toEqual("object");
@@ -164,7 +164,7 @@ test("stream with bound tools, yielding a single chunk", async () => {
       ],
       {
         tool_choice: "auto",
-      }
+      },
     )
     .stream([message]);
   // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
@@ -201,7 +201,7 @@ test("Few shotting with tool calls", async () => {
     ],
     {
       tool_choice: "auto",
-    }
+    },
   );
   const res = await chat.invoke([
     new HumanMessage("What is the weather in SF?"),
@@ -247,7 +247,7 @@ test("Cerebras can stream tool calls", async () => {
   const modelWithTools = model.bindTools([weatherTool]);
 
   const stream = await modelWithTools.stream(
-    "What is the weather in San Francisco?"
+    "What is the weather in San Francisco?",
   );
 
   let finalMessage: AIMessageChunk | undefined;

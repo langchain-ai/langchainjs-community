@@ -238,7 +238,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
 
   constructor(
     embeddings: EmbeddingsInterface,
-    dbConfig: AzureCosmosDBNoSQLConfig
+    dbConfig: AzureCosmosDBNoSQLConfig,
   ) {
     super(embeddings, dbConfig);
 
@@ -252,7 +252,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
 
     if (!dbConfig.client && !connectionString && !endpoint) {
       throw new Error(
-        "AzureCosmosDBNoSQLVectorStore client, connection string or endpoint must be set."
+        "AzureCosmosDBNoSQLVectorStore client, connection string or endpoint must be set.",
       );
     }
 
@@ -317,7 +317,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
     this.embeddingKey = vectorEmbeddingPolicy.vectorEmbeddings[0].path.slice(1);
     if (!this.embeddingKey) {
       throw new Error(
-        "AzureCosmosDBNoSQLVectorStore requires a valid vectorEmbeddings path"
+        "AzureCosmosDBNoSQLVectorStore requires a valid vectorEmbeddings path",
       );
     }
 
@@ -328,7 +328,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         indexingPolicy.fullTextIndexes.length === 0
       ) {
         throw new Error(
-          "fullTextIndexes cannot be null or empty in the indexingPolicy if full text search is enabled."
+          "fullTextIndexes cannot be null or empty in the indexingPolicy if full text search is enabled.",
         );
       }
       if (
@@ -337,7 +337,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         this.fullTextPolicy.fullTextPaths.length === 0
       ) {
         throw new Error(
-          "fullTextPolicy with fullTextPaths cannot be null or empty if full text search is enabled."
+          "fullTextPolicy with fullTextPaths cannot be null or empty if full text search is enabled.",
         );
       }
     }
@@ -354,7 +354,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         }).catch((error) => {
           console.error(
             "Error during AzureCosmosDBNoSQLVectorStore initialization:",
-            error
+            error,
           );
         });
       }
@@ -374,7 +374,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
 
     if (params.ids && params.filter) {
       throw new Error(
-        `AzureCosmosDBNoSQLVectorStore delete requires either "ids" or "filter" to be set in the params object, not both`
+        `AzureCosmosDBNoSQLVectorStore delete requires either "ids" or "filter" to be set in the params object, not both`,
       );
     }
 
@@ -417,7 +417,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
    */
   async addVectors(
     vectors: number[][],
-    documents: DocumentInterface[]
+    documents: DocumentInterface[],
   ): Promise<string[]> {
     await this.initialize();
     const docs = vectors.map((embedding, idx) => ({
@@ -429,7 +429,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
 
     const ids: string[] = [];
     const results = await Promise.all(
-      docs.map((doc) => this.container.items.create(doc))
+      docs.map((doc) => this.container.items.create(doc)),
     );
 
     for (const result of results) {
@@ -449,7 +449,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
     const texts = documents.map(({ pageContent }) => pageContent);
     return this.addVectors(
       await this.embeddings.embedDocuments(texts),
-      documents
+      documents,
     );
   }
 
@@ -465,7 +465,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
   async similaritySearchVectorWithScore(
     queryVector: number[],
     k = 4,
-    filter: this["FilterType"] | undefined = undefined
+    filter: this["FilterType"] | undefined = undefined,
   ): Promise<[Document, number][]> {
     const searchType = filter?.searchType ?? this.defaultSearchType;
 
@@ -478,7 +478,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         queryVector,
         k,
         filter,
-        filter?.threshold
+        filter?.threshold,
       );
     } else if (searchType === AzureCosmosDBNoSQLSearchType.Hybrid) {
       if (
@@ -486,14 +486,14 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         filter.fullTextRankFilter.length === 0
       ) {
         throw new Error(
-          `fullTextRankFilter is required for ${searchType} search type`
+          `fullTextRankFilter is required for ${searchType} search type`,
         );
       }
       return this.hybridSearchWithScore(
         queryVector,
         k,
         filter,
-        filter.fullTextRankFilter
+        filter.fullTextRankFilter,
       );
     } else if (
       searchType === AzureCosmosDBNoSQLSearchType.HybridScoreThreshold
@@ -503,7 +503,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         filter.fullTextRankFilter.length === 0
       ) {
         throw new Error(
-          `fullTextRankFilter is required for ${searchType} search type`
+          `fullTextRankFilter is required for ${searchType} search type`,
         );
       }
       return this.hybridSearchWithScoreThreshold(
@@ -511,14 +511,14 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         k,
         filter,
         filter.fullTextRankFilter,
-        filter?.threshold
+        filter?.threshold,
       );
     } else if (searchType === AzureCosmosDBNoSQLSearchType.FullTextSearch) {
       return this.fullTextSearch(k, filter);
     } else if (searchType === AzureCosmosDBNoSQLSearchType.FullTextRanking) {
       if (!filter?.fullTextRankFilter) {
         throw new Error(
-          `fullTextRankFilter is required for ${searchType} search type`
+          `fullTextRankFilter is required for ${searchType} search type`,
         );
       }
       return this.fullTextRanking(k, filter, filter.fullTextRankFilter);
@@ -541,7 +541,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
    */
   async maxMarginalRelevanceSearch(
     query: string,
-    options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>
+    options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>,
   ): Promise<Document[]> {
     const queryEmbedding = await this.embeddings.embedQuery(query);
     return this.maxMarginalRelevanceSearchByVector(queryEmbedding, options);
@@ -562,7 +562,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
    */
   async maxMarginalRelevanceSearchByVector(
     queryEmbedding: number[],
-    options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>
+    options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>,
   ): Promise<Document[]> {
     const { k, fetchK = 20, lambda = 0.5, filter } = options;
     const includeEmbeddingsFlag = filter?.includeEmbeddings || false;
@@ -573,7 +573,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
       {
         ...filter,
         includeEmbeddings: true,
-      }
+      },
     );
     const embeddingList = docs.map((doc) => doc[0].metadata[this.embeddingKey]);
 
@@ -582,7 +582,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
       queryEmbedding,
       embeddingList,
       lambda,
-      k
+      k,
     );
 
     return mmrIndexes.map((index) => {
@@ -608,12 +608,12 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
     client: CosmosClient,
     databaseName: string,
     containerName: string,
-    initOptions: AzureCosmosDBNoSQLInitOptions
+    initOptions: AzureCosmosDBNoSQLInitOptions,
   ): Promise<void> {
     // Determine vector dimensions if not provided
     const vectorEmbeddingPolicy = initOptions.vectorEmbeddingPolicy!;
     const needDimensions = vectorEmbeddingPolicy.vectorEmbeddings.some(
-      (v) => !v.dimensions
+      (v) => !v.dimensions,
     );
     if (needDimensions) {
       const queryEmbedding = await this.embeddings.embedQuery("test");
@@ -648,7 +648,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
   private async vectorSearchWithScore(
     queryVector: number[],
     k = 4,
-    filter: this["FilterType"] | undefined = undefined
+    filter: this["FilterType"] | undefined = undefined,
   ): Promise<[Document, number][]> {
     await this.initialize();
 
@@ -661,7 +661,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         offsetLimit: filter?.offsetLimit,
         projectionMapping: filter?.projectionMapping,
         withEmbedding: filter?.includeEmbeddings,
-      }
+      },
     );
 
     return this.executeQuery(
@@ -671,7 +671,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
       {
         withEmbedding: filter?.includeEmbeddings,
         projectionMapping: filter?.projectionMapping,
-      }
+      },
     );
   }
 
@@ -682,7 +682,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
     embeddings: number[],
     k = 4,
     filter: this["FilterType"] | undefined = undefined,
-    fullTextRankFilter: AzureCosmosDBNoSQLFullTextRankFilter[]
+    fullTextRankFilter: AzureCosmosDBNoSQLFullTextRankFilter[],
   ): Promise<[Document, number][]> {
     const { query, parameters } = this.constructQuery(
       k,
@@ -695,7 +695,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         withEmbedding: filter?.includeEmbeddings,
         filterClause: filter?.filterClause,
         weights: filter?.weights,
-      }
+      },
     );
 
     return this.executeQuery(
@@ -705,7 +705,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
       {
         withEmbedding: filter?.includeEmbeddings,
         projectionMapping: filter?.projectionMapping,
-      }
+      },
     );
   }
 
@@ -717,7 +717,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
     k = 4,
     filter: this["FilterType"] | undefined = undefined,
     fullTextRankFilter: AzureCosmosDBNoSQLFullTextRankFilter[],
-    threshold: number = 0.5
+    threshold: number = 0.5,
   ): Promise<[Document, number][]> {
     const { query, parameters } = this.constructQuery(
       k,
@@ -730,7 +730,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         withEmbedding: filter?.includeEmbeddings,
         filterClause: filter?.filterClause,
         weights: filter?.weights,
-      }
+      },
     );
 
     return this.executeQuery(
@@ -741,7 +741,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         withEmbedding: filter?.includeEmbeddings,
         projectionMapping: filter?.projectionMapping,
         threshold,
-      }
+      },
     );
   }
 
@@ -752,7 +752,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
     embeddings: number[],
     k = 4,
     filter: this["FilterType"] | undefined = undefined,
-    threshold: number = 0.5
+    threshold: number = 0.5,
   ): Promise<[Document, number][]> {
     const { query, parameters } = this.constructQuery(
       k,
@@ -763,7 +763,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         offsetLimit: filter?.offsetLimit,
         projectionMapping: filter?.projectionMapping,
         withEmbedding: filter?.includeEmbeddings,
-      }
+      },
     );
 
     return this.executeQuery(
@@ -774,7 +774,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         withEmbedding: filter?.includeEmbeddings,
         projectionMapping: filter?.projectionMapping,
         threshold,
-      }
+      },
     );
   }
 
@@ -785,7 +785,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
   private async fullTextRanking(
     k = 4,
     filter: this["FilterType"] | undefined = undefined,
-    fullTextRankFilter: AzureCosmosDBNoSQLFullTextRankFilter[]
+    fullTextRankFilter: AzureCosmosDBNoSQLFullTextRankFilter[],
   ): Promise<[Document, number][]> {
     const { query, parameters } = this.constructQuery(
       k,
@@ -795,7 +795,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         projectionMapping: filter?.projectionMapping,
         fullTextRankFilter,
         filterClause: filter?.filterClause,
-      }
+      },
     );
 
     return this.executeQuery(
@@ -805,7 +805,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
       {
         withEmbedding: false,
         projectionMapping: filter?.projectionMapping,
-      }
+      },
     );
   }
 
@@ -815,7 +815,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
    */
   private async fullTextSearch(
     k = 4,
-    filter: this["FilterType"] | undefined = undefined
+    filter: this["FilterType"] | undefined = undefined,
   ): Promise<[Document, number][]> {
     const { query, parameters } = this.constructQuery(
       k,
@@ -824,7 +824,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         offsetLimit: filter?.offsetLimit,
         projectionMapping: filter?.projectionMapping,
         filterClause: filter?.filterClause,
-      }
+      },
     );
 
     return this.executeQuery(
@@ -834,7 +834,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
       {
         withEmbedding: false,
         projectionMapping: filter?.projectionMapping,
-      }
+      },
     );
   }
 
@@ -859,7 +859,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
       withEmbedding?: boolean;
       filterClause?: AzureCosmosDBNoSQLQueryFilter;
       weights?: number[];
-    }
+    },
   ): { query: string; parameters: SqlParameter[] } {
     const table = this.tableAlias;
 
@@ -870,7 +870,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
       searchType,
       options.projectionMapping,
       options.fullTextRankFilter,
-      options.withEmbedding
+      options.withEmbedding,
     );
 
     // Add FROM clause
@@ -901,11 +901,11 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
               .split(" ")
               .map(
                 (_, termIndex) =>
-                  `@${item.searchField}_${filterIndex}_term_${termIndex}`
+                  `@${item.searchField}_${filterIndex}_term_${termIndex}`,
               )
               .join(", ");
             return `FullTextScore(${table}[@${item.searchField}], ${terms})`;
-          }
+          },
         );
         query += ` ORDER BY RANK RRF(${rankComponents?.join(", ")})`;
       }
@@ -924,15 +924,15 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
             .split(" ")
             .map(
               (_, termIndex) =>
-                `@${item.searchField}_${filterIndex}_term_${termIndex}`
+                `@${item.searchField}_${filterIndex}_term_${termIndex}`,
             )
             .join(", ");
           return `FullTextScore(${table}[@${item.searchField}], ${terms})`;
-        }
+        },
       );
 
       query += ` ORDER BY RANK RRF(${rankComponents?.join(
-        ", "
+        ", ",
       )}, VectorDistance(${table}[@embeddingKey], @embeddings)`;
       if (options.weights) {
         query += ", @weights)";
@@ -953,7 +953,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
       options.projectionMapping,
       options.fullTextRankFilter,
       options.weights,
-      options.filterClause
+      options.filterClause,
     );
 
     return { query, parameters };
@@ -966,7 +966,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
     searchType: AzureCosmosDBNoSQLSearchType,
     projectionMapping?: ProjectionMapping,
     fullTextRankFilter?: AzureCosmosDBNoSQLFullTextRankFilter[],
-    withEmbedding?: boolean
+    withEmbedding?: boolean,
   ): string {
     const table = this.tableAlias;
     let projection = "";
@@ -974,7 +974,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
 
     if (projectionMapping) {
       const fields = Object.entries(projectionMapping).map(
-        ([key, alias]) => `${table}[@${key}] as ${alias}`
+        ([key, alias]) => `${table}[@${key}] as ${alias}`,
       );
 
       if (fields.length > 0) {
@@ -996,7 +996,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
         ) {
           if (!addedSearchFields.has(item.searchField)) {
             fields.push(
-              `${table}[@${item.searchField}] as ${item.searchField}`
+              `${table}[@${item.searchField}] as ${item.searchField}`,
             );
             addedSearchFields.add(item.searchField);
           }
@@ -1036,7 +1036,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
     projectionMapping?: ProjectionMapping,
     fullTextRankFilter?: AzureCosmosDBNoSQLFullTextRankFilter[],
     weights?: number[],
-    filterClause?: AzureCosmosDBNoSQLQueryFilter
+    filterClause?: AzureCosmosDBNoSQLQueryFilter,
   ): SqlParameter[] {
     const parameters: SqlParameter[] = [{ name: "@limit", value: k }];
     let isDefaultParamRequired = true;
@@ -1117,7 +1117,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
    */
   private extractTextFromItem(
     item: Record<string, unknown>,
-    projectionMapping?: ProjectionMapping
+    projectionMapping?: ProjectionMapping,
   ): string {
     if (projectionMapping && this.textKey in projectionMapping) {
       const textKey = projectionMapping[this.textKey];
@@ -1133,7 +1133,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
   private populateMetadataFromItem(
     item: Record<string, unknown>,
     baseMetadata: Record<string, unknown>,
-    projectionMapping?: ProjectionMapping
+    projectionMapping?: ProjectionMapping,
   ): Record<string, unknown> {
     if (projectionMapping) {
       for (const [key, alias] of Object.entries(projectionMapping)) {
@@ -1166,7 +1166,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
       withEmbedding?: boolean;
       projectionMapping?: ProjectionMapping;
       threshold?: number;
-    }
+    },
   ): Promise<[Document, number][]> {
     await this.initialize();
 
@@ -1234,7 +1234,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
     texts: string[],
     metadatas: object[] | object,
     embeddings: EmbeddingsInterface,
-    dbConfig: AzureCosmosDBNoSQLConfig
+    dbConfig: AzureCosmosDBNoSQLConfig,
   ): Promise<AzureCosmosDBNoSQLVectorStore> {
     const docs: Document[] = [];
     for (let i = 0; i < texts.length; i += 1) {
@@ -1248,7 +1248,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
     return AzureCosmosDBNoSQLVectorStore.fromDocuments(
       docs,
       embeddings,
-      dbConfig
+      dbConfig,
     );
   }
 
@@ -1264,7 +1264,7 @@ export class AzureCosmosDBNoSQLVectorStore extends VectorStore {
   static async fromDocuments(
     docs: Document[],
     embeddings: EmbeddingsInterface,
-    dbConfig: AzureCosmosDBNoSQLConfig
+    dbConfig: AzureCosmosDBNoSQLConfig,
   ): Promise<AzureCosmosDBNoSQLVectorStore> {
     const instance = new this(embeddings, dbConfig);
     await instance.addDocuments(docs);

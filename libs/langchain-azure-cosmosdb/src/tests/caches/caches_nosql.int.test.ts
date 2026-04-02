@@ -49,7 +49,7 @@ function indexingPolicy(indexType: any) {
 
 function vectorEmbeddingPolicy(
   distanceFunction: "euclidean" | "cosine" | "dotproduct",
-  dimension: number
+  dimension: number,
 ): VectorEmbeddingPolicy {
   return {
     vectorEmbeddings: [
@@ -66,14 +66,14 @@ function vectorEmbeddingPolicy(
 async function initializeCache(
   indexType: any,
   distanceFunction: any,
-  similarityThreshold?: number
+  similarityThreshold?: number,
 ): Promise<AzureCosmosDBNoSQLSemanticCache> {
   let cache: AzureCosmosDBNoSQLSemanticCache;
   const embeddingModel = getEmbeddings();
   const testEmbedding = await embeddingModel.embedDocuments(["sample text"]);
   const dimension = Math.min(
     testEmbedding[0].length,
-    indexType === "flat" ? 505 : 4096
+    indexType === "flat" ? 505 : 4096,
   );
   if (process.env.AZURE_COSMOSDB_NOSQL_CONNECTION_STRING) {
     cache = new AzureCosmosDBNoSQLSemanticCache(
@@ -85,10 +85,10 @@ async function initializeCache(
         indexingPolicy: indexingPolicy(indexType),
         vectorEmbeddingPolicy: vectorEmbeddingPolicy(
           distanceFunction,
-          dimension
+          dimension,
         ),
       },
-      similarityThreshold
+      similarityThreshold,
     );
   } else if (process.env.AZURE_COSMOSDB_NOSQL_ENDPOINT) {
     cache = new AzureCosmosDBNoSQLSemanticCache(
@@ -100,14 +100,14 @@ async function initializeCache(
         indexingPolicy: indexingPolicy(indexType),
         vectorEmbeddingPolicy: vectorEmbeddingPolicy(
           distanceFunction,
-          dimension
+          dimension,
         ),
       },
-      similarityThreshold
+      similarityThreshold,
     );
   } else {
     throw new Error(
-      "Please set the environment variable AZURE_COSMOSDB_NOSQL_CONNECTION_STRING or AZURE_COSMOSDB_NOSQL_ENDPOINT"
+      "Please set the environment variable AZURE_COSMOSDB_NOSQL_CONNECTION_STRING or AZURE_COSMOSDB_NOSQL_ENDPOINT",
     );
   }
   return cache;
@@ -136,7 +136,7 @@ describe("Azure CosmosDB NoSQL Semantic Cache", () => {
 
     if (process.env.AZURE_COSMOSDB_NOSQL_CONNECTION_STRING) {
       client = new CosmosClient(
-        process.env.AZURE_COSMOSDB_NOSQL_CONNECTION_STRING
+        process.env.AZURE_COSMOSDB_NOSQL_CONNECTION_STRING,
       );
     } else if (process.env.AZURE_COSMOSDB_NOSQL_ENDPOINT) {
       client = new CosmosClient({
@@ -145,7 +145,7 @@ describe("Azure CosmosDB NoSQL Semantic Cache", () => {
       });
     } else {
       throw new Error(
-        "Please set the environment variable AZURE_COSMOSDB_NOSQL_CONNECTION_STRING or AZURE_COSMOSDB_NOSQL_ENDPOINT"
+        "Please set the environment variable AZURE_COSMOSDB_NOSQL_CONNECTION_STRING or AZURE_COSMOSDB_NOSQL_ENDPOINT",
       );
     }
 
@@ -251,12 +251,12 @@ describe("Azure CosmosDB NoSQL Semantic Cache", () => {
     const cache = await initializeCache("quantizedFlat", "cosine");
     const model = getChatModel({ model: "gpt-4o-mini", cache });
     const response1 = await model.invoke(
-      "Where is the headquarter of Microsoft?"
+      "Where is the headquarter of Microsoft?",
     );
     // gives similarity score of 0.56 which is less than the threshold of 0.6. The cache
     // will retun null which will allow the model to generate result.
     const response2 = await model.invoke(
-      "List all Microsoft offices in India."
+      "List all Microsoft offices in India.",
     );
     expect(response2.content).not.toEqual(response1.content);
     // gives similarity score of .63 > 0.6

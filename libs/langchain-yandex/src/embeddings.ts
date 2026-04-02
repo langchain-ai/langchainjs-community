@@ -63,7 +63,7 @@ export class YandexGPTEmbeddings
 
     if (apiKey === undefined && iamToken === undefined) {
       throw new Error(
-        "Please set the YC_API_KEY or YC_IAM_TOKEN environment variable or pass it to the constructor as the apiKey or iamToken field."
+        "Please set the YC_API_KEY or YC_IAM_TOKEN environment variable or pass it to the constructor as the apiKey or iamToken field.",
       );
     }
 
@@ -76,7 +76,7 @@ export class YandexGPTEmbeddings
 
     if (this.modelURI === undefined && folderID === undefined) {
       throw new Error(
-        "Please set the YC_FOLDER_ID environment variable or pass Yandex GPT model URI to the constructor as the modelURI field."
+        "Please set the YC_FOLDER_ID environment variable or pass Yandex GPT model URI to the constructor as the modelURI field.",
       );
     }
 
@@ -151,7 +151,7 @@ export class YandexGPTEmbeddings
           });
           if (!response.ok) {
             throw new Error(
-              `Failed to fetch ${apiUrl} from YandexGPT: ${response.status}`
+              `Failed to fetch ${apiUrl} from YandexGPT: ${response.status}`,
             );
           }
 

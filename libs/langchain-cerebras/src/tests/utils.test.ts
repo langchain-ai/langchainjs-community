@@ -28,7 +28,7 @@ describe("convertToCerebrasMessageParams", () => {
   test("should convert a full conversation with tool calls", () => {
     const messages = [
       new HumanMessage(
-        "Please tell me the current number of globules in the environment."
+        "Please tell me the current number of globules in the environment.",
       ),
       new AIMessage({
         content: "",
@@ -94,7 +94,7 @@ describe("convertToCerebrasMessageParams", () => {
     });
 
     expect(() => convertToCerebrasMessageParams([toolMessage])).toThrow(
-      "Non string tool message content is not supported"
+      "Non string tool message content is not supported",
     );
   });
 

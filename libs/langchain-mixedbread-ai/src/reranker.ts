@@ -97,7 +97,7 @@ export class MixedbreadAIReranker extends BaseDocumentCompressor {
     const apiKey = params?.apiKey ?? getEnvironmentVariable("MXBAI_API_KEY");
     if (!apiKey) {
       throw new Error(
-        "Mixedbread AI API key not found. Either provide it in the constructor or set the 'MXBAI_API_KEY' environment variable."
+        "Mixedbread AI API key not found. Either provide it in the constructor or set the 'MXBAI_API_KEY' environment variable.",
       );
     }
 
@@ -130,7 +130,7 @@ export class MixedbreadAIReranker extends BaseDocumentCompressor {
    */
   async compressDocuments(
     documents: DocumentInterface[],
-    query: string
+    query: string,
   ): Promise<DocumentInterface[]> {
     if (documents.length === 0) {
       return [];
@@ -172,7 +172,7 @@ export class MixedbreadAIReranker extends BaseDocumentCompressor {
       | DocumentInterface[]
       | Array<Record<string, unknown>>,
     query: string,
-    options?: RerankingRequestWithoutInput
+    options?: RerankingRequestWithoutInput,
   ): Promise<Array<MixedbreadAI.RankedDocument>> {
     if (documents.length === 0) {
       return [];
@@ -192,7 +192,7 @@ export class MixedbreadAIReranker extends BaseDocumentCompressor {
       },
       {
         maxRetries: this.maxRetries,
-      }
+      },
     );
 
     return result.data;

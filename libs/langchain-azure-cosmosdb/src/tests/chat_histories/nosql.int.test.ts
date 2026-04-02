@@ -26,7 +26,7 @@ beforeEach(async () => {
 
   if (process.env.AZURE_COSMOSDB_NOSQL_CONNECTION_STRING) {
     client = new CosmosClient(
-      process.env.AZURE_COSMOSDB_NOSQL_CONNECTION_STRING
+      process.env.AZURE_COSMOSDB_NOSQL_CONNECTION_STRING,
     );
   } else if (process.env.AZURE_COSMOSDB_NOSQL_ENDPOINT) {
     client = new CosmosClient({
@@ -35,7 +35,7 @@ beforeEach(async () => {
     });
   } else {
     throw new Error(
-      "Please set the environment variable AZURE_COSMOSDB_NOSQL_CONNECTION_STRING or AZURE_COSMOSDB_NOSQL_ENDPOINT"
+      "Please set the environment variable AZURE_COSMOSDB_NOSQL_CONNECTION_STRING or AZURE_COSMOSDB_NOSQL_ENDPOINT",
     );
   }
   try {

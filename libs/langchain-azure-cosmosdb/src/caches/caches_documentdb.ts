@@ -47,7 +47,7 @@ export class AzureDocumentDBSemanticCache extends BaseCache {
   constructor(
     embeddings: EmbeddingsInterface,
     dbConfig: AzureDocumentDBConfig,
-    similarityScoreThreshold: number = 0.6
+    similarityScoreThreshold: number = 0.6,
   ) {
     super();
 
@@ -58,7 +58,7 @@ export class AzureDocumentDBSemanticCache extends BaseCache {
 
     if (!dbConfig.client && !connectionString) {
       throw new Error(
-        "AzureDocumentDBSemanticCache client or connection string must be set."
+        "AzureDocumentDBSemanticCache client or connection string must be set.",
       );
     }
 
@@ -87,7 +87,7 @@ export class AzureDocumentDBSemanticCache extends BaseCache {
     if (!this.cacheDict[key]) {
       this.cacheDict[key] = new AzureDocumentDBVectorStore(
         this.embeddings,
-        this.config
+        this.config,
       );
     }
     return this.cacheDict[key];
@@ -107,7 +107,7 @@ export class AzureDocumentDBSemanticCache extends BaseCache {
     const results = await llmCache.similaritySearchVectorWithScore(
       queryEmbedding,
       1,
-      this.config.indexOptions?.indexType
+      this.config.indexOptions?.indexType,
     );
     if (!results.length) return null;
 
@@ -122,7 +122,7 @@ export class AzureDocumentDBSemanticCache extends BaseCache {
         if (!isSimilar) return undefined;
 
         return document.metadata.return_value.map((gen: string) =>
-          deserializeStoredGeneration(JSON.parse(gen))
+          deserializeStoredGeneration(JSON.parse(gen)),
         );
       })
       .filter((gen) => gen !== undefined);
@@ -140,10 +140,10 @@ export class AzureDocumentDBSemanticCache extends BaseCache {
   public async update(
     prompt: string,
     llmKey: string,
-    returnValue: Generation[]
+    returnValue: Generation[],
   ): Promise<void> {
     const serializedGenerations = returnValue.map((generation) =>
-      JSON.stringify(serializeGeneration(generation))
+      JSON.stringify(serializeGeneration(generation)),
     );
 
     const llmCache = this.getLlmCache(llmKey);

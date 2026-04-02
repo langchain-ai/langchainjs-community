@@ -26,7 +26,7 @@ export function convertCerebrasMessagesToLangChain(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     responseMetadata?: Record<string, any>;
     usageMetadata?: UsageMetadata;
-  }
+  },
 ): AIMessageChunk {
   return new AIMessageChunk({
     content: messages.content ?? "",
@@ -48,7 +48,7 @@ function extractBase64FromDataUrl(dataUrl: string): string {
 }
 
 function convertAIMessageToCerebras(
-  messages: AIMessage
+  messages: AIMessage,
 ): CerebrasMessageParam[] {
   const toolCalls: CerebrasToolCall[] | undefined = messages.tool_calls?.map(
     (tc) => ({
@@ -58,7 +58,7 @@ function convertAIMessageToCerebras(
         name: tc.name,
         arguments: JSON.stringify(tc.args),
       },
-    })
+    }),
   );
   if (typeof messages.content === "string") {
     // Check if there are tool calls even with string content
@@ -80,7 +80,7 @@ function convertAIMessageToCerebras(
   }
 
   const textFields = messages.content.filter(
-    (c) => c.type === "text" && typeof c.text === "string"
+    (c) => c.type === "text" && typeof c.text === "string",
   );
   const textMessages: CerebrasMessageParam[] = (
     textFields as MessageContentText[]
@@ -107,7 +107,7 @@ function convertAIMessageToCerebras(
     !messages.tool_calls?.length
   ) {
     throw new Error(
-      "'tool_use' content type is not supported without tool calls."
+      "'tool_use' content type is not supported without tool calls.",
     );
   }
 
@@ -115,7 +115,7 @@ function convertAIMessageToCerebras(
 }
 
 function convertHumanGenericMessagesToCerebras(
-  message: HumanMessage
+  message: HumanMessage,
 ): CerebrasMessageParam[] {
   if (typeof message.content === "string") {
     return [
@@ -156,7 +156,7 @@ function convertHumanGenericMessagesToCerebras(
 }
 
 function convertSystemMessageToCerebras(
-  message: SystemMessage
+  message: SystemMessage,
 ): CerebrasMessageParam[] {
   if (typeof message.content === "string") {
     return [
@@ -167,7 +167,7 @@ function convertSystemMessageToCerebras(
     ];
   } else if (
     message.content.every(
-      (c) => c.type === "text" && typeof c.text === "string"
+      (c) => c.type === "text" && typeof c.text === "string",
     )
   ) {
     return (message.content as MessageContentText[]).map((c) => ({
@@ -178,13 +178,13 @@ function convertSystemMessageToCerebras(
     throw new Error(
       `Unsupported content type(s): ${message.content
         .map((c) => c.type)
-        .join(", ")}`
+        .join(", ")}`,
     );
   }
 }
 
 function convertToolMessageToCerebras(
-  message: ToolMessage
+  message: ToolMessage,
 ): CerebrasMessageParam[] {
   if (typeof message.content !== "string") {
     throw new Error("Non string tool message content is not supported");
@@ -199,7 +199,7 @@ function convertToolMessageToCerebras(
 }
 
 export function convertToCerebrasMessageParams(
-  messages: BaseMessage[]
+  messages: BaseMessage[],
 ): CerebrasMessageParam[] {
   return messages.flatMap((msg) => {
     if (["human", "generic"].includes(msg.type)) {
@@ -217,7 +217,7 @@ export function convertToCerebrasMessageParams(
 }
 
 export function formatToCerebrasToolChoice(
-  toolChoice?: ToolChoice
+  toolChoice?: ToolChoice,
 ): Cerebras.ChatCompletionCreateParams["tool_choice"] {
   if (!toolChoice) {
     return undefined;

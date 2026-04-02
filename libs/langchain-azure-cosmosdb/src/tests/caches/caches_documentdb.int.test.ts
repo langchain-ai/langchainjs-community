@@ -39,7 +39,7 @@ const COLLECTION_NAME = "test";
 async function initializeCache(
   indexType: any,
   distanceFunction: any,
-  similarityThreshold: number = 0.6
+  similarityThreshold: number = 0.6,
 ): Promise<AzureDocumentDBSemanticCache> {
   const embeddingModel = getEmbeddings();
   const testEmbedding = await embeddingModel.embedDocuments(["sample text"]);
@@ -70,11 +70,11 @@ async function initializeCache(
         connectionString,
         indexOptions,
       },
-      similarityThreshold
+      similarityThreshold,
     );
   } else {
     throw new Error(
-      "Please set the environment variable AZURE_DOCUMENTDB_CONNECTION_STRING"
+      "Please set the environment variable AZURE_DOCUMENTDB_CONNECTION_STRING",
     );
   }
 
@@ -105,13 +105,13 @@ describe("AzureDocumentDBSemanticCache", () => {
 
     let cacheOutput = await cache.lookup(
       "What is the capital of France?",
-      llmString
+      llmString,
     );
     expect(cacheOutput).toEqual([{ text: "Paris" }]);
 
     cacheOutput = await cache.lookup(
       "How do I bake chocolate chip cookies from scratch?",
-      llmString
+      llmString,
     );
     expect(cacheOutput).toEqual(null);
 
@@ -128,13 +128,13 @@ describe("AzureDocumentDBSemanticCache", () => {
 
     let cacheOutput = await cache.lookup(
       "What is the capital of France?",
-      llmString
+      llmString,
     );
     expect(cacheOutput).toEqual([{ text: "Paris" }]);
 
     cacheOutput = await cache.lookup(
       "How do I bake chocolate chip cookies from scratch?",
-      llmString
+      llmString,
     );
     expect(cacheOutput).toEqual(null);
 
@@ -151,13 +151,13 @@ describe("AzureDocumentDBSemanticCache", () => {
 
     const cacheOutput = await cache.lookup(
       "What is the capital of France?",
-      llmString
+      llmString,
     );
     expect(cacheOutput).toEqual([{ text: "Paris" }]);
 
     const resultBelowThreshold = await cache.lookup(
       "How do I bake chocolate chip cookies from scratch?",
-      llmString
+      llmString,
     );
     expect(resultBelowThreshold).toEqual(null);
 
@@ -178,19 +178,19 @@ describe("AzureDocumentDBSemanticCache", () => {
 
     let cacheOutput = await cache.lookup(
       "What is the capital of France?",
-      llmString
+      llmString,
     );
     expect(cacheOutput).toEqual([{ text: "Paris" }]);
 
     cacheOutput = await cache.lookup(
       "How do I train my dog to sit on command?",
-      llmString
+      llmString,
     );
     expect(cacheOutput).toEqual([{ text: "Use positive reinforcement" }]);
 
     cacheOutput = await cache.lookup(
       "How do I bake chocolate chip cookies from scratch?",
-      llmString
+      llmString,
     );
     expect(cacheOutput).toEqual(null);
 

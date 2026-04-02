@@ -8,7 +8,7 @@ import {
 
 afterAll(async () => {
   const client = new MongoClient(
-    process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING!
+    process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING!,
   );
   await client.connect();
   await client.db("langchain").dropDatabase();
@@ -19,7 +19,7 @@ test("Test Azure Cosmos MongoDB history store", async () => {
   expect(process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING).toBeDefined();
 
   const mongoClient = new MongoClient(
-    process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING!
+    process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING!,
   );
   const dbcfg: AzureCosmosDBMongoChatHistoryDBConfig = {
     client: mongoClient,
@@ -33,7 +33,7 @@ test("Test Azure Cosmos MongoDB history store", async () => {
   const chatHistory = new AzureCosmosDBMongoChatMessageHistory(
     dbcfg,
     sessionId,
-    userId
+    userId,
   );
 
   const blankResult = await chatHistory.getMessages();
@@ -59,7 +59,7 @@ test("Test clear Azure Cosmos MongoDB history store", async () => {
   expect(process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING).toBeDefined();
 
   const mongoClient = new MongoClient(
-    process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING!
+    process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING!,
   );
   const dbcfg: AzureCosmosDBMongoChatHistoryDBConfig = {
     client: mongoClient,
@@ -73,7 +73,7 @@ test("Test clear Azure Cosmos MongoDB history store", async () => {
   const chatHistory = new AzureCosmosDBMongoChatMessageHistory(
     dbcfg,
     sessionId,
-    userId
+    userId,
   );
 
   await chatHistory.addUserMessage("Who is the best vocalist?");
@@ -99,7 +99,7 @@ test("Test getAllSessions and clearAllSessions", async () => {
   expect(process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING).toBeDefined();
 
   const mongoClient = new MongoClient(
-    process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING!
+    process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING!,
   );
   const dbcfg: AzureCosmosDBMongoChatHistoryDBConfig = {
     client: mongoClient,
@@ -115,12 +115,12 @@ test("Test getAllSessions and clearAllSessions", async () => {
   const chatHistory1 = new AzureCosmosDBMongoChatMessageHistory(
     dbcfg,
     sessionId1,
-    userId
+    userId,
   );
   const chatHistory2 = new AzureCosmosDBMongoChatMessageHistory(
     dbcfg,
     sessionId2,
-    userId
+    userId,
   );
 
   // Clear any existing sessions from previous test runs

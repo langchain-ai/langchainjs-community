@@ -241,7 +241,10 @@ export class ChatBaiduQianfan
 
   constructor(
     model: string,
-    params?: Omit<Partial<BaiduQianfanChatInput> & BaseChatModelParams, "model">
+    params?: Omit<
+      Partial<BaiduQianfanChatInput> & BaseChatModelParams,
+      "model"
+    >,
   );
   constructor(fields?: Partial<BaiduQianfanChatInput> & BaseChatModelParams);
   constructor(
@@ -251,7 +254,7 @@ export class ChatBaiduQianfan
     paramsArg?: Omit<
       Partial<BaiduQianfanChatInput> & BaseChatModelParams,
       "model"
-    >
+    >,
   ) {
     const fields =
       typeof modelOrFields === "string"
@@ -335,7 +338,7 @@ export class ChatBaiduQianfan
   async _generate(
     messages: BaseMessage[],
     options: this["ParsedCallOptions"],
-    runManager?: CallbackManagerForLLMRun
+    runManager?: CallbackManagerForLLMRun,
   ): Promise<ChatResult> {
     if (this.streaming) {
       let finalChunk: ChatGenerationChunk | undefined;
@@ -365,7 +368,7 @@ export class ChatBaiduQianfan
       const params = this.invocationParams();
 
       const systemMessage = messages.find(
-        (message) => message._getType() === "system"
+        (message) => message._getType() === "system",
       );
       if (systemMessage) {
         // eslint-disable-next-line no-param-reassign
@@ -379,7 +382,7 @@ export class ChatBaiduQianfan
           ...params,
           messages: messagesMapped,
         },
-        false
+        false,
       )) as ChatCompletionResponse;
 
       const tokenUsage = data.usage || {};
@@ -401,7 +404,7 @@ export class ChatBaiduQianfan
   /** @ignore */
   async completionWithRetry(
     request: ChatCompletionRequest,
-    stream: boolean
+    stream: boolean,
   ): Promise<
     ChatCompletionResponse | AsyncIterableIterator<ChatCompletionResponse>
   > {
@@ -420,7 +423,7 @@ export class ChatBaiduQianfan
   async *_streamResponseChunks(
     messages: BaseMessage[],
     _options?: this["ParsedCallOptions"],
-    runManager?: CallbackManagerForLLMRun
+    runManager?: CallbackManagerForLLMRun,
   ): AsyncGenerator<ChatGenerationChunk> {
     const parameters = {
       ...this.invocationParams(),
@@ -428,7 +431,7 @@ export class ChatBaiduQianfan
     };
 
     const systemMessage = messages.find(
-      (message) => message._getType() === "system"
+      (message) => message._getType() === "system",
     );
     if (systemMessage) {
       // eslint-disable-next-line no-param-reassign
@@ -443,8 +446,8 @@ export class ChatBaiduQianfan
           ...parameters,
           messages: messagesMapped,
         },
-        true
-      )
+        true,
+      ),
     )) as AsyncIterableIterator<ChatCompletionResponse>;
 
     for await (const chunk of stream) {

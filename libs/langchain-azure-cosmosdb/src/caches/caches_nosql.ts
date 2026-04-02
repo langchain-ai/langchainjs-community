@@ -49,7 +49,7 @@ export class AzureCosmosDBNoSQLSemanticCache extends BaseCache {
   constructor(
     embeddings: EmbeddingsInterface,
     dbConfig: AzureCosmosDBNoSQLConfig,
-    similarityScoreThreshold: number = 0.6
+    similarityScoreThreshold: number = 0.6,
   ) {
     super();
     let client: CosmosClient;
@@ -64,7 +64,7 @@ export class AzureCosmosDBNoSQLSemanticCache extends BaseCache {
 
     if (!dbConfig.client && !connectionString && !endpoint) {
       throw new Error(
-        "AzureCosmosDBNoSQLSemanticCache client, connection string or endpoint must be set."
+        "AzureCosmosDBNoSQLSemanticCache client, connection string or endpoint must be set.",
       );
     }
 
@@ -110,7 +110,7 @@ export class AzureCosmosDBNoSQLSemanticCache extends BaseCache {
     if (!this.cacheDict[key]) {
       this.cacheDict[key] = new AzureCosmosDBNoSQLVectorStore(
         this.embeddings,
-        this.config
+        this.config,
       );
     }
     return this.cacheDict[key];
@@ -140,7 +140,7 @@ export class AzureCosmosDBNoSQLSemanticCache extends BaseCache {
         if (!isSimilar) return undefined;
 
         return document.metadata.return_value.map((gen: string) =>
-          deserializeStoredGeneration(JSON.parse(gen))
+          deserializeStoredGeneration(JSON.parse(gen)),
         );
       })
       .filter((gen) => gen !== undefined);
@@ -158,10 +158,10 @@ export class AzureCosmosDBNoSQLSemanticCache extends BaseCache {
   public async update(
     prompt: string,
     llmKey: string,
-    returnValue: Generation[]
+    returnValue: Generation[],
   ) {
     const serializedGenerations = returnValue.map((generation) =>
-      JSON.stringify(serializeGeneration(generation))
+      JSON.stringify(serializeGeneration(generation)),
     );
     const llmCache = this.getLlmCache(llmKey);
     const metadata = {

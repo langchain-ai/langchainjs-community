@@ -20,7 +20,7 @@ function _parseChatHistory(history: BaseMessage[]): ParsedMessage[] {
   for (const message of history) {
     if (typeof message.content !== "string") {
       throw new Error(
-        "ChatYandexGPT does not support non-string message content."
+        "ChatYandexGPT does not support non-string message content.",
       );
     }
     if ("content" in message) {
@@ -71,7 +71,7 @@ export class ChatYandexGPT extends BaseChatModel {
   constructor(fields?: YandexGPTInputs);
   constructor(
     modelOrFields?: string | YandexGPTInputs,
-    fields?: Omit<YandexGPTInputs, "model">
+    fields?: Omit<YandexGPTInputs, "model">,
   ) {
     const params =
       typeof modelOrFields === "string"
@@ -88,7 +88,7 @@ export class ChatYandexGPT extends BaseChatModel {
 
     if (apiKey === undefined && iamToken === undefined) {
       throw new Error(
-        "Please set the YC_API_KEY or YC_IAM_TOKEN environment variable or pass it to the constructor as the apiKey or iamToken field."
+        "Please set the YC_API_KEY or YC_IAM_TOKEN environment variable or pass it to the constructor as the apiKey or iamToken field.",
       );
     }
 
@@ -103,7 +103,7 @@ export class ChatYandexGPT extends BaseChatModel {
 
     if (this.modelURI === undefined && folderID === undefined) {
       throw new Error(
-        "Please set the YC_FOLDER_ID environment variable or pass Yandex GPT model URI to the constructor as the modelURI field."
+        "Please set the YC_FOLDER_ID environment variable or pass Yandex GPT model URI to the constructor as the modelURI field.",
       );
     }
 
@@ -132,7 +132,7 @@ export class ChatYandexGPT extends BaseChatModel {
   async _generate(
     messages: BaseMessage[],
     options: this["ParsedCallOptions"],
-    _runManager?: CallbackManagerForLLMRun | undefined
+    _runManager?: CallbackManagerForLLMRun | undefined,
   ): Promise<ChatResult> {
     const messageHistory = _parseChatHistory(messages);
     const headers = {
@@ -164,7 +164,7 @@ export class ChatYandexGPT extends BaseChatModel {
     });
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch ${apiUrl} from YandexGPT: ${response.status}`
+        `Failed to fetch ${apiUrl} from YandexGPT: ${response.status}`,
       );
     }
     const responseData = await response.json();

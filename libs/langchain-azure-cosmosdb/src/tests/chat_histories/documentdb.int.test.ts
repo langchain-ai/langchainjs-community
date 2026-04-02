@@ -35,7 +35,7 @@ test("Test Azure DocumentDB history store", async () => {
   const chatHistory = new AzureDocumentDBChatMessageHistory(
     dbcfg,
     sessionId,
-    userId
+    userId,
   );
 
   const blankResult = await chatHistory.getMessages();
@@ -76,7 +76,7 @@ test("Test clear Azure DocumentDB history store", async () => {
   const chatHistory = new AzureDocumentDBChatMessageHistory(
     dbcfg,
     sessionId,
-    userId
+    userId,
   );
 
   await chatHistory.addUserMessage("Who is the best vocalist?");
@@ -119,12 +119,12 @@ test("Test getAllSessions and clearAllSessions", async () => {
   const chatHistory1 = new AzureDocumentDBChatMessageHistory(
     dbcfg,
     sessionId1,
-    userId
+    userId,
   );
   const chatHistory2 = new AzureDocumentDBChatMessageHistory(
     dbcfg,
     sessionId2,
-    userId
+    userId,
   );
 
   // Clear any existing sessions from previous test runs

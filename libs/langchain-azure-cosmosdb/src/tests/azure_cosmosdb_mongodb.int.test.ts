@@ -47,11 +47,11 @@ describe("AzureCosmosDBMongoDBVectorStore", () => {
     // - AZURE_OPENAI_API_EMBEDDINGS_DEPLOYMENT_NAME
     // - AZURE_OPENAI_API_VERSION
     expect(
-      process.env.OPENAI_API_KEY || process.env.AZURE_OPENAI_API_KEY
+      process.env.OPENAI_API_KEY || process.env.AZURE_OPENAI_API_KEY,
     ).toBeDefined();
 
     const client = new MongoClient(
-      process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING!
+      process.env.AZURE_COSMOSDB_MONGODB_CONNECTION_STRING!,
     );
     await client.connect();
     const db = client.db(DATABASE_NAME);
@@ -91,7 +91,7 @@ describe("AzureCosmosDBMongoDBVectorStore", () => {
 
     const results: Document[] = await vectorStore.similaritySearch(
       "sandwich",
-      1
+      1,
     );
 
     expect(results.length).toEqual(1);
@@ -124,7 +124,7 @@ describe("AzureCosmosDBMongoDBVectorStore", () => {
         indexOptions: {
           numLists: 1,
         },
-      }
+      },
     );
 
     const output = await vectorStore.maxMarginalRelevanceSearch("foo", {
@@ -145,7 +145,7 @@ describe("AzureCosmosDBMongoDBVectorStore", () => {
     expect(output).toHaveLength(texts.length);
 
     const standardRetrieverActual = standardRetrieverOutput.map(
-      (doc) => doc.pageContent
+      (doc) => doc.pageContent,
     );
     const standardRetrieverExpected = ["foo", "foo", "fox"];
     expect(standardRetrieverActual).toEqual(standardRetrieverExpected);

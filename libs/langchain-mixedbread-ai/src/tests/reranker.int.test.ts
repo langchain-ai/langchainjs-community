@@ -24,7 +24,7 @@ test("MixedbreadAIReranker can indeed rerank documents with compressDocuments me
 
   const rerankedDocuments = await mxbaiReranker.compressDocuments(
     documents,
-    query
+    query,
   );
   // console.log(rerankedDocuments);
   expect(rerankedDocuments).toHaveLength(3);
@@ -35,7 +35,7 @@ test("MixedbreadAIReranker can indeed rerank documents with rerank method", asyn
 
   const rerankedDocuments = await mxbaiReranker.rerank(
     documents.map((doc) => doc.pageContent),
-    query
+    query,
   );
   // console.log(rerankedDocuments);
   expect(rerankedDocuments).toHaveLength(3);

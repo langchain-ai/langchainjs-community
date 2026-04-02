@@ -61,7 +61,7 @@ export class AzureDocumentDBChatMessageHistory extends BaseListChatMessageHistor
   constructor(
     dbConfig: AzureDocumentDBChatHistoryDBConfig,
     sessionId: string,
-    userId: string
+    userId: string,
   ) {
     super();
 
@@ -93,11 +93,11 @@ export class AzureDocumentDBChatMessageHistory extends BaseListChatMessageHistor
         this.initPromise = this.init(
           client,
           databaseName,
-          collectionName
+          collectionName,
         ).catch((error) => {
           console.error(
             "Error during AzureDocumentDBChatMessageHistory initialization: ",
-            error
+            error,
           );
         });
       }
@@ -116,7 +116,7 @@ export class AzureDocumentDBChatMessageHistory extends BaseListChatMessageHistor
   private async init(
     client: MongoClient,
     databaseName: string,
-    collectionName: string
+    collectionName: string,
   ): Promise<void> {
     this.initPromise = (async () => {
       await client.connect();
@@ -169,7 +169,7 @@ export class AzureDocumentDBChatMessageHistory extends BaseListChatMessageHistor
         } as PushOperator<Document>,
         $set: { context },
       },
-      { upsert: true }
+      { upsert: true },
     );
   }
 
@@ -235,7 +235,7 @@ export class AzureDocumentDBChatMessageHistory extends BaseListChatMessageHistor
         {
           $set: { context },
         },
-        { upsert: true }
+        { upsert: true },
       );
     } catch (error) {
       console.error("Error setting chat history context", error);

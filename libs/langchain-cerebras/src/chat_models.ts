@@ -458,12 +458,12 @@ export class ChatCerebras
 
   constructor(
     model: Cerebras.ChatCompletionCreateParams["model"],
-    fields?: Omit<ChatCerebrasInput, "model">
+    fields?: Omit<ChatCerebrasInput, "model">,
   );
   constructor(fields?: ChatCerebrasInput);
   constructor(
     modelOrFields?: string | ChatCerebrasInput,
-    fieldsArg?: Omit<ChatCerebrasInput, "model">
+    fieldsArg?: Omit<ChatCerebrasInput, "model">,
   ) {
     const fields = (
       typeof modelOrFields === "string"
@@ -494,7 +494,7 @@ export class ChatCerebras
 
   override bindTools(
     tools: BindToolsInput[],
-    kwargs?: Partial<this["ParsedCallOptions"]>
+    kwargs?: Partial<this["ParsedCallOptions"]>,
   ): Runnable<BaseLanguageModelInput, AIMessageChunk, ChatCerebrasCallOptions> {
     return this.withConfig({
       tools: tools.map((tool) => convertToOpenAITool(tool)),
@@ -509,7 +509,7 @@ export class ChatCerebras
    * @returns An object containing the parameters for an Ollama API call.
    */
   override invocationParams(
-    options?: this["ParsedCallOptions"]
+    options?: this["ParsedCallOptions"],
   ): Omit<Cerebras.ChatCompletionCreateParams, "stream" | "messages"> {
     return {
       model: this.model,
@@ -524,8 +524,8 @@ export class ChatCerebras
         ? options.tools.map(
             (tool) =>
               convertToOpenAITool(
-                tool
-              ) as Cerebras.ChatCompletionCreateParams.Tool
+                tool,
+              ) as Cerebras.ChatCompletionCreateParams.Tool,
           )
         : undefined,
       tool_choice: formatToCerebrasToolChoice(options?.tool_choice),
@@ -535,7 +535,7 @@ export class ChatCerebras
   async _generate(
     messages: BaseMessage[],
     options: this["ParsedCallOptions"],
-    runManager?: CallbackManagerForLLMRun
+    runManager?: CallbackManagerForLLMRun,
   ): Promise<ChatResult> {
     // Handle streaming
     if (this.streaming) {
@@ -543,7 +543,7 @@ export class ChatCerebras
       for await (const chunk of this._streamResponseChunks(
         messages,
         options,
-        runManager
+        runManager,
       )) {
         if (!finalChunk) {
           finalChunk = chunk.message;
@@ -583,7 +583,7 @@ export class ChatCerebras
         {
           headers: options.headers,
           httpAgent: options.httpAgent,
-        }
+        },
       );
       return res;
     });
@@ -616,7 +616,7 @@ export class ChatCerebras
                 args: JSON.parse(toolCall.function?.arguments),
                 index: toolCall.index,
                 type: "tool_call",
-              })
+              }),
             ),
             usage_metadata: usageMetadata,
             response_metadata: rest,
@@ -633,7 +633,7 @@ export class ChatCerebras
   async *_streamResponseChunks(
     messages: BaseMessage[],
     options: this["ParsedCallOptions"],
-    runManager?: CallbackManagerForLLMRun
+    runManager?: CallbackManagerForLLMRun,
   ): AsyncGenerator<ChatGenerationChunk> {
     const stream = await this.caller.call(async () => {
       const res = await this.client.chat.completions.create(
@@ -645,7 +645,7 @@ export class ChatCerebras
         {
           headers: options.headers,
           httpAgent: options.httpAgent,
-        }
+        },
       );
       return res;
     });
@@ -691,7 +691,7 @@ export class ChatCerebras
               args: toolCallChunk.function?.arguments,
               index: toolCallChunk.index,
               type: "tool_call_chunk",
-            })
+            }),
           ),
           usage_metadata: usageMetadata,
           response_metadata: rest,
@@ -705,7 +705,7 @@ export class ChatCerebras
         undefined,
         undefined,
         undefined,
-        { chunk: generationChunk }
+        { chunk: generationChunk },
       );
     }
   }
@@ -719,7 +719,7 @@ export class ChatCerebras
       | SerializableSchema<RunOutput>
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       | Record<string, any>,
-    config?: StructuredOutputMethodOptions<false>
+    config?: StructuredOutputMethodOptions<false>,
   ): Runnable<BaseLanguageModelInput, RunOutput>;
 
   withStructuredOutput<
@@ -731,7 +731,7 @@ export class ChatCerebras
       | SerializableSchema<RunOutput>
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       | Record<string, any>,
-    config?: StructuredOutputMethodOptions<true>
+    config?: StructuredOutputMethodOptions<true>,
   ): Runnable<BaseLanguageModelInput, { raw: BaseMessage; parsed: RunOutput }>;
 
   withStructuredOutput<
@@ -743,7 +743,7 @@ export class ChatCerebras
       | SerializableSchema<RunOutput>
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       | Record<string, any>,
-    config?: StructuredOutputMethodOptions<boolean>
+    config?: StructuredOutputMethodOptions<boolean>,
   ):
     | Runnable<BaseLanguageModelInput, RunOutput>
     | Runnable<
@@ -755,7 +755,7 @@ export class ChatCerebras
       > {
     if (config?.strict) {
       throw new Error(
-        `"strict" mode is not supported for this model by default.`
+        `"strict" mode is not supported for this model by default.`,
       );
     }
 
@@ -768,7 +768,7 @@ export class ChatCerebras
 
     if (method === "jsonMode") {
       throw new Error(
-        `Cerebras withStructuredOutput implementation only supports "functionCalling" as a method.`
+        `Cerebras withStructuredOutput implementation only supports "functionCalling" as a method.`,
       );
     }
 
@@ -806,20 +806,20 @@ export class ChatCerebras
           throw new Error("No tool calls found in the response.");
         }
         const toolCall = input.tool_calls.find(
-          (tc) => tc.name === functionName
+          (tc) => tc.name === functionName,
         );
         if (!toolCall) {
           throw new Error(`No tool call found with name ${functionName}.`);
         }
         return toolCall.args as RunOutput;
-      }
+      },
     );
 
     return assembleStructuredOutputPipeline(
       llm,
       outputParser,
       includeRaw,
-      "ChatCerebrasStructuredOutput"
+      "ChatCerebrasStructuredOutput",
     );
   }
 }

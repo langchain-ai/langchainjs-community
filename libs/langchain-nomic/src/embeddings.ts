@@ -114,10 +114,10 @@ export class NomicEmbeddings
   async embedDocuments(texts: string[]): Promise<number[][]> {
     const batches = chunkArray(
       this.stripNewLines ? texts.map((t) => t.replace(/\n/g, " ")) : texts,
-      this.batchSize
+      this.batchSize,
     );
     const batchRequests = batches.map((batch) =>
-      this.embeddingWithRetry(batch)
+      this.embeddingWithRetry(batch),
     );
     const batchResponses = await Promise.all(batchRequests);
     const embeddings = batchResponses
@@ -134,7 +134,7 @@ export class NomicEmbeddings
    */
   async embedQuery(text: string): Promise<number[]> {
     const { embeddings } = await this.embeddingWithRetry(
-      this.stripNewLines ? text.replace(/\n/g, " ") : text
+      this.stripNewLines ? text.replace(/\n/g, " ") : text,
     );
     return embeddings[0];
   }
@@ -147,7 +147,7 @@ export class NomicEmbeddings
    * @returns {Promise<NomicEmbeddingsResult>} Promise that resolves to the response from the API.
    */
   private async embeddingWithRetry(
-    input: string | Array<string>
+    input: string | Array<string>,
   ): Promise<NomicEmbeddingsResult> {
     return this.caller.call(async () => {
       const result = await this.client.apiCall(`/v1/embedding/text`, "POST", {

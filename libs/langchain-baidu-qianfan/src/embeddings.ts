@@ -79,7 +79,7 @@ export class BaiduQianfanEmbeddings
       qianfanSK?: string;
       qianfanAccessKey?: string;
       qianfanSecretKey?: string;
-    }
+    },
   ) {
     const fieldsWithDefaults = { maxConcurrency: 2, ...fields };
     super(fieldsWithDefaults);
@@ -118,7 +118,7 @@ export class BaiduQianfanEmbeddings
     if (this.modelName === "tao-8k") {
       if (fieldsWithDefaults?.batchSize && fieldsWithDefaults.batchSize !== 1) {
         throw new Error(
-          "tao-8k model supports only a batchSize of 1. Please adjust your batchSize accordingly"
+          "tao-8k model supports only a batchSize of 1. Please adjust your batchSize accordingly",
         );
       }
       this.batchSize = 1;
@@ -140,7 +140,7 @@ export class BaiduQianfanEmbeddings
   async embedDocuments(texts: string[]): Promise<number[][]> {
     const batches = chunkArray(
       this.stripNewLines ? texts.map((t) => t.replace(/\n/g, " ")) : texts,
-      this.batchSize
+      this.batchSize,
     );
 
     const batchRequests = batches.map((batch) => {
@@ -185,7 +185,7 @@ export class BaiduQianfanEmbeddings
    * @returns an embedding params.
    */
   private getParams(
-    texts: EmbeddingCreateParams["input"]
+    texts: EmbeddingCreateParams["input"],
   ): EmbeddingCreateParams {
     return {
       input: texts,
@@ -205,12 +205,12 @@ export class BaiduQianfanEmbeddings
 
     if ("error_code" in embeddingData && embeddingData.error_code) {
       throw new Error(
-        `${embeddingData.error_code}: ${embeddingData.error_msg}`
+        `${embeddingData.error_code}: ${embeddingData.error_msg}`,
       );
     }
 
     return (embeddingData as EmbeddingResponse).data.map(
-      ({ embedding }) => embedding
+      ({ embedding }) => embedding,
     );
   }
 }

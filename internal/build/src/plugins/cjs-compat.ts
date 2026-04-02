@@ -102,10 +102,7 @@ export function cjsCompatPlugin(param: CjsCompatPluginOptions = {}): Plugin {
         // On Windows, path.relative and path.join produce backslash paths
         // which break split("/") operations and import path generation.
         const relativePath = toPosixPath(
-          path.relative(
-            path.join(packagePath, "src"),
-            entrypointPath
-          )
+          path.relative(path.join(packagePath, "src"), entrypointPath)
         );
 
         // Get the target path for the barrel file (e.g. callbacks/base/index)
@@ -180,10 +177,7 @@ export function cjsCompatPlugin(param: CjsCompatPluginOptions = {}): Plugin {
       async handler() {
         if (!options.enabled) return;
 
-        const packageJsonPath = path.resolve(
-          packagePath,
-          "package.json"
-        );
+        const packageJsonPath = path.resolve(packagePath, "package.json");
         if (isSafeProjectPath(packageJsonPath)) {
           const packageJson = JSON.parse(
             await fs.readFile(packageJsonPath, "utf-8")

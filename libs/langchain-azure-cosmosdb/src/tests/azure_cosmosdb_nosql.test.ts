@@ -159,7 +159,7 @@ test("AzureCosmosDBNoSQLVectorStore initializes from texts", async () => {
     ["test", "hello", "world"],
     {},
     embeddings,
-    { client: client as any }
+    { client: client as any },
   );
 
   expect(store).toBeDefined();
@@ -200,7 +200,7 @@ test("AzureCosmosDBNoSQLVectorStore initializes from documents", async () => {
       new Document({ pageContent: "pool" }),
     ],
     embeddings,
-    { client: client as any }
+    { client: client as any },
   );
 
   expect(store).toBeDefined();
@@ -229,17 +229,17 @@ describe("AzureCosmosDBNoSQLSearchType", () => {
   test("should have all expected search types", () => {
     expect(AzureCosmosDBNoSQLSearchType.Vector).toBe("vector");
     expect(AzureCosmosDBNoSQLSearchType.VectorScoreThreshold).toBe(
-      "vector_score_threshold"
+      "vector_score_threshold",
     );
     expect(AzureCosmosDBNoSQLSearchType.FullTextSearch).toBe(
-      "full_text_search"
+      "full_text_search",
     );
     expect(AzureCosmosDBNoSQLSearchType.FullTextRanking).toBe(
-      "full_text_ranking"
+      "full_text_ranking",
     );
     expect(AzureCosmosDBNoSQLSearchType.Hybrid).toBe("hybrid");
     expect(AzureCosmosDBNoSQLSearchType.HybridScoreThreshold).toBe(
-      "hybrid_score_threshold"
+      "hybrid_score_threshold",
     );
   });
 });

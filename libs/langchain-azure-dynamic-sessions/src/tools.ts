@@ -100,7 +100,7 @@ export class SessionsPythonREPLTool extends Tool {
     this.poolManagementEndpoint =
       params?.poolManagementEndpoint ??
       getEnvironmentVariable(
-        "AZURE_CONTAINER_APP_SESSION_POOL_MANAGEMENT_ENDPOINT"
+        "AZURE_CONTAINER_APP_SESSION_POOL_MANAGEMENT_ENDPOINT",
       ) ??
       "";
 
@@ -224,7 +224,7 @@ export class SessionsPythonREPLTool extends Tool {
 
     const json = await response.json();
     const list = json.value.map(
-      (x: { properties: RemoteFile }) => x.properties
+      (x: { properties: RemoteFile }) => x.properties,
     );
     return list as RemoteFile[];
   }
@@ -233,6 +233,6 @@ export class SessionsPythonREPLTool extends Tool {
 function defaultAzureADTokenProvider() {
   return getBearerTokenProvider(
     new DefaultAzureCredential(),
-    "https://acasessions.io/.default"
+    "https://acasessions.io/.default",
   );
 }

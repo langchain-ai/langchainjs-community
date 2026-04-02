@@ -101,7 +101,7 @@ describe("SessionsPythonREPLTool", () => {
 
       const getTokenMock = vi.spyOn(
         DefaultAzureCredential.prototype,
-        "getToken"
+        "getToken",
       );
       getTokenMock.mockResolvedValue({
         token: "test-token",
@@ -147,7 +147,7 @@ describe("SessionsPythonREPLTool", () => {
               code: "print('hello')\n1+1",
             },
           }),
-        }
+        },
       );
     });
   });

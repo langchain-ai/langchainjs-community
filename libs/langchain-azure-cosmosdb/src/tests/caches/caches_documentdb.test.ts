@@ -54,7 +54,7 @@ describe("AzureDocumentDBSemanticCache", () => {
       {
         client: mockClient as MongoClient,
       },
-      0.8
+      0.8,
     );
 
     expect(cache).toBeDefined();

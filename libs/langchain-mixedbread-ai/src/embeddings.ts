@@ -94,12 +94,12 @@ export class MixedbreadAIEmbeddings extends Embeddings {
     const apiKey = params?.apiKey ?? getEnvironmentVariable("MXBAI_API_KEY");
     if (!apiKey) {
       throw new Error(
-        "Mixedbread AI API key not found. Either provide it in the constructor or set the 'MXBAI_API_KEY' environment variable."
+        "Mixedbread AI API key not found. Either provide it in the constructor or set the 'MXBAI_API_KEY' environment variable.",
       );
     }
     if (params?.batchSize && params?.batchSize > 256) {
       throw new Error(
-        "The maximum batch size for Mixedbread AI embeddings API is 256."
+        "The maximum batch size for Mixedbread AI embeddings API is 256.",
       );
     }
 
@@ -136,7 +136,7 @@ export class MixedbreadAIEmbeddings extends Embeddings {
 
     const batches = chunkArray(texts, this.batchSize);
     const batchRequests = batches.map((batch) =>
-      this.createEmbeddingsWithRetry(batch)
+      this.createEmbeddingsWithRetry(batch),
     );
 
     const batchResponses = await Promise.all(batchRequests);
@@ -165,7 +165,7 @@ export class MixedbreadAIEmbeddings extends Embeddings {
    * @returns {Promise<number[][]>} A Promise that resolves to the API response.
    */
   private async createEmbeddingsWithRetry(
-    input: string | string[]
+    input: string | string[],
   ): Promise<number[][]> {
     return this.caller.call(async () => {
       const response = await this.client.embeddings({

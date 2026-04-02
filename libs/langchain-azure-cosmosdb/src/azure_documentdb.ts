@@ -123,7 +123,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
 
   constructor(
     embeddings: EmbeddingsInterface,
-    dbConfig: AzureDocumentDBConfig
+    dbConfig: AzureDocumentDBConfig,
   ) {
     super(embeddings, dbConfig);
 
@@ -134,7 +134,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
 
     if (!dbConfig.client && !connectionString) {
       throw new Error(
-        "AzureDocumentDBVectorStore client or connection string must be set."
+        "AzureDocumentDBVectorStore client or connection string must be set.",
       );
     }
 
@@ -158,11 +158,11 @@ export class AzureDocumentDBVectorStore extends VectorStore {
         this.initPromise = this.init(
           client,
           databaseName,
-          collectionName
+          collectionName,
         ).catch((error) => {
           console.error(
             "Error during AzureDocumentDBVectorStore initialization:",
-            error
+            error,
           );
         });
       }
@@ -240,7 +240,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
   async createIndex(
     dimensions: number | undefined = undefined,
     indexType: "ivf" | "hnsw" | "diskann" = "ivf",
-    similarity: AzureDocumentDBSimilarityType = AzureDocumentDBSimilarityType.COS
+    similarity: AzureDocumentDBSimilarityType = AzureDocumentDBSimilarityType.COS,
   ): Promise<void> {
     await this.connectPromise;
 
@@ -295,7 +295,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
    * @returns A promise that resolves when the documents have been removed.
    */
   async delete(
-    params: AzureDocumentDBDeleteParams | string[] = {}
+    params: AzureDocumentDBDeleteParams | string[] = {},
   ): Promise<void> {
     await this.initialize();
 
@@ -339,7 +339,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
    */
   async addVectors(
     vectors: number[][],
-    documents: DocumentInterface[]
+    documents: DocumentInterface[],
   ): Promise<string[]> {
     const docs = vectors.map((embedding, idx) => ({
       [this.textKey]: documents[idx].pageContent,
@@ -361,7 +361,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
     const texts = documents.map(({ pageContent }) => pageContent);
     return this.addVectors(
       await this.embeddings.embedDocuments(texts),
-      documents
+      documents,
     );
   }
 
@@ -376,7 +376,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
   async similaritySearchVectorWithScore(
     queryVector: number[],
     k: number,
-    indexType?: "ivf" | "hnsw" | "diskann"
+    indexType?: "ivf" | "hnsw" | "diskann",
   ): Promise<[Document, number][]> {
     await this.initialize();
 
@@ -427,19 +427,19 @@ export class AzureDocumentDBVectorStore extends VectorStore {
    */
   async maxMarginalRelevanceSearch(
     query: string,
-    options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>
+    options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>,
   ): Promise<Document[]>;
 
   async maxMarginalRelevanceSearch(
     query: string,
     options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>,
-    indexType: "ivf" | "hnsw" | "diskann"
+    indexType: "ivf" | "hnsw" | "diskann",
   ): Promise<Document[]>;
 
   async maxMarginalRelevanceSearch(
     query: string,
     options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>,
-    indexType?: "ivf" | "hnsw" | "diskann"
+    indexType?: "ivf" | "hnsw" | "diskann",
   ): Promise<Document[]> {
     const { k, fetchK = 20, lambda = 0.5 } = options;
 
@@ -447,7 +447,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
     const docs = await this.similaritySearchVectorWithScore(
       queryEmbedding,
       fetchK,
-      indexType
+      indexType,
     );
     const embeddingList = docs.map((doc) => doc[0].metadata[this.embeddingKey]);
 
@@ -456,7 +456,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
       queryEmbedding,
       embeddingList,
       lambda,
-      k
+      k,
     );
 
     const mmrDocs = mmrIndexes.map((index) => docs[index][0]);
@@ -473,7 +473,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
   private async init(
     client: MongoClient,
     databaseName: string,
-    collectionName: string
+    collectionName: string,
   ): Promise<void> {
     this.connectPromise = (async () => {
       await client.connect();
@@ -488,7 +488,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
       await this.createIndex(
         this.indexOptions.dimensions,
         indexType,
-        this.indexOptions.similarity
+        this.indexOptions.similarity,
       );
     }
   }
@@ -507,7 +507,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
     texts: string[],
     metadatas: object[] | object,
     embeddings: EmbeddingsInterface,
-    dbConfig: AzureDocumentDBConfig
+    dbConfig: AzureDocumentDBConfig,
   ): Promise<AzureDocumentDBVectorStore> {
     const docs: Document[] = [];
     for (let i = 0; i < texts.length; i += 1) {
@@ -533,7 +533,7 @@ export class AzureDocumentDBVectorStore extends VectorStore {
   static async fromDocuments(
     docs: Document[],
     embeddings: EmbeddingsInterface,
-    dbConfig: AzureDocumentDBConfig
+    dbConfig: AzureDocumentDBConfig,
   ): Promise<AzureDocumentDBVectorStore> {
     const instance = new this(embeddings, dbConfig);
     await instance.addDocuments(docs);
