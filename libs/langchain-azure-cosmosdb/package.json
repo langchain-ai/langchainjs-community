@@ -19,9 +19,6 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:int": "vitest run --mode int",
-    "test:standard:unit": "vitest run --mode standard-unit",
-    "test:standard:int": "vitest run --mode standard-int",
-    "test:standard": "pnpm test:standard:unit && pnpm test:standard:int",
     "format": "prettier --write \"src\"",
     "format:check": "prettier --check \"src\""
   },
