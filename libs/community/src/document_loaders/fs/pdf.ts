@@ -1,6 +1,19 @@
 import { Document } from "@langchain/core/documents";
 import { BufferLoader } from "@langchain/classic/document_loaders/fs/buffer";
 
+type PDFLoaderV1Imports = {
+  isV2: false;
+  getDocument: typeof import("pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js").getDocument;
+  version: typeof import("pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js").version;
+};
+
+type PDFLoaderV2Imports = {
+  isV2: true;
+  PDFParse: typeof import("pdf-parse").PDFParse;
+};
+
+type PDFLoaderImportsResult = PDFLoaderV1Imports | PDFLoaderV2Imports;
+
 /**
  * A class that extends the `BufferLoader` class. It represents a document
  * loader that loads documents from PDF files.
@@ -53,7 +66,13 @@ export class PDFLoader extends BufferLoader {
     raw: Buffer,
     metadata: Document["metadata"]
   ): Promise<Document[]> {
-    const { getDocument, version } = await this.pdfjs();
+    const pdfjsResult = await this.pdfjs();
+
+    if (pdfjsResult.isV2) {
+      return this.parseWithV2(raw, metadata, pdfjsResult.PDFParse);
+    }
+
+    const { getDocument, version } = pdfjsResult;
     const pdf = await getDocument({
       data: new Uint8Array(raw.buffer),
       useWorkerFetch: false,
@@ -131,18 +150,93 @@ export class PDFLoader extends BufferLoader {
       }),
     ];
   }
+
+  private async parseWithV2(
+    raw: Buffer,
+    metadata: Document["metadata"],
+    PDFParseClass: typeof import("pdf-parse").PDFParse
+  ): Promise<Document[]> {
+    const parser = new PDFParseClass({ data: new Uint8Array(raw.buffer) });
+
+    try {
+      const [textResult, infoResult] = await Promise.all([
+        parser.getText(),
+        parser.getInfo(),
+      ]);
+
+      const documents: Document[] = [];
+
+      for (const page of textResult.pages) {
+        if (!page.text || page.text.trim().length === 0) {
+          continue;
+        }
+
+        documents.push(
+          new Document({
+            pageContent: page.text,
+            metadata: {
+              ...metadata,
+              pdf: {
+                version: infoResult.metadata?.format || "unknown",
+                info: infoResult.info,
+                metadata: infoResult.metadata,
+                totalPages: textResult.total,
+              },
+              loc: {
+                pageNumber: page.num,
+              },
+            },
+          })
+        );
+      }
+
+      if (this.splitPages) {
+        return documents;
+      }
+
+      if (documents.length === 0) {
+        return [];
+      }
+
+      return [
+        new Document({
+          pageContent: documents.map((doc) => doc.pageContent).join("\n\n"),
+          metadata: {
+            ...metadata,
+            pdf: {
+              version: infoResult.metadata?.format || "unknown",
+              info: infoResult.info,
+              metadata: infoResult.metadata,
+              totalPages: textResult.total,
+            },
+          },
+        }),
+      ];
+    } finally {
+      await parser.destroy();
+    }
+  }
 }
 
-async function PDFLoaderImports() {
+async function PDFLoaderImports(): Promise<PDFLoaderImportsResult> {
+  try {
+    const pdfParseModule = await import("pdf-parse");
+    if ("PDFParse" in pdfParseModule) {
+      return { isV2: true as const, PDFParse: pdfParseModule.PDFParse };
+    }
+  } catch {
+    // Fall back to the pdf-parse v1 import path below.
+  }
+
   try {
     const { default: mod } =
       await import("pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js");
     const { getDocument, version } = mod;
-    return { getDocument, version };
+    return { isV2: false as const, getDocument, version };
   } catch (e) {
     console.error(e);
     throw new Error(
-      "Failed to load pdf-parse. This loader currently supports pdf-parse v1 only. Please install v1, e.g. `npm install pdf-parse@^1` (v2 is not yet supported)."
+      "Failed to load pdf-parse. Please install pdf-parse v1 or v2, e.g. `npm install pdf-parse@^1` or `npm install pdf-parse@^2`."
     );
   }
 }

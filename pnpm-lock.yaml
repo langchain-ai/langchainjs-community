@@ -613,7 +613,7 @@ importers:
         specifier: '*'
         version: 6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6)
       pdf-parse:
-        specifier: 2.4.5
+        specifier: ^1.0.0 || ^2.0.0
         version: 2.4.5
       pg:
         specifier: ^8.11.0
