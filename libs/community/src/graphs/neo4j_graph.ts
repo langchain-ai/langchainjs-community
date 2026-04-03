@@ -97,7 +97,7 @@ function isDistinctMoreThanLimit(
 }
 
 function cleanStringValues(text: string) {
-  return text.replace("\n", " ").replace("\r", " ");
+  return text.replaceAll("\n", " ").replaceAll("\r", " ");
 }
 
 function formatSchema(
