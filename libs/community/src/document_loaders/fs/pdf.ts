@@ -14,6 +14,8 @@ type PDFLoaderV2Imports = {
 
 type PDFLoaderImportsResult = PDFLoaderV1Imports | PDFLoaderV2Imports;
 
+const PDF_PARSE_V1_IMPORT_PATH = "pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js";
+
 /**
  * A class that extends the `BufferLoader` class. It represents a document
  * loader that loads documents from PDF files.
@@ -159,10 +161,8 @@ export class PDFLoader extends BufferLoader {
     const parser = new PDFParseClass({ data: new Uint8Array(raw.buffer) });
 
     try {
-      const [textResult, infoResult] = await Promise.all([
-        parser.getText(),
-        parser.getInfo(),
-      ]);
+      const textResult = await parser.getText();
+      const infoResult = await parser.getInfo();
 
       const documents: Document[] = [];
 
@@ -229,8 +229,9 @@ async function PDFLoaderImports(): Promise<PDFLoaderImportsResult> {
   }
 
   try {
-    const { default: mod } =
-      await import("pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js");
+    const { default: mod } = await import(
+      /* @vite-ignore */ PDF_PARSE_V1_IMPORT_PATH
+    );
     const { getDocument, version } = mod;
     return { isV2: false as const, getDocument, version };
   } catch (e) {
