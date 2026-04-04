@@ -1,0 +1,75 @@
+# Ensure PRs that touch publishable code or workspace manifests include a changeset.
+# Mirrors skip rules from labeler.yml (release PRs) and the changeset file convention from
+# dev-release.yml in langchain-ai/langchainjs.
+
+name: Verify Changesets
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - "libs/**"
+      - "internal/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "turbo.json"
+      - ".changeset/**"
+      - ".github/workflows/verify-changesets.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify changeset
+    if: |
+      github.repository == 'langchain-ai/langchainjs-community' &&
+      github.event.pull_request.draft == false &&
+      !contains(github.event.pull_request.title, 'Version Packages') &&
+      !contains(github.event.pull_request.title, 'version packages') &&
+      !contains(github.event.pull_request.title, 'chore: version packages')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0
+
+      - name: Require changeset when versioned paths change
+        run: |
+          set -euo pipefail
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+
+          CHANGED="$(git diff --name-only "$BASE_SHA".."$HEAD_SHA")"
+
+          NEEDS_CHANGESET=false
+          while IFS= read -r path; do
+            [ -z "$path" ] && continue
+            case "$path" in
+              libs/*|internal/*|package.json|pnpm-lock.yaml|pnpm-workspace.yaml|turbo.json)
+                NEEDS_CHANGESET=true
+                break
+                ;;
+            esac
+          done <<< "$CHANGED"
+
+          if [ "$NEEDS_CHANGESET" != true ]; then
+            echo "No changes under libs/, internal/, or workspace manifests; a changeset is not required."
+            exit 0
+          fi
+
+          if echo "$CHANGED" | grep -E '^\.changeset/[^/]+\.md$' | grep -v '^\.changeset/README\.md$' | grep -q .; then
+            echo "Changeset markdown file(s) are included in this PR."
+            exit 0
+          fi
+
+          echo "::error::Add a changeset for this PR. Versioned paths changed but no .changeset/*.md file is part of the diff."
+          echo "::error::Run \`pnpm changeset\` and commit the generated file under .changeset/."
+          exit 1
