@@ -227,7 +227,7 @@ export class CassandraClientFactory {
     astraArgs: AstraServiceProviderArgs
   ): Promise<string> {
     const dir = path.join(os.tmpdir(), "cassandra-astra");
-    await fs.mkdir(dir, { recursive: true });
+    await fs.mkdir(dir, { recursive: true, mode: 0o700 });
 
     let scbFileName = `astra-secure-connect-${astraArgs.datacenterID}`;
     if (astraArgs.regionName) {
@@ -350,7 +350,20 @@ export class CassandraClientFactory {
       throw new Error(`HTTP error! Status: ${getResponse.status}`);
     }
     const bundleData = await getResponse.arrayBuffer();
-    await fs.writeFile(scbPath, Buffer.from(bundleData));
+
+    // Write using exclusive creation flag to prevent symlink attacks (O_CREAT|O_EXCL|O_WRONLY).
+    // If the file already exists, remove it first (we already checked staleness upstream).
+    try {
+      await fs.unlink(scbPath);
+    } catch {
+      // File doesn't exist — expected on first download
+    }
+    const fileHandle = await fs.open(scbPath, "wx", 0o600);
+    try {
+      await fileHandle.writeFile(Buffer.from(bundleData));
+    } finally {
+      await fileHandle.close();
+    }
   }
 }
 
