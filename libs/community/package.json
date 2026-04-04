@@ -73,6 +73,7 @@
     "@langchain/tsconfig": "workspace:*",
     "@layerup/layerup-security": "^1.5.12",
     "@libsql/client": "^0.17.0",
+    "@mediapipe/tasks-genai": "^0.10.25",
     "@mendable/firecrawl-js": "^4.15.2",
     "@mlc-ai/web-llm": ">=0.2.62 <0.3.0",
     "@mozilla/readability": "^0.6.0",
@@ -223,6 +224,7 @@
     "@langchain/core": "^1.1.38",
     "@layerup/layerup-security": "^1.5.12",
     "@libsql/client": "^0.17.0",
+    "@mediapipe/tasks-genai": "*",
     "@mendable/firecrawl-js": "^4.15.2",
     "@mlc-ai/web-llm": "*",
     "@mozilla/readability": "*",
@@ -388,6 +390,9 @@
       "optional": true
     },
     "@libsql/client": {
+      "optional": true
+    },
+    "@mediapipe/tasks-genai": {
       "optional": true
     },
     "@mendable/firecrawl-js": {
@@ -935,6 +940,17 @@
       "import": {
         "types": "./dist/chat_models/llama_cpp.d.ts",
         "default": "./dist/chat_models/llama_cpp.js"
+      }
+    },
+    "./chat_models/mediapipe_genai": {
+      "input": "./src/chat_models/mediapipe_genai.ts",
+      "require": {
+        "types": "./dist/chat_models/mediapipe_genai.d.cts",
+        "default": "./dist/chat_models/mediapipe_genai.cjs"
+      },
+      "import": {
+        "types": "./dist/chat_models/mediapipe_genai.d.ts",
+        "default": "./dist/chat_models/mediapipe_genai.js"
       }
     },
     "./chat_models/minimax": {

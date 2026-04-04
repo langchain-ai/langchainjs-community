@@ -318,6 +318,9 @@ importers:
       '@libsql/client':
         specifier: ^0.17.0
         version: 0.17.2(bufferutil@4.1.0)
+      '@mediapipe/tasks-genai':
+        specifier: ^0.10.25
+        version: 0.10.27
       '@mendable/firecrawl-js':
         specifier: ^4.15.2
         version: 4.18.1
@@ -3156,6 +3159,9 @@ packages:
 
   '@manypkg/get-packages@1.1.3':
     resolution: {integrity: sha512-fo+QhuU3qE/2TQMQmbVMqaQ6EWbMhi4ABWP+O4AM1NqPBuy0OrApV5LO6BrrgnhtAHS2NH6RrVk9OL181tTi8A==}
+
+  '@mediapipe/tasks-genai@0.10.27':
+    resolution: {integrity: sha512-cv69CPPAtEDBUs6dGZft2S+sBqde1XvEMST367siSyxrhffdWtm4uQIsfdedAbhJ33BwAjuMnAdxDrO9WrzIAQ==}
 
   '@mendable/firecrawl-js@4.18.1':
     resolution: {integrity: sha512-NfmJv+xcHoZthj8I3NP/8KAgO8EWcvOcTvCAvszxqs7/6sCs1CRss6Tum6RycZNSwJkr5RzQossN89IlixRfng==}
@@ -13800,6 +13806,8 @@ snapshots:
       fs-extra: 8.1.0
       globby: 11.1.0
       read-yaml-file: 1.1.0
+
+  '@mediapipe/tasks-genai@0.10.27': {}
 
   '@mendable/firecrawl-js@4.18.1':
     dependencies:
