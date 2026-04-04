@@ -309,7 +309,8 @@
     "voy-search": "0.6.3",
     "word-extractor": "*",
     "ws": "^8.14.2",
-    "youtubei.js": "*"
+    "youtubei.js": "*",
+    "@suwappu/sdk": ">=0.1.0"
   },
   "peerDependenciesMeta": {
     "@arcjet/redact": {
@@ -664,6 +665,9 @@
       "optional": true
     },
     "youtubei.js": {
+      "optional": true
+    },
+    "@suwappu/sdk": {
       "optional": true
     }
   },
