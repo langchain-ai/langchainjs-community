@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-explicit-any
 import { test, expect } from "vitest";
 import * as url from "node:url";
 import * as path from "node:path";
@@ -18,34 +19,77 @@ test("Test PDF loader from blob", async () => {
 
   expect(docs.length).toBe(15);
   expect(docs[0].pageContent).toContain("Attention Is All You Need");
-  expect(docs[0].metadata).toMatchInlineSnapshot(`
-    {
-      "blobType": "application/pdf",
-      "loc": {
-        "pageNumber": 1,
-      },
-      "pdf": {
-        "info": {
-          "Author": "",
-          "CreationDate": "D:20171207010315Z",
-          "Creator": "LaTeX with hyperref package",
-          "IsAcroFormPresent": false,
-          "IsXFAPresent": false,
-          "Keywords": "",
-          "ModDate": "D:20171207010315Z",
-          "PDFFormatVersion": "1.5",
-          "Producer": "pdfTeX-1.40.17",
-          "Subject": "",
-          "Title": "",
-          "Trapped": {
-            "name": "False",
-          },
-        },
-        "metadata": null,
-        "totalPages": 15,
-        "version": "1.10.100",
-      },
-      "source": "blob",
+  expect(docs[0].metadata).toMatchObject({
+    blobType: "application/pdf",
+    loc: {
+      pageNumber: 1,
+    },
+    pdf: {
+      totalPages: 15,
+      version: expect.any(String),
+    },
+    source: "blob",
+  });
+  expect(docs[0].metadata.pdf.info).toBeTruthy();
+});
+
+test("Test PDF loader with custom pdf-parse v2 implementation", async () => {
+  let destroyed = false;
+
+  class MockPDFParse {
+    constructor(_: { data: Uint8Array }) {}
+
+    async getText() {
+      return {
+        pages: [
+          { num: 1, text: "Mock page 1" },
+          { num: 2, text: "Mock page 2" },
+        ],
+        total: 2,
+      };
     }
-  `);
+
+    async getInfo() {
+      return {
+        info: { Title: "Mock PDF" },
+        metadata: { format: "mock-v2" },
+      };
+    }
+
+    async destroy() {
+      destroyed = true;
+    }
+  }
+
+  const loader = new PDFLoader(
+    new Blob([Buffer.from("mock pdf")], {
+      type: "application/pdf",
+    }),
+    {
+      pdfjs: async () =>
+        ({
+          isV2: true as const,
+          PDFParse: MockPDFParse,
+        }) as any,
+    }
+  );
+
+  const docs = await loader.load();
+
+  expect(docs).toHaveLength(2);
+  expect(docs[0].pageContent).toBe("Mock page 1");
+  expect(docs[1].metadata).toMatchObject({
+    blobType: "application/pdf",
+    loc: {
+      pageNumber: 2,
+    },
+    pdf: {
+      info: { Title: "Mock PDF" },
+      metadata: { format: "mock-v2" },
+      totalPages: 2,
+      version: "mock-v2",
+    },
+    source: "blob",
+  });
+  expect(destroyed).toBe(true);
 });

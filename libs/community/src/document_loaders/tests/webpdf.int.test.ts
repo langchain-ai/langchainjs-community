@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-explicit-any
 import { test, expect } from "vitest";
 import * as url from "node:url";
 import * as path from "node:path";
@@ -18,81 +19,61 @@ test("Test Web PDF loader from blob", async () => {
 
   expect(docs.length).toBe(15);
   expect(docs[0].pageContent).toContain("Attention Is All You Need");
-  expect(docs[0].metadata).toMatchInlineSnapshot(`
-    {
-      "loc": {
-        "pageNumber": 1,
-      },
-      "pdf": {
-        "info": {
-          "Author": "",
-          "CreationDate": "D:20171207010315Z",
-          "Creator": "LaTeX with hyperref package",
-          "IsAcroFormPresent": false,
-          "IsXFAPresent": false,
-          "Keywords": "",
-          "ModDate": "D:20171207010315Z",
-          "PDFFormatVersion": "1.5",
-          "Producer": "pdfTeX-1.40.17",
-          "Subject": "",
-          "Title": "",
-          "Trapped": {
-            "name": "False",
-          },
-        },
-        "metadata": null,
-        "totalPages": 15,
-        "version": "1.10.100",
-      },
-    }
-  `);
+  expect(docs[0].metadata).toMatchObject({
+    loc: {
+      pageNumber: 1,
+    },
+    pdf: {
+      totalPages: 15,
+      version: expect.any(String),
+    },
+  });
+  expect(docs[0].metadata.pdf.info).toBeTruthy();
 });
 
-test("Test Web PDF loader with custom pdfjs", async () => {
-  const filePath = path.resolve(
-    path.dirname(url.fileURLToPath(import.meta.url)),
-    "./example_data/1706.03762.pdf"
-  );
-  const loader = new WebPDFLoader(
-    new Blob([await fs.readFile(filePath)], {
-      type: "application/pdf",
-    }),
-    {
-      pdfjs: () => import("pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js"),
-    }
-  );
+test("Test Web PDF loader with custom pdf-parse v1 implementation", async () => {
+  const loader = new WebPDFLoader(new Blob([Buffer.from("mock pdf")]), {
+    pdfjs: async () =>
+      ({
+        isV2: false as const,
+        version: "1.10.100",
+        getDocument: () =>
+          ({
+            promise: Promise.resolve({
+              numPages: 1,
+              getMetadata: async () => ({
+                info: { Title: "Mock PDF" },
+                metadata: null,
+              }),
+              getPage: async () => ({
+                getTextContent: async () => ({
+                  items: [
+                    {
+                      str: "Mock page 1",
+                      transform: [0, 0, 0, 0, 0, 0],
+                    },
+                  ],
+                }),
+              }),
+            }),
+          }) as any,
+      }) as any,
+  });
   const docs = await loader.load();
 
-  expect(docs.length).toBe(15);
-  expect(docs[0].pageContent).toContain("Attention Is All You Need");
-  expect(docs[0].metadata).toMatchInlineSnapshot(`
-    {
-      "loc": {
-        "pageNumber": 1,
-      },
-      "pdf": {
-        "info": {
-          "Author": "",
-          "CreationDate": "D:20171207010315Z",
-          "Creator": "LaTeX with hyperref package",
-          "IsAcroFormPresent": false,
-          "IsXFAPresent": false,
-          "Keywords": "",
-          "ModDate": "D:20171207010315Z",
-          "PDFFormatVersion": "1.5",
-          "Producer": "pdfTeX-1.40.17",
-          "Subject": "",
-          "Title": "",
-          "Trapped": {
-            "name": "False",
-          },
-        },
-        "metadata": null,
-        "totalPages": 15,
-        "version": "1.10.100",
-      },
-    }
-  `);
+  expect(docs).toHaveLength(1);
+  expect(docs[0].pageContent).toBe("Mock page 1");
+  expect(docs[0].metadata).toMatchObject({
+    loc: {
+      pageNumber: 1,
+    },
+    pdf: {
+      info: { Title: "Mock PDF" },
+      metadata: null,
+      totalPages: 1,
+      version: "1.10.100",
+    },
+  });
 });
 
 test("Test Web PDF loader lines", async () => {
