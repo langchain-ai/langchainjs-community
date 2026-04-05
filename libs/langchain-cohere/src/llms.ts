@@ -108,7 +108,7 @@ export class Cohere extends LLM<CohereCallOptions> implements CohereInput {
     };
     // Filter undefined entries
     return Object.fromEntries(
-      Object.entries(params).filter(([, value]) => value !== undefined)
+      Object.entries(params).filter(([, value]) => value !== undefined),
     );
   }
 
@@ -116,7 +116,7 @@ export class Cohere extends LLM<CohereCallOptions> implements CohereInput {
   async _call(
     prompt: string,
     options: this["ParsedCallOptions"],
-    runManager?: CallbackManagerForLLMRun
+    runManager?: CallbackManagerForLLMRun,
   ): Promise<string> {
     const generateResponse = await this.caller.callWithOptions(
       { signal: options.signal },
@@ -133,7 +133,7 @@ export class Cohere extends LLM<CohereCallOptions> implements CohereInput {
           throw e;
         }
         return response;
-      }
+      },
     );
     try {
       await runManager?.handleLLMNewToken(generateResponse.generations[0].text);

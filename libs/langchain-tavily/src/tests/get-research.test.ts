@@ -53,7 +53,7 @@ describe("TavilyGetResearch", () => {
     // Using a type assertion to access the private property
     expect(
       (tool as unknown as { apiWrapper: TestTavilyResearchAPIWrapper })
-        .apiWrapper
+        .apiWrapper,
     ).toBe(mockWrapper);
   });
 
@@ -81,7 +81,7 @@ describe("TavilyGetResearch", () => {
     mockWrapper.getResearch = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.getResearch;
 
     const tool = new TavilyGetResearch({ apiWrapper: mockWrapper });
@@ -112,7 +112,7 @@ describe("TavilyGetResearch", () => {
     mockWrapper.getResearch = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.getResearch;
 
     const tool = new TavilyGetResearch({ apiWrapper: mockWrapper });
@@ -142,7 +142,7 @@ describe("TavilyGetResearch", () => {
     mockWrapper.getResearch = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.getResearch;
 
     const tool = new TavilyGetResearch({ apiWrapper: mockWrapper });
@@ -172,7 +172,7 @@ describe("TavilyGetResearch", () => {
     mockWrapper.getResearch = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.getResearch;
 
     const tool = new TavilyGetResearch({ apiWrapper: mockWrapper });
@@ -190,7 +190,7 @@ describe("TavilyGetResearch", () => {
     mockWrapper.getResearch = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("API error"))
+        Promise.reject(new Error("API error")),
       ) as typeof mockWrapper.getResearch;
 
     const tool = new TavilyGetResearch({ apiWrapper: mockWrapper });
@@ -207,7 +207,7 @@ describe("TavilyGetResearch", () => {
     mockWrapper.getResearch = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("String error without message property"))
+        Promise.reject(new Error("String error without message property")),
       ) as typeof mockWrapper.getResearch;
 
     const tool = new TavilyGetResearch({ apiWrapper: mockWrapper });

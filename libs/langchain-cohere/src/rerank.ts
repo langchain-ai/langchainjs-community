@@ -41,7 +41,7 @@ export class CohereRerank extends BaseDocumentCompressor {
     this.model = fields?.model ?? this.model;
     if (!this.model) {
       throw new Error(
-        "Model not specified for CohereRerank instance. Please provide a model name from the options here: https://docs.cohere.com/reference/rerank"
+        "Model not specified for CohereRerank instance. Please provide a model name from the options here: https://docs.cohere.com/reference/rerank",
       );
     }
     this.topN = fields?.topN ?? this.topN;
@@ -58,7 +58,7 @@ export class CohereRerank extends BaseDocumentCompressor {
    */
   async compressDocuments(
     documents: Array<DocumentInterface>,
-    query: string
+    query: string,
   ): Promise<Array<DocumentInterface>> {
     if (documents == null || documents.length === 0) {
       return [];
@@ -100,7 +100,7 @@ export class CohereRerank extends BaseDocumentCompressor {
       model?: string;
       topN?: number;
       maxChunksPerDoc?: number;
-    }
+    },
   ): Promise<Array<{ index: number; relevanceScore: number }>> {
     const docs = documents.map((doc) => {
       if (typeof doc === "string") {

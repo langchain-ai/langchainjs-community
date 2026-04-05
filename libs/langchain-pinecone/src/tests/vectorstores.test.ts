@@ -27,7 +27,7 @@ test("PineconeStore with external ids", async () => {
         },
       },
     ],
-    ["id1"]
+    ["id1"],
   );
   expect(upsert).toHaveBeenCalledTimes(1);
   expect(upsert).toHaveBeenCalledWith([
@@ -89,7 +89,7 @@ test("PineconeStore with string arrays", async () => {
         },
       },
     ],
-    ["id1"]
+    ["id1"],
   );
 
   expect(upsert).toHaveBeenCalledWith([
@@ -177,6 +177,6 @@ test("PineconeStore throws when config and index is passed", async () => {
             apiKey: "apiKey",
           },
         },
-      })
+      }),
   ).toThrow();
 });

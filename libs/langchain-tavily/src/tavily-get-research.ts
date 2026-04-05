@@ -123,7 +123,7 @@ export class TavilyGetResearch extends StructuredTool<typeof inputSchema> {
 
   async _call(
     input: InferInteropZodOutput<typeof inputSchema>,
-    _runManager?: CallbackManagerForToolRun
+    _runManager?: CallbackManagerForToolRun,
   ): Promise<
     | TavilyGetResearchResponse
     | TavilyGetIncompleteResearchResponse

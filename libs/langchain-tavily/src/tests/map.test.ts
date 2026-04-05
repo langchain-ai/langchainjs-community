@@ -65,7 +65,7 @@ describe("TavilyMap", () => {
 
     // Using a type assertion to access the private property
     expect(
-      (tool as unknown as { apiWrapper: TestTavilyMapAPIWrapper }).apiWrapper
+      (tool as unknown as { apiWrapper: TestTavilyMapAPIWrapper }).apiWrapper,
     ).toBe(mockWrapper);
   });
 
@@ -81,7 +81,7 @@ describe("TavilyMap", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyMap({ apiWrapper: mockWrapper });
@@ -102,7 +102,7 @@ describe("TavilyMap", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("API error"))
+        Promise.reject(new Error("API error")),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyMap({ apiWrapper: mockWrapper });
@@ -125,7 +125,7 @@ describe("TavilyMap", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyMap({ apiWrapper: mockWrapper });
@@ -152,7 +152,7 @@ describe("TavilyMap", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyMap({ apiWrapper: mockWrapper });
@@ -162,7 +162,7 @@ describe("TavilyMap", () => {
 
     expect(result).toEqual({
       error: expect.stringContaining(
-        "Try adding specific path filters using selectPaths"
+        "Try adding specific path filters using selectPaths",
       ),
     });
   });
@@ -173,7 +173,7 @@ describe("TavilyMap", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("String error without message property"))
+        Promise.reject(new Error("String error without message property")),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyMap({ apiWrapper: mockWrapper });

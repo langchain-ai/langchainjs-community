@@ -24,13 +24,13 @@ test("ChatCohere can count tokens", async () => {
   // console.log(response);
   expect(response.llmOutput?.estimatedTokenUsage).toBeTruthy();
   expect(
-    response.llmOutput?.estimatedTokenUsage.completionTokens
+    response.llmOutput?.estimatedTokenUsage.completionTokens,
   ).toBeGreaterThan(1);
   expect(response.llmOutput?.estimatedTokenUsage.promptTokens).toBeGreaterThan(
-    1
+    1,
   );
   expect(response.llmOutput?.estimatedTokenUsage.totalTokens).toBeGreaterThan(
-    1
+    1,
   );
 });
 
@@ -72,7 +72,7 @@ test("Stream token count usage_metadata", async () => {
   let res: AIMessageChunk | null = null;
   let lastRes: AIMessageChunk | null = null;
   for await (const chunk of await model.stream(
-    "Why is the sky blue? Be concise."
+    "Why is the sky blue? Be concise.",
   )) {
     if (!res) {
       res = chunk;
@@ -89,7 +89,7 @@ test("Stream token count usage_metadata", async () => {
   expect(res.usage_metadata.input_tokens).toBeGreaterThan(1);
   expect(res.usage_metadata.output_tokens).toBeGreaterThan(10);
   expect(res.usage_metadata.total_tokens).toBe(
-    res.usage_metadata.input_tokens + res.usage_metadata.output_tokens
+    res.usage_metadata.input_tokens + res.usage_metadata.output_tokens,
   );
   expect(lastRes?.additional_kwargs).toBeDefined();
   if (!lastRes?.additional_kwargs) {
@@ -107,7 +107,7 @@ test("streamUsage excludes token usage", async () => {
   let res: AIMessageChunk | null = null;
   let lastRes: AIMessageChunk | null = null;
   for await (const chunk of await model.stream(
-    "Why is the sky blue? Be concise."
+    "Why is the sky blue? Be concise.",
   )) {
     if (!res) {
       res = chunk;
@@ -142,7 +142,7 @@ test("Invoke token count usage_metadata", async () => {
   expect(res.usage_metadata.input_tokens).toBeGreaterThan(1);
   expect(res.usage_metadata.output_tokens).toBeGreaterThan(10);
   expect(res.usage_metadata.total_tokens).toBe(
-    res.usage_metadata.input_tokens + res.usage_metadata.output_tokens
+    res.usage_metadata.input_tokens + res.usage_metadata.output_tokens,
   );
 });
 
@@ -167,7 +167,7 @@ test("Test model tool calling", async () => {
 
   const messages = [
     new HumanMessage(
-      "Who is the president of Singapore?? USE TOOLS TO SEARCH INTERNET!!!!"
+      "Who is the president of Singapore?? USE TOOLS TO SEARCH INTERNET!!!!",
     ),
   ];
   const res = await modelWithTools.invoke(messages);
@@ -177,7 +177,7 @@ test("Test model tool calling", async () => {
     return;
   }
   expect(res.usage_metadata.total_tokens).toBe(
-    res.usage_metadata.input_tokens + res.usage_metadata.output_tokens
+    res.usage_metadata.input_tokens + res.usage_metadata.output_tokens,
   );
   expect(res.tool_calls).toBeDefined();
   expect(res.tool_calls?.length).toBe(1);
@@ -187,8 +187,8 @@ test("Test model tool calling", async () => {
     new ToolMessage(
       "Aidan Gomez is the president of Singapore",
       tool_id,
-      "web_search"
-    )
+      "web_search",
+    ),
   );
   const resWithToolResults = await modelWithTools.invoke(messages);
   // console.log(resWithToolResults);

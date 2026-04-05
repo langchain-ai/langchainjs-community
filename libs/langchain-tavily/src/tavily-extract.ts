@@ -112,7 +112,7 @@ function generateSuggestions(params: Record<string, unknown>): string[] {
 
   if (extractDepth === "basic") {
     suggestions.push(
-      "Try a more detailed extraction using 'advanced' extractDepth"
+      "Try a more detailed extraction using 'advanced' extractDepth",
     );
   }
 
@@ -133,7 +133,7 @@ Use "advanced" (default) to retrieve comprehensive content including
 tables and embedded elements. Always use "advanced" for LinkedIn 
 and YouTube URLs for optimal results.
 
-Better for complex websites but may increase response time.`
+Better for complex websites but may increase response time.`,
     ),
   includeImages: z
     .boolean()
@@ -143,7 +143,7 @@ Better for complex websites but may increase response time.`
 
 Set to True when visualizations are needed for better context or understanding.
 
-Default is False (extracts text content only).`
+Default is False (extracts text content only).`,
     ),
   query: z
     .string()
@@ -220,7 +220,7 @@ export class TavilyExtract extends StructuredTool<typeof inputSchema> {
 
   async _call(
     input: InferInteropZodOutput<typeof inputSchema>,
-    _runManager?: CallbackManagerForToolRun
+    _runManager?: CallbackManagerForToolRun,
   ): Promise<TavilyExtractResponse | { error: string }> {
     try {
       const { urls, extractDepth, includeImages, query } = input;

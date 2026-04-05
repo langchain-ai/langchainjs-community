@@ -116,7 +116,7 @@ test("Weaviate Self Query Retriever Test", async () => {
     const vectorStore = await WeaviateStore.fromDocuments(
       docs,
       embeddings,
-      weaviateArgs
+      weaviateArgs,
     );
     const selfQueryRetriever = SelfQueryRetriever.fromLLM({
       llm,
@@ -127,14 +127,14 @@ test("Weaviate Self Query Retriever Test", async () => {
     });
 
     const query2 = await selfQueryRetriever.invoke(
-      "Which movies are rated higher than 8.5?"
+      "Which movies are rated higher than 8.5?",
     );
     // this query isn't correctly converted by Langchain selfQuery
     // const _query3 = await selfQueryRetriever.invoke(
     //   "Which movies are directed by Greta Gerwig?"
     // );
     const query4 = await selfQueryRetriever.invoke(
-      "Wau wau wau wau hello gello hello?"
+      "Wau wau wau wau hello gello hello?",
     );
     // weaviate will always return results but with lesser score
     expect(query4.length).toBe(4);
@@ -255,7 +255,7 @@ test.skip("Weaviate Vector Store Self Query Retriever Test With Default Filter O
   const vectorStore = await WeaviateStore.fromDocuments(
     docs,
     embeddings,
-    weaviateArgs
+    weaviateArgs,
   );
 
   const collection = client.collections.get(weaviateArgs.indexName);
@@ -268,7 +268,7 @@ test.skip("Weaviate Vector Store Self Query Retriever Test With Default Filter O
       structuredQueryTranslator: new WeaviateTranslator(),
       searchParams: {
         filter: Filters.and(
-          collection.filter.byProperty("type").equal("movie")
+          collection.filter.byProperty("type").equal("movie"),
         ),
         mergeFiltersOperator: "or",
         k: docs.length,
@@ -276,7 +276,7 @@ test.skip("Weaviate Vector Store Self Query Retriever Test With Default Filter O
     });
 
     const query4 = await selfQueryRetriever.invoke(
-      "Wau wau wau wau hello gello hello?"
+      "Wau wau wau wau hello gello hello?",
     );
     // query4 has to return documents, since the default filter takes over with
     expect(query4.length).toEqual(7);
@@ -399,7 +399,7 @@ test("Weaviate Vector Store Self Query Retriever Test With Default Filter And Me
     const vectorStore = await WeaviateStore.fromDocuments(
       docs,
       embeddings,
-      weaviateArgs
+      weaviateArgs,
     );
     const collection = client.collections.get(weaviateArgs.indexName);
     const selfQueryRetriever = SelfQueryRetriever.fromLLM({
@@ -410,7 +410,7 @@ test("Weaviate Vector Store Self Query Retriever Test With Default Filter And Me
       structuredQueryTranslator: new WeaviateTranslator(),
       searchParams: {
         filter: Filters.and(
-          collection.filter.byProperty("type").equal("movie")
+          collection.filter.byProperty("type").equal("movie"),
         ),
         mergeFiltersOperator: "and",
         k: docs.length,
@@ -418,7 +418,7 @@ test("Weaviate Vector Store Self Query Retriever Test With Default Filter And Me
     });
 
     const query4 = await selfQueryRetriever.invoke(
-      "Wau wau wau wau hello gello hello?"
+      "Wau wau wau wau hello gello hello?",
     );
     // query4 has to return empty array, since the default filter takes over with and filter
     expect(query4.length).toEqual(7);

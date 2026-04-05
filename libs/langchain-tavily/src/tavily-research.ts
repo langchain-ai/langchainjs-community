@@ -120,7 +120,7 @@ const outputSchemaPropertySchema: z.ZodTypeAny = z.lazy(() =>
     properties: z
       .record(
         // Recursive definition: nested properties use the same schema shape
-        outputSchemaPropertySchema
+        outputSchemaPropertySchema,
       )
       .optional(),
     items: z
@@ -128,7 +128,7 @@ const outputSchemaPropertySchema: z.ZodTypeAny = z.lazy(() =>
         type: z.enum(["object", "string", "integer", "number", "array"]),
       })
       .optional(),
-  })
+  }),
 );
 
 const inputSchema = z.object({
@@ -142,7 +142,7 @@ const inputSchema = z.object({
       "pro" provides comprehensive, multi-angle research and is suited for complex topics that span multiple subtopics or domains.
       "auto" lets Tavily automatically determine the appropriate model based on the task complexity.
       Default is "auto".
-      `
+      `,
     ),
   outputSchema: z
     .object({
@@ -155,7 +155,7 @@ const inputSchema = z.object({
       A JSON Schema object that defines the structure of the research output. 
       When provided, the research response will be structured to match this schema, ensuring a predictable and validated output shape. 
       Must include a 'properties' field, and may optionally include 'required' field.
-      `
+      `,
     ),
   stream: z
     .boolean()
@@ -164,14 +164,14 @@ const inputSchema = z.object({
       `Whether to stream the research results as they are generated. 
       When 'true', returns a Server-Sent Events (SSE) stream.
       Default is false.
-      `
+      `,
     ),
   citationFormat: z
     .enum(["numbered", "mla", "apa", "chicago"])
     .optional()
     .describe(
       `The format for citations in the research report.
-      Default is "numbered".`
+      Default is "numbered".`,
     ),
 });
 /**
@@ -256,7 +256,7 @@ export class TavilyResearch extends StructuredTool<typeof inputSchema> {
 
   async _call(
     input: InferInteropZodOutput<typeof inputSchema>,
-    _runManager?: CallbackManagerForToolRun
+    _runManager?: CallbackManagerForToolRun,
   ): Promise<
     | TavilyResearchQueueResponse
     | AsyncGenerator<Buffer, void, unknown>

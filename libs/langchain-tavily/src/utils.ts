@@ -703,7 +703,7 @@ abstract class BaseTavilyAPIWrapper {
       fields.tavilyApiKey ?? getEnvironmentVariable("TAVILY_API_KEY");
     if (!apiKey) {
       throw new Error(
-        "Tavily API key not found. Please provide it as an argument or set the TAVILY_API_KEY environment variable."
+        "Tavily API key not found. Please provide it as an argument or set the TAVILY_API_KEY environment variable.",
       );
     }
     this.tavilyApiKey = apiKey;
@@ -716,7 +716,7 @@ abstract class BaseTavilyAPIWrapper {
    * @returns The parameters with snake_case keys only
    */
   protected convertCamelToSnakeCase(
-    params: Record<string, unknown>
+    params: Record<string, unknown>,
   ): Record<string, unknown> {
     const result: Record<string, unknown> = {};
 
@@ -747,11 +747,11 @@ export class TavilySearchAPIWrapper extends BaseTavilyAPIWrapper {
    * @returns The raw response body from the Tavily Search API.
    */
   async rawResults(
-    params: TavilySearchParamsWithSimpleImages
+    params: TavilySearchParamsWithSimpleImages,
   ): Promise<TavilySearchResponseWithSimpleImages>;
 
   async rawResults(
-    params: TavilySearchParamsWithImageDescriptions
+    params: TavilySearchParamsWithImageDescriptions,
   ): Promise<TavilySearchResponseWithImageDescriptions>;
 
   async rawResults(params: TavilySearchParams): Promise<TavilySearchResponse> {
@@ -790,7 +790,7 @@ export class TavilyExtractAPIWrapper extends BaseTavilyAPIWrapper {
    * @returns The raw response body from the Tavily Extract API. See {@link TavilyExtractResponse}.
    */
   async rawResults(
-    params: TavilyExtractParams
+    params: TavilyExtractParams,
   ): Promise<TavilyExtractResponse> {
     const headers = {
       Authorization: `Bearer ${this.tavilyApiKey}`,
@@ -891,7 +891,7 @@ export class TavilyResearchAPIWrapper extends BaseTavilyAPIWrapper {
    * @returns The queued response with request_id, or an async generator if streaming.
    */
   async rawResults(
-    params: TavilyResearchParams
+    params: TavilyResearchParams,
   ): Promise<
     TavilyResearchQueueResponse | AsyncGenerator<Buffer, void, unknown>
   > {

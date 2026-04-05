@@ -8,7 +8,7 @@ test("ExaSearchResults can perform a search given a string query", async () => {
   });
 
   const toolData = await exaTool.invoke(
-    "What does the AI company LangChain do?"
+    "What does the AI company LangChain do?",
   );
 
   const parsedData = JSON.parse(toolData);

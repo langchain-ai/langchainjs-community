@@ -9,7 +9,7 @@ test("test invoke", async () => {
   // @eslint-disable-next-line/@typescript-eslint/ban-ts-comment
   // @ts-expect-error unused var
   const result = await cohere.invoke(
-    "What is a good name for a company that makes colorful socks?"
+    "What is a good name for a company that makes colorful socks?",
   );
   // console.log({ result });
 });
@@ -35,7 +35,7 @@ test("test invoke with callback", async () => {
             },
           },
         ],
-      }
+      },
     );
     // Not streaming, so we should only get one token
     expect(tokens.length).toBe(1);

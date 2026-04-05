@@ -48,7 +48,7 @@ describe("TavilyExtract", () => {
     // Using a type assertion to access the private property
     expect(
       (tool as unknown as { apiWrapper: TestTavilyExtractAPIWrapper })
-        .apiWrapper
+        .apiWrapper,
     ).toBe(mockWrapper);
   });
 
@@ -70,7 +70,7 @@ describe("TavilyExtract", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyExtract({ apiWrapper: mockWrapper });
@@ -103,7 +103,7 @@ describe("TavilyExtract", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyExtract({ apiWrapper: mockWrapper });
@@ -138,7 +138,7 @@ describe("TavilyExtract", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     // Now with our fixed implementation, the default values should be respected
@@ -168,7 +168,7 @@ describe("TavilyExtract", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("API error"))
+        Promise.reject(new Error("API error")),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyExtract({ apiWrapper: mockWrapper });
@@ -191,7 +191,7 @@ describe("TavilyExtract", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyExtract({ apiWrapper: mockWrapper });
@@ -218,7 +218,7 @@ describe("TavilyExtract", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyExtract({ apiWrapper: mockWrapper });
@@ -245,7 +245,7 @@ describe("TavilyExtract", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyExtract({ apiWrapper: mockWrapper });
@@ -256,7 +256,7 @@ describe("TavilyExtract", () => {
 
     expect(result).toEqual({
       error: expect.stringContaining(
-        "Try a more detailed extraction using 'advanced' extractDepth"
+        "Try a more detailed extraction using 'advanced' extractDepth",
       ),
     });
   });
@@ -267,7 +267,7 @@ describe("TavilyExtract", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("String error without message property"))
+        Promise.reject(new Error("String error without message property")),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyExtract({ apiWrapper: mockWrapper });

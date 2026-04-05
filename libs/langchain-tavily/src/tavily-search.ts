@@ -193,7 +193,7 @@ function generateSuggestions(params: Record<string, unknown>): string[] {
   }
   if (searchDepth === "basic") {
     suggestions.push(
-      "Try a more detailed search using 'advanced' search_depth"
+      "Try a more detailed search using 'advanced' search_depth",
     );
   }
   if (topic && topic !== "general") {
@@ -218,7 +218,7 @@ Use this parameter when:
 In both cases, you should determine the appropriate domains (e.g., ["nasa.gov"] or ["apple.com"]) and set this parameter.
 
 Results will ONLY come from the specified domains - no other sources will be included.
-Default is None (no domain restriction).`
+Default is None (no domain restriction).`,
     ),
   excludeDomains: z
     .array(z.string())
@@ -233,7 +233,7 @@ Use this parameter when:
 In both cases, you should determine the appropriate domains to exclude (e.g., ["twitter.com"] or ["apple.com"]) and set this parameter.
 
 Results will filter out all content from the specified domains.
-Default is None (no domain exclusion).`
+Default is None (no domain exclusion).`,
     ),
   searchDepth: z
     .enum(["basic", "advanced"])
@@ -244,7 +244,7 @@ Default is None (no domain exclusion).`
 Use "basic" (default) for simple queries requiring quick, straightforward answers.
 
 Use "advanced" for complex queries, specialized topics, 
-rare information, or when in-depth analysis is needed.`
+rare information, or when in-depth analysis is needed.`,
     ),
   includeImages: z
     .boolean()
@@ -256,7 +256,7 @@ Set to True when the user explicitly requests visuals or when images would
 significantly enhance understanding (e.g., "Show me what black holes look like," 
 "Find pictures of Renaissance art").
 
-Leave as False (default) for most informational queries where text is sufficient.`
+Leave as False (default) for most informational queries where text is sufficient.`,
     ),
   timeRange: z
     .enum(["day", "week", "month", "year"])
@@ -272,7 +272,7 @@ For less popular or niche topics, use broader time ranges
 
 Options: "day" (24h), "week" (7d), "month" (30d), "year" (365d).
 
-Default is None.`
+Default is None.`,
     ),
   topic: z
     .enum(["general", "news", "finance"])
@@ -286,7 +286,7 @@ Use "general" (default) for most queries, INCLUDING those with terms like
 Use "finance" for markets, investments, economic data, or financial news.
 
 Use "news" ONLY for politics, sports, or major current events covered by 
-mainstream media - NOT simply because a query asks for "new" information.`
+mainstream media - NOT simply because a query asks for "new" information.`,
     ),
 });
 
@@ -412,7 +412,7 @@ export class TavilySearch extends StructuredTool<typeof inputSchema> {
 
   async _call(
     input: InferInteropZodOutput<typeof inputSchema>,
-    _runManager?: CallbackManagerForToolRun
+    _runManager?: CallbackManagerForToolRun,
   ): Promise<TavilySearchResponse | { error: string }> {
     try {
       const {

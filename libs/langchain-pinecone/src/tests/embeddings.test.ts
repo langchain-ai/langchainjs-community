@@ -13,7 +13,7 @@ test("confirm embedDocuments method throws error when an empty array is passed",
   };
   await expect(errorThrown).rejects.toThrow(Error);
   await expect(errorThrown).rejects.toThrowError(
-    "At least one document is required to generate embeddings"
+    "At least one document is required to generate embeddings",
   );
 });
 
@@ -24,7 +24,7 @@ test("confirm embedQuery method throws error when an empty string is passed", as
   };
   await expect(errorThrown).rejects.toThrow(Error);
   await expect(errorThrown).rejects.toThrowError(
-    "No query passed for which to generate embeddings"
+    "No query passed for which to generate embeddings",
   );
 });
 

@@ -29,7 +29,7 @@ export class PineconeEmbeddings
   params: Record<string, string>;
 
   constructor(
-    fields?: Partial<PineconeEmbeddingsParams> & Partial<PineconeConfiguration>
+    fields?: Partial<PineconeEmbeddingsParams> & Partial<PineconeConfiguration>,
   ) {
     const defaultFields = { maxRetries: 3, ...fields };
     super(defaultFields);
@@ -69,7 +69,7 @@ export class PineconeEmbeddings
   async embedDocuments(texts: string[]): Promise<number[][]> {
     if (texts.length === 0) {
       throw new Error(
-        "At least one document is required to generate embeddings"
+        "At least one document is required to generate embeddings",
       );
     }
 
@@ -79,7 +79,7 @@ export class PineconeEmbeddings
         const result: EmbeddingsList = await this.client.inference.embed(
           this.model,
           texts,
-          this.params
+          this.params,
         );
         return result;
       });
@@ -88,7 +88,7 @@ export class PineconeEmbeddings
         const result: EmbeddingsList = await this.client.inference.embed(
           this.model,
           texts,
-          {}
+          {},
         );
         return result;
       });
@@ -121,7 +121,7 @@ export class PineconeEmbeddings
         return await this.client.inference.embed(
           this.model,
           [text],
-          this.params
+          this.params,
         );
       });
     } else {

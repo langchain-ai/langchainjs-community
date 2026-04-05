@@ -71,7 +71,7 @@ describe("TavilyCrawl", () => {
 
     // Using a type assertion to access the property
     expect(
-      (tool as unknown as { apiWrapper: TestTavilyCrawlAPIWrapper }).apiWrapper
+      (tool as unknown as { apiWrapper: TestTavilyCrawlAPIWrapper }).apiWrapper,
     ).toBe(mockWrapper);
   });
 
@@ -93,7 +93,7 @@ describe("TavilyCrawl", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyCrawl({ apiWrapper: mockWrapper });
@@ -105,7 +105,7 @@ describe("TavilyCrawl", () => {
     expect(mockWrapper.rawResults).toHaveBeenCalledWith(
       expect.objectContaining({
         url: "https://example.com",
-      })
+      }),
     );
 
     expect(result).toEqual(mockResult);
@@ -129,7 +129,7 @@ describe("TavilyCrawl", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyCrawl({ apiWrapper: mockWrapper });
@@ -144,7 +144,7 @@ describe("TavilyCrawl", () => {
         url: "https://example.com",
         allowExternal: true,
         categories: ["Documentation"],
-      })
+      }),
     );
   });
 
@@ -166,7 +166,7 @@ describe("TavilyCrawl", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     // Create a tool with custom defaults
@@ -188,7 +188,7 @@ describe("TavilyCrawl", () => {
         extractDepth: "advanced",
         includeImages: true,
         format: "markdown",
-      })
+      }),
     );
   });
 
@@ -198,7 +198,7 @@ describe("TavilyCrawl", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("API error"))
+        Promise.reject(new Error("API error")),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyCrawl({ apiWrapper: mockWrapper });
@@ -221,7 +221,7 @@ describe("TavilyCrawl", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyCrawl({ apiWrapper: mockWrapper });
@@ -231,7 +231,7 @@ describe("TavilyCrawl", () => {
 
     expect(result).toEqual({
       error: expect.stringContaining(
-        "No crawl results found for 'https://example.com'"
+        "No crawl results found for 'https://example.com'",
       ),
     });
   });
@@ -248,7 +248,7 @@ describe("TavilyCrawl", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyCrawl({
@@ -263,17 +263,17 @@ describe("TavilyCrawl", () => {
     // Verify that the error message contains the expected suggestions
     expect(result).toEqual({
       error: expect.stringContaining(
-        "Try adding specific path filters using selectPaths"
+        "Try adding specific path filters using selectPaths",
       ),
     });
     expect(result).toEqual({
       error: expect.stringContaining(
-        "Try adding domain filters using selectDomains"
+        "Try adding domain filters using selectDomains",
       ),
     });
     expect(result).toEqual({
       error: expect.stringContaining(
-        "Try excluding specific domains using excludeDomains"
+        "Try excluding specific domains using excludeDomains",
       ),
     });
   });
@@ -284,7 +284,7 @@ describe("TavilyCrawl", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("String error without message property"))
+        Promise.reject(new Error("String error without message property")),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyCrawl({ apiWrapper: mockWrapper });
@@ -309,7 +309,7 @@ describe("TavilyCrawl", () => {
             results: [],
             response_time: 0.5,
           }),
-      } as Response)
+      } as Response),
     );
     global.fetch = mockFetch as typeof fetch;
 

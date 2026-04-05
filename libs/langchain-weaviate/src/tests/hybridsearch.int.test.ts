@@ -72,7 +72,7 @@ test("Hybridsearch with limit", async () => {
         { foo: "bar" },
       ],
       embeddings,
-      weaviateArgs
+      weaviateArgs,
     );
 
     const results = await store.hybridSearch("hello world", {
@@ -131,7 +131,7 @@ test("Hybridsearch with named vectors", async () => {
         { foo: "bar", title: "bye" },
       ],
       embeddings,
-      weaviateArgs
+      weaviateArgs,
     );
 
     // how are you in portuguese
@@ -188,7 +188,7 @@ test("Hybridsearch with rerank", async () => {
         { foo: "bar", title: "bye" },
       ],
       embeddings,
-      weaviateArgs
+      weaviateArgs,
     );
 
     const results = await store.hybridSearch("greeting", {
@@ -227,7 +227,7 @@ test("HybridSearch providing vector and return metadata", async () => {
       ["a dog can bark", "what more?", "How many is enough?"],
       [{ foo: "bar" }],
       embeddings,
-      weaviateArgs
+      weaviateArgs,
     );
 
     const results = await store.hybridSearch("domestic dog", {

@@ -20,7 +20,7 @@ test("flattenObjectForWeaviate", () => {
         },
       },
       emptyArray: [],
-    })
+    }),
   ).toMatchInlineSnapshot(`
     {
       "deep_array3": [

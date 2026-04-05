@@ -48,7 +48,7 @@ test("WeaviateStore", async () => {
       ["hello world", "hi there", "how are you", "bye now"],
       [{ foo: "bar" }, { foo: "baz" }, { foo: "qux" }, { foo: "bar" }],
       embeddings,
-      weaviateArgs
+      weaviateArgs,
     );
     const collection = client.collections.get(weaviateArgs.indexName);
     const results = await store.similaritySearch("hello world", 1);
@@ -63,7 +63,7 @@ test("WeaviateStore", async () => {
     const results2 = await store.similaritySearch(
       "hello world",
       1,
-      Filters.and(collection.filter.byProperty("foo").equal("baz"))
+      Filters.and(collection.filter.byProperty("foo").equal("baz")),
     );
 
     expect(results2).toEqual([
@@ -93,14 +93,14 @@ test("WeaviateStore", async () => {
         indexName: "DocumentTest",
         textKey: "text",
         metadataKeys: ["deep_string", "deep_deepdeep_string"],
-      }
+      },
     );
     const result3 = await documentStore.similaritySearch(
       "this is the deep document world!",
       1,
       Filters.and(
-        collection.filter.byProperty("deep_string").equal("deep string")
-      )
+        collection.filter.byProperty("deep_string").equal("deep string"),
+      ),
     );
     expect(result3).toEqual([
       new Document({
@@ -134,7 +134,7 @@ test("WeaviateStore upsert + delete", async () => {
         }),
       ],
       new OpenAIEmbeddings(),
-      weaviateArgs
+      weaviateArgs,
     );
 
     const ids = await store.addDocuments([
@@ -153,7 +153,7 @@ test("WeaviateStore upsert + delete", async () => {
       4,
       collection.filter
         .byProperty("deletionTest")
-        .equal((createdAt + 1).toString())
+        .equal((createdAt + 1).toString()),
     );
 
     expect(results).toEqual([
@@ -180,7 +180,7 @@ test("WeaviateStore upsert + delete", async () => {
           metadata: { deletionTest: (createdAt + 1).toString() },
         },
       ],
-      { ids }
+      { ids },
     );
 
     expect(ids2).toEqual(ids);
@@ -190,8 +190,8 @@ test("WeaviateStore upsert + delete", async () => {
       Filters.and(
         collection.filter
           .byProperty("deletionTest")
-          .equal((createdAt + 1).toString())
-      )
+          .equal((createdAt + 1).toString()),
+      ),
     );
     expect(results2).toEqual([
       new Document({
@@ -213,8 +213,8 @@ test("WeaviateStore upsert + delete", async () => {
       Filters.and(
         collection.filter
           .byProperty("deletionTest")
-          .equal((createdAt + 1).toString())
-      )
+          .equal((createdAt + 1).toString()),
+      ),
     );
     expect(results3).toEqual([
       new Document({
@@ -240,7 +240,7 @@ test("WeaviateStore with tenant", async () => {
     ["hello world", "hi there", "how are you", "bye now"],
     [{ foo: "bar" }, { foo: "baz" }, { foo: "qux" }, { foo: "bar" }],
     new OpenAIEmbeddings(),
-    weaviateArgs
+    weaviateArgs,
   );
   const collection = client.collections.get(weaviateArgs.indexName);
   try {
@@ -258,7 +258,7 @@ test("WeaviateStore with tenant", async () => {
     const results2 = await store.similaritySearch(
       "hello world",
       1,
-      collection.filter.byProperty("foo").equal("bar")
+      collection.filter.byProperty("foo").equal("bar"),
     );
     expect(results2).toEqual([]);
   } finally {
@@ -278,7 +278,7 @@ test("WeaviateStore with limited metadatakeys", async () => {
     ["hello world"],
     [{ foo: "bar", bar: "bar" }],
     new FakeEmbeddings(),
-    weaviateArgs
+    weaviateArgs,
   );
   try {
     const results = await store.similaritySearch("hello world", 1);
@@ -304,7 +304,7 @@ test("invalid metadata name", async () => {
     ["hello world"],
     [{ "pdf_metadata__metadata_xmp:createdate": "bar" }],
     new FakeEmbeddings(),
-    weaviateArgs
+    weaviateArgs,
   );
   try {
     const total = await client.collections
@@ -328,7 +328,7 @@ test("WeaviateStore delete with filter", async () => {
       ["hello world", "hi there", "how are you", "bye now"],
       [{ foo: "bar" }, { foo: "baz" }, { foo: "qux" }, { foo: "bar" }],
       new OpenAIEmbeddings(),
-      weaviateArgs
+      weaviateArgs,
     );
     const collection = client.collections.get(weaviateArgs.indexName);
     const results = await store.similaritySearch("hello world", 1);
@@ -345,7 +345,7 @@ test("WeaviateStore delete with filter", async () => {
     const results2 = await store.similaritySearch(
       "hello world",
       1,
-      collection.filter.byProperty("foo").equal("bar")
+      collection.filter.byProperty("foo").equal("bar"),
     );
     expect(results2).toEqual([]);
   } finally {
@@ -387,7 +387,7 @@ test("addDocuments & addVectors method works", async () => {
     ];
 
     const embeddings = await store.embeddings.embedDocuments(
-      documents.map((d) => d.pageContent)
+      documents.map((d) => d.pageContent),
     );
 
     const vectors = await store.addVectors(embeddings, documents);
@@ -428,7 +428,7 @@ test("maxMarginalRelevanceSearch", async () => {
         fatherDoc,
       ],
       new OpenAIEmbeddings(),
-      weaviateArgs
+      weaviateArgs,
     );
 
     const result = await store.maxMarginalRelevanceSearch("father", { k: 1 });
@@ -448,7 +448,7 @@ test("fromExistingIndex", async () => {
   try {
     const store = await WeaviateStore.fromExistingIndex(
       new OpenAIEmbeddings(),
-      weaviateArgs
+      weaviateArgs,
     );
 
     expect(store).toBeDefined();

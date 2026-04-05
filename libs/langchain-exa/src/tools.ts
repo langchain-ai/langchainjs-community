@@ -107,10 +107,10 @@ export class ExaSearchResults<
 
   protected async _call(
     input: string,
-    _runManager?: CallbackManagerForToolRun
+    _runManager?: CallbackManagerForToolRun,
   ): Promise<string> {
     return JSON.stringify(
-      await this.client.searchAndContents<T>(input, this.searchArgs)
+      await this.client.searchAndContents<T>(input, this.searchArgs),
     );
   }
 }
@@ -139,10 +139,10 @@ export class ExaFindSimilarResults<
 
   protected async _call(
     url: string,
-    _runManager?: CallbackManagerForToolRun
+    _runManager?: CallbackManagerForToolRun,
   ): Promise<string> {
     return JSON.stringify(
-      await this.client.findSimilarAndContents<T>(url, this.searchArgs)
+      await this.client.findSimilarAndContents<T>(url, this.searchArgs),
     );
   }
 }

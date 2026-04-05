@@ -232,7 +232,7 @@ export class PineconeStore extends VectorStore {
     }
     if (pineconeIndex && pineconeConfig) {
       throw new Error(
-        "Only one of pineconeConfig or pineconeIndex can be provided."
+        "Only one of pineconeConfig or pineconeIndex can be provided.",
       );
     }
 
@@ -247,7 +247,7 @@ export class PineconeStore extends VectorStore {
         },
         pineconeConfig.namespace,
         pineconeConfig.indexHostUrl,
-        pineconeConfig.additionalHeaders
+        pineconeConfig.additionalHeaders,
       );
     }
 
@@ -265,13 +265,13 @@ export class PineconeStore extends VectorStore {
    */
   async addDocuments(
     documents: Document[],
-    options?: { ids?: string[]; namespace?: string } | string[]
+    options?: { ids?: string[]; namespace?: string } | string[],
   ): Promise<string[]> {
     const texts = documents.map(({ pageContent }) => pageContent);
     return this.addVectors(
       await this.embeddings.embedDocuments(texts),
       documents,
-      options
+      options,
     );
   }
 
@@ -286,7 +286,7 @@ export class PineconeStore extends VectorStore {
   async addVectors(
     vectors: number[][],
     documents: Document[],
-    options?: { ids?: string[]; namespace?: string } | string[]
+    options?: { ids?: string[]; namespace?: string } | string[],
   ) {
     const ids = Array.isArray(options) ? options : options?.ids;
     const documentIds = ids == null ? documents.map(() => uuid()) : ids;
@@ -349,7 +349,7 @@ export class PineconeStore extends VectorStore {
           }
           throw e;
         }
-      })
+      }),
     );
 
     await Promise.all(batchRequests);
@@ -386,7 +386,7 @@ export class PineconeStore extends VectorStore {
     query: number[],
     k: number,
     filter?: PineconeMetadata,
-    options?: { includeValues: boolean }
+    options?: { includeValues: boolean },
   ) {
     if (filter && this.filter) {
       throw new Error("cannot provide both `filter` and `this.filter`");
@@ -421,7 +421,7 @@ export class PineconeStore extends VectorStore {
    * @returns An array of arrays, where each inner array contains a document and its score.
    */
   private _formatMatches(
-    matches: ScoredPineconeRecord<RecordMetadata>[] = []
+    matches: ScoredPineconeRecord<RecordMetadata>[] = [],
   ): [Document, number][] {
     const documentsWithScores: [Document, number][] = [];
 
@@ -460,7 +460,7 @@ export class PineconeStore extends VectorStore {
   async similaritySearchVectorWithScore(
     query: number[],
     k: number,
-    filter?: PineconeMetadata
+    filter?: PineconeMetadata,
   ): Promise<[Document, number][]> {
     const { matches = [] } = await this._runPineconeQuery(query, k, filter);
     const records = this._formatMatches(matches);
@@ -484,7 +484,7 @@ export class PineconeStore extends VectorStore {
    */
   async maxMarginalRelevanceSearch(
     query: string,
-    options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>
+    options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>,
   ): Promise<DocumentInterface[]> {
     const queryEmbedding = await this.embeddings.embedQuery(query);
 
@@ -492,7 +492,7 @@ export class PineconeStore extends VectorStore {
       queryEmbedding,
       options.fetchK ?? 20,
       options.filter,
-      { includeValues: true }
+      { includeValues: true },
     );
 
     const { matches = [] } = results;
@@ -502,7 +502,7 @@ export class PineconeStore extends VectorStore {
       queryEmbedding,
       embeddingList,
       options.lambda,
-      options.k
+      options.k,
     );
 
     const topMmrMatches = mmrIndexes.map((idx) => matches[idx]);
@@ -529,7 +529,7 @@ export class PineconeStore extends VectorStore {
           textKey?: string;
           namespace?: string | undefined;
         }
-      | PineconeStoreParams
+      | PineconeStoreParams,
   ): Promise<PineconeStore> {
     const docs: Document[] = [];
     for (let i = 0; i < texts.length; i += 1) {
@@ -560,7 +560,7 @@ export class PineconeStore extends VectorStore {
   static async fromDocuments(
     docs: Document[],
     embeddings: EmbeddingsInterface,
-    dbConfig: PineconeStoreParams
+    dbConfig: PineconeStoreParams,
   ): Promise<PineconeStore> {
     const args = dbConfig;
     args.textKey = dbConfig.textKey ?? "text";
@@ -579,7 +579,7 @@ export class PineconeStore extends VectorStore {
    */
   static async fromExistingIndex(
     embeddings: EmbeddingsInterface,
-    dbConfig: PineconeStoreParams
+    dbConfig: PineconeStoreParams,
   ): Promise<PineconeStore> {
     const instance = new this(embeddings, dbConfig);
     return instance;

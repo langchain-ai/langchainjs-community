@@ -96,7 +96,7 @@ export interface ChatCohereCallOptions
 }
 
 function convertToDocuments(
-  observations: MessageContent
+  observations: MessageContent,
 ): Array<Record<string, any>> {
   /** Converts observations into a 'document' dict */
   const documents: Array<Record<string, any>> = [];
@@ -133,7 +133,7 @@ function convertToDocuments(
 
 function convertMessageToCohereMessage(
   message: BaseMessage,
-  toolResults: ToolResult[]
+  toolResults: ToolResult[],
 ): Cohere.Message {
   const getRole = (role: MessageType) => {
     switch (role) {
@@ -147,7 +147,7 @@ function convertMessageToCohereMessage(
         return "TOOL";
       default:
         throw new Error(
-          `Unknown message type: '${role}'. Accepted types: 'human', 'ai', 'system', 'tool'`
+          `Unknown message type: '${role}'. Accepted types: 'human', 'ai', 'system', 'tool'`,
         );
     }
   };
@@ -160,8 +160,8 @@ function convertMessageToCohereMessage(
       `ChatCohere does not support non text message content. Received: ${JSON.stringify(
         content,
         null,
-        2
-      )}`
+        2,
+      )}`,
     );
   };
 
@@ -196,7 +196,7 @@ function convertMessageToCohereMessage(
     };
   } else {
     throw new Error(
-      "Got unknown message type. Supported types are AIMessage, ToolMessage, HumanMessage, and SystemMessage"
+      "Got unknown message type. Supported types are AIMessage, ToolMessage, HumanMessage, and SystemMessage",
     );
   }
 }
@@ -235,7 +235,7 @@ function _convertJsonSchemaToCohereTool(jsonSchema: Record<string, any>) {
 }
 
 function _formatToolsToCohere(
-  tools: ChatCohereCallOptions["tools"]
+  tools: ChatCohereCallOptions["tools"],
 ): Cohere.Tool[] | undefined {
   if (!tools) {
     return undefined;
@@ -247,7 +247,7 @@ function _formatToolsToCohere(
         name: tool.function.name,
         description: tool.function.description ?? "",
         parameterDefinitions: _convertJsonSchemaToCohereTool(
-          tool.function.parameters
+          tool.function.parameters,
         ),
       };
     });
@@ -260,13 +260,13 @@ function _formatToolsToCohere(
         name: tool.name,
         description: tool.description ?? "",
         parameterDefinitions: _convertJsonSchemaToCohereTool(
-          parameterDefinitionsFromZod
+          parameterDefinitionsFromZod,
         ),
       };
     });
   } else {
     throw new Error(
-      `Can not pass in a mix of tool schema types to ChatCohere.`
+      `Can not pass in a mix of tool schema types to ChatCohere.`,
     );
   }
 }
@@ -735,7 +735,7 @@ export class ChatCohere<
   constructor(fields?: ChatCohereInput);
   constructor(
     modelOrFields?: string | ChatCohereInput,
-    fields?: Omit<ChatCohereInput, "model">
+    fields?: Omit<ChatCohereInput, "model">,
   ) {
     const params =
       typeof modelOrFields === "string"
@@ -774,7 +774,7 @@ export class ChatCohere<
   invocationParams(options: this["ParsedCallOptions"]) {
     if (options.tool_choice) {
       throw new Error(
-        "'tool_choice' call option is not supported by ChatCohere."
+        "'tool_choice' call option is not supported by ChatCohere.",
       );
     }
 
@@ -792,13 +792,13 @@ export class ChatCohere<
     };
     // Filter undefined entries
     return Object.fromEntries(
-      Object.entries(params).filter(([, value]) => value !== undefined)
+      Object.entries(params).filter(([, value]) => value !== undefined),
     );
   }
 
   override bindTools(
     tools: ChatCohereToolType[],
-    kwargs?: Partial<CallOptions>
+    kwargs?: Partial<CallOptions>,
   ): Runnable<BaseLanguageModelInput, AIMessageChunk, CallOptions> {
     return this.withConfig({
       tools: _formatToolsToCohere(tools),
@@ -809,7 +809,7 @@ export class ChatCohere<
   /** @ignore */
   private _getChatRequest(
     messages: BaseMessage[],
-    options: this["ParsedCallOptions"]
+    options: this["ParsedCallOptions"],
   ): Cohere.ChatRequest {
     const params = this.invocationParams(options);
 
@@ -827,7 +827,7 @@ export class ChatCohere<
         // If there are multiple tool messages, then we need to aggregate them into one single tool message to pass into chat history
         if (message._getType().toLowerCase() === "tool") {
           tempToolResults = tempToolResults.concat(
-            this._messageToCohereToolResults(messages, i)
+            this._messageToCohereToolResults(messages, i),
           );
 
           if (
@@ -836,7 +836,7 @@ export class ChatCohere<
           ) {
             const cohere_message = convertMessageToCohereMessage(
               message,
-              tempToolResults
+              tempToolResults,
             );
             chatHistory.push(cohere_message);
             tempToolResults = [];
@@ -863,7 +863,7 @@ export class ChatCohere<
         // If there are multiple tool messages, then we need to aggregate them into one single tool message to pass into chat history
         if (message._getType().toLowerCase() === "tool") {
           tempToolResults = tempToolResults.concat(
-            this._messageToCohereToolResults(messages, i)
+            this._messageToCohereToolResults(messages, i),
           );
 
           if (
@@ -872,7 +872,7 @@ export class ChatCohere<
           ) {
             const cohereMessage = convertMessageToCohereMessage(
               message,
-              tempToolResults
+              tempToolResults,
             );
             chatHistory.push(cohereMessage);
             tempToolResults = [];
@@ -915,7 +915,7 @@ export class ChatCohere<
   }
 
   private _messagesToCohereToolResultsCurrChatTurn(
-    messages: BaseMessage[]
+    messages: BaseMessage[],
   ): Array<{
     call: Cohere.ToolCall;
     outputs: ReturnType<typeof convertToDocuments>;
@@ -931,7 +931,7 @@ export class ChatCohere<
       if (isToolMessage(message)) {
         const toolMessage = message;
         const previousAiMsgs = currChatTurnMessages.filter(
-          (msg) => isAIMessage(msg) && msg.tool_calls !== undefined
+          (msg) => isAIMessage(msg) && msg.tool_calls !== undefined,
         ) as AIMessage[];
         if (previousAiMsgs.length > 0) {
           const previousAiMsg = previousAiMsgs[previousAiMsgs.length - 1];
@@ -939,7 +939,7 @@ export class ChatCohere<
             toolResults.push(
               ...previousAiMsg.tool_calls
                 .filter(
-                  (lcToolCall) => lcToolCall.id === toolMessage.tool_call_id
+                  (lcToolCall) => lcToolCall.id === toolMessage.tool_call_id,
                 )
                 .map((lcToolCall) => ({
                   call: {
@@ -947,7 +947,7 @@ export class ChatCohere<
                     parameters: lcToolCall.args,
                   },
                   outputs: convertToDocuments(toolMessage.content),
-                }))
+                })),
             );
           }
         }
@@ -958,7 +958,7 @@ export class ChatCohere<
 
   private _messageToCohereToolResults(
     messages: BaseMessage[],
-    toolMessageIndex: number
+    toolMessageIndex: number,
   ): Array<{ call: Cohere.ToolCall; outputs: any }> {
     /** Get tool_results from messages. */
     const toolResults: Array<{ call: Cohere.ToolCall; outputs: any }> = [];
@@ -966,7 +966,7 @@ export class ChatCohere<
 
     if (!isToolMessage(toolMessage)) {
       throw new Error(
-        "The message index does not correspond to an instance of ToolMessage"
+        "The message index does not correspond to an instance of ToolMessage",
       );
     }
 
@@ -985,7 +985,7 @@ export class ChatCohere<
               parameters: lcToolCall.args,
             },
             outputs: convertToDocuments(toolMessage.content),
-          }))
+          })),
       );
     }
 
@@ -1019,7 +1019,7 @@ export class ChatCohere<
   }
 
   private _convertCohereToolCallToLangchain(
-    toolCalls: Record<string, any>[]
+    toolCalls: Record<string, any>[],
   ): ToolCall[] {
     return toolCalls.map((toolCall) => ({
       name: toolCall.function.name,
@@ -1033,7 +1033,7 @@ export class ChatCohere<
   async _generate(
     messages: BaseMessage[],
     options: this["ParsedCallOptions"],
-    runManager?: CallbackManagerForLLMRun
+    runManager?: CallbackManagerForLLMRun,
   ): Promise<ChatResult> {
     options.signal?.throwIfAborted();
     const tokenUsage: TokenUsage = {};
@@ -1074,7 +1074,7 @@ export class ChatCohere<
             throw e;
           }
           return response;
-        }
+        },
       );
 
     if (response.meta?.tokens) {
@@ -1101,13 +1101,13 @@ export class ChatCohere<
       // Only populate tool_calls when 1) present on the response and
       // 2) has one or more calls.
       generationInfo.toolCalls = this._formatCohereToolCalls(
-        response.toolCalls
+        response.toolCalls,
       );
     }
     let toolCalls: ToolCall[] = [];
     if ("toolCalls" in generationInfo) {
       toolCalls = this._convertCohereToolCallToLangchain(
-        generationInfo.toolCalls as Record<string, any>[]
+        generationInfo.toolCalls as Record<string, any>[],
       );
     }
 
@@ -1136,7 +1136,7 @@ export class ChatCohere<
   async *_streamResponseChunks(
     messages: BaseMessage[],
     options: this["ParsedCallOptions"],
-    runManager?: CallbackManagerForLLMRun
+    runManager?: CallbackManagerForLLMRun,
   ): AsyncGenerator<ChatGenerationChunk> {
     const request = this._getChatRequest(messages, options);
 
@@ -1152,7 +1152,7 @@ export class ChatCohere<
           throw e;
         }
         return stream;
-      }
+      },
     );
     for await (const chunk of stream) {
       if (options.signal?.aborted) {
@@ -1196,7 +1196,7 @@ export class ChatCohere<
           // Only populate tool_calls when 1) present on the response and
           // 2) has one or more calls.
           chunkGenerationInfo.toolCalls = this._formatCohereToolCalls(
-            chunk.response.toolCalls
+            chunk.response.toolCalls,
           );
         }
 
@@ -1265,7 +1265,7 @@ export class ChatCohere<
           promptTokens: 0,
           totalTokens: 0,
         },
-      }
+      },
     );
   }
 

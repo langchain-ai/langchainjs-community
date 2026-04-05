@@ -29,11 +29,11 @@ describe("QdrantVectorStore testcase", () => {
       pageContent,
       {
         k: 1,
-      }
+      },
     );
     expect(mmrResults.length).toBe(1);
     expect(mmrResults[0]).toEqual(
-      new Document({ metadata: {}, pageContent, id })
+      new Document({ metadata: {}, pageContent, id }),
     );
   });
 
@@ -53,7 +53,7 @@ describe("QdrantVectorStore testcase", () => {
           url: process.env.QDRANT_URL,
           apiKey: process.env.QDRANT_API_KEY,
         }),
-      }
+      },
     );
 
     const results = await qdrantVectorStore.similaritySearch(pageContent, 1);
@@ -78,12 +78,12 @@ describe("QdrantVectorStore testcase", () => {
       {
         collectionName: "mmr_test_collection",
         url: process.env.QDRANT_URL || "http://localhost:6333",
-      }
+      },
     );
 
     const mmrResults = await qdrantVectorStore.maxMarginalRelevanceSearch(
       "fruit vegetable animal",
-      { k: 3 }
+      { k: 3 },
     );
 
     expect(mmrResults.length).toBe(3);

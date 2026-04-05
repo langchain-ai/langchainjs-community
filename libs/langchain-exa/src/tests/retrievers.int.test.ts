@@ -8,7 +8,7 @@ test("ExaRetriever can retrieve some data", async () => {
   });
 
   const results = await exaRetriever.getRelevantDocuments(
-    "What does the AI company LangChain do?"
+    "What does the AI company LangChain do?",
   );
 
   // console.log("results:", JSON.stringify(results, null, 2));

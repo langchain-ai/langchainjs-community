@@ -28,7 +28,7 @@ describe("Tests for getPineconeClient", () => {
       };
       await expect(errorThrown).rejects.toThrow(Error);
       await expect(errorThrown).rejects.toThrow(
-        "PINECONE_API_KEY must be set in environment"
+        "PINECONE_API_KEY must be set in environment",
       );
     } finally {
       // Restore the original value of PINECONE_API_KEY

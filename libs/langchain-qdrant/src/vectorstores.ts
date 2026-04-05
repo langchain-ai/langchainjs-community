@@ -126,13 +126,13 @@ export class QdrantVectorStore extends VectorStore {
    */
   async addDocuments(
     documents: Document[],
-    documentOptions?: QdrantAddDocumentOptions
+    documentOptions?: QdrantAddDocumentOptions,
   ): Promise<void> {
     const texts = documents.map(({ pageContent }) => pageContent);
     await this.addVectors(
       await this.embeddings.embedDocuments(texts),
       documents,
-      documentOptions
+      documentOptions,
     );
   }
 
@@ -148,7 +148,7 @@ export class QdrantVectorStore extends VectorStore {
   async addVectors(
     vectors: number[][],
     documents: Document[],
-    documentOptions?: QdrantAddDocumentOptions
+    documentOptions?: QdrantAddDocumentOptions,
   ): Promise<void> {
     if (vectors.length === 0) {
       return;
@@ -176,7 +176,7 @@ export class QdrantVectorStore extends VectorStore {
       const error = new Error(
         `${e?.status ?? "Undefined error code"} ${e?.message}: ${
           e?.data?.status?.error
-        }`
+        }`,
       );
       throw error;
     }
@@ -225,7 +225,7 @@ export class QdrantVectorStore extends VectorStore {
   async similaritySearchVectorWithScore(
     query: number[],
     k?: number,
-    filter?: this["FilterType"]
+    filter?: this["FilterType"],
   ): Promise<[Document, number][]> {
     if (!query) {
       return [];
@@ -274,7 +274,7 @@ export class QdrantVectorStore extends VectorStore {
    */
   async maxMarginalRelevanceSearch(
     query: string,
-    options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>
+    options: MaxMarginalRelevanceSearchOptions<this["FilterType"]>,
   ): Promise<Document[]> {
     if (!query) {
       return [];
@@ -307,7 +307,7 @@ export class QdrantVectorStore extends VectorStore {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata: res.payload[this.metadataPayloadKey] as Record<string, any>,
           pageContent: res.payload[this.contentPayloadKey] as string,
-        })
+        }),
     );
 
     return result;
@@ -322,7 +322,7 @@ export class QdrantVectorStore extends VectorStore {
     const response = await this.client.getCollections();
 
     const collectionNames = response.collections.map(
-      (collection) => collection.name
+      (collection) => collection.name,
     );
 
     if (!collectionNames.includes(this.collectionName)) {
@@ -350,7 +350,7 @@ export class QdrantVectorStore extends VectorStore {
     texts: string[],
     metadatas: object[] | object,
     embeddings: EmbeddingsInterface,
-    dbConfig: QdrantLibArgs
+    dbConfig: QdrantLibArgs,
   ): Promise<QdrantVectorStore> {
     const docs = [];
     for (let i = 0; i < texts.length; i += 1) {
@@ -375,7 +375,7 @@ export class QdrantVectorStore extends VectorStore {
   static async fromDocuments(
     docs: Document[],
     embeddings: EmbeddingsInterface,
-    dbConfig: QdrantLibArgs
+    dbConfig: QdrantLibArgs,
   ): Promise<QdrantVectorStore> {
     const instance = new this(embeddings, dbConfig);
     if (dbConfig.customPayload) {
@@ -398,7 +398,7 @@ export class QdrantVectorStore extends VectorStore {
    */
   static async fromExistingCollection(
     embeddings: EmbeddingsInterface,
-    dbConfig: QdrantLibArgs
+    dbConfig: QdrantLibArgs,
   ): Promise<QdrantVectorStore> {
     const instance = new this(embeddings, dbConfig);
     await instance.ensureCollection();

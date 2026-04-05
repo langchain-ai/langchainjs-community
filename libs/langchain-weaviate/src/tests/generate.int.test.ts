@@ -68,7 +68,7 @@ test("Generate with limit", async () => {
         { foo: "qux", title: "another title" },
       ],
       embeddings,
-      weaviateArgs
+      weaviateArgs,
     );
 
     const results = await store.generate(
@@ -80,7 +80,7 @@ test("Generate with limit", async () => {
       },
       {
         limit: 1,
-      }
+      },
     );
     expect(results).toEqual([
       expect.objectContaining({

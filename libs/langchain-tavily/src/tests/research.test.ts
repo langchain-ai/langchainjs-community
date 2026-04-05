@@ -19,7 +19,7 @@ class TestTavilyResearchAPIWrapper extends TavilyResearchAPIWrapper {
 
   // Mock the raw results method to return what we want
   async rawResults(
-    params: TavilyResearchParams
+    params: TavilyResearchParams,
   ): Promise<
     TavilyResearchQueueResponse | AsyncGenerator<Buffer, void, unknown>
   > {
@@ -73,7 +73,7 @@ describe("TavilyResearch", () => {
     // Using a type assertion to access the private property
     expect(
       (tool as unknown as { apiWrapper: TestTavilyResearchAPIWrapper })
-        .apiWrapper
+        .apiWrapper,
     ).toBe(mockWrapper);
   });
 
@@ -92,7 +92,7 @@ describe("TavilyResearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyResearch({ apiWrapper: mockWrapper });
@@ -106,7 +106,7 @@ describe("TavilyResearch", () => {
         model: "auto",
         stream: false,
         citationFormat: "numbered",
-      })
+      }),
     );
 
     expect(result).toEqual(mockResult);
@@ -130,7 +130,7 @@ describe("TavilyResearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockStreamGenerator())
+        Promise.resolve(mockStreamGenerator()),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyResearch({
@@ -146,7 +146,7 @@ describe("TavilyResearch", () => {
       expect.objectContaining({
         input: "What is the capital of France?",
         stream: true,
-      })
+      }),
     );
 
     // Verify it returns an async generator
@@ -154,7 +154,7 @@ describe("TavilyResearch", () => {
     expect(
       typeof (result as AsyncGenerator<Buffer, void, unknown>)[
         Symbol.asyncIterator
-      ]
+      ],
     ).toBe("function");
 
     // Consume the stream and verify chunks
@@ -180,7 +180,7 @@ describe("TavilyResearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyResearch({ apiWrapper: mockWrapper });
@@ -210,7 +210,7 @@ describe("TavilyResearch", () => {
         }),
         citationFormat: "mla",
         stream: false,
-      })
+      }),
     );
   });
 
@@ -229,7 +229,7 @@ describe("TavilyResearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     // Create a tool with custom defaults
@@ -259,7 +259,7 @@ describe("TavilyResearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("API error"))
+        Promise.reject(new Error("API error")),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyResearch({ apiWrapper: mockWrapper });
@@ -276,7 +276,7 @@ describe("TavilyResearch", () => {
     mockWrapper.rawResults = vi.fn().mockImplementation(() =>
       Promise.resolve({
         invalid: "response",
-      } as unknown as TavilyResearchQueueResponse)
+      } as unknown as TavilyResearchQueueResponse),
     ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyResearch({ apiWrapper: mockWrapper });
@@ -286,7 +286,7 @@ describe("TavilyResearch", () => {
 
     expect(result).toEqual({
       error: expect.stringContaining(
-        "Invalid research queue response for 'Test research question'"
+        "Invalid research queue response for 'Test research question'",
       ),
     });
   });
@@ -297,7 +297,7 @@ describe("TavilyResearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("String error without message property"))
+        Promise.reject(new Error("String error without message property")),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilyResearch({ apiWrapper: mockWrapper });
@@ -325,7 +325,7 @@ describe("TavilyResearch", () => {
             model: "auto",
             response_time: 0.5,
           }),
-      } as Response)
+      } as Response),
     );
     global.fetch = mockFetch as typeof fetch;
 

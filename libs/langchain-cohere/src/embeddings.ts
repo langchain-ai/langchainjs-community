@@ -58,7 +58,7 @@ export class CohereEmbeddings
   constructor(
     fields?: Partial<CohereEmbeddingsParams> & {
       verbose?: boolean;
-    } & CohereClientOptions
+    } & CohereClientOptions,
   ) {
     const fieldsWithDefaults = { maxConcurrency: 2, ...fields };
 
@@ -69,7 +69,7 @@ export class CohereEmbeddings
 
     if (!this.model) {
       throw new Error(
-        "Model not specified for CohereEmbeddings instance. Please provide a model name from the options here: https://docs.cohere.com/reference/embed"
+        "Model not specified for CohereEmbeddings instance. Please provide a model name from the options here: https://docs.cohere.com/reference/embed",
       );
     }
 
@@ -94,7 +94,7 @@ export class CohereEmbeddings
         inputType: "search_document" as any,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         embeddingTypes: this.embeddingTypes as any,
-      })
+      }),
     );
 
     const batchResponses = await Promise.all(batchRequests);
@@ -139,8 +139,8 @@ export class CohereEmbeddings
         `Invalid response from Cohere API. Received: ${JSON.stringify(
           embeddings,
           null,
-          2
-        )}`
+          2,
+        )}`,
       );
     }
   }
@@ -156,8 +156,8 @@ export class CohereEmbeddings
         `Invalid response from Cohere API. Received: ${JSON.stringify(
           embeddings,
           null,
-          2
-        )}`
+          2,
+        )}`,
       );
     }
   }
@@ -168,7 +168,7 @@ export class CohereEmbeddings
    * @returns A Promise that resolves to the API response.
    */
   private async embeddingWithRetry(
-    request: Parameters<typeof this.client.embed>[0]
+    request: Parameters<typeof this.client.embed>[0],
   ) {
     return this.caller.call(async () => {
       let response;

@@ -21,7 +21,7 @@ export interface ExaRetrieverFields<
 }
 
 export function _getMetadata<T extends ContentsOptions = { text: true }>(
-  result: SearchResult<T>
+  result: SearchResult<T>,
 ): Record<string, unknown> {
   const newMetadata: Record<string, unknown> = { ...result };
   delete newMetadata.text;
@@ -63,7 +63,7 @@ export class ExaRetriever<
   async _getRelevantDocuments(query: string): Promise<Document[]> {
     const res: SearchResponse<T> = await this.client.searchAndContents<T>(
       query,
-      this.searchArgs
+      this.searchArgs,
     );
 
     const documents: Document[] = [];
@@ -81,7 +81,7 @@ export class ExaRetriever<
         new Document({
           pageContent,
           metadata: _getMetadata<T>(result),
-        })
+        }),
       );
     }
     return documents;

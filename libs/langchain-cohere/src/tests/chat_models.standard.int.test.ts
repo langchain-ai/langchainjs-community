@@ -14,7 +14,7 @@ class ChatCohereStandardIntegrationTests extends ChatModelIntegrationTests<
   constructor() {
     if (!process.env.COHERE_API_KEY) {
       throw new Error(
-        "Can not run Cohere integration tests because COHERE_API_KEY is not set"
+        "Can not run Cohere integration tests because COHERE_API_KEY is not set",
       );
     }
     super({
@@ -33,7 +33,7 @@ class ChatCohereStandardIntegrationTests extends ChatModelIntegrationTests<
     this.skipTestMessage(
       "testToolMessageHistoriesListContent",
       "ChatCohere",
-      "Anthropic-style tool calling is not supported."
+      "Anthropic-style tool calling is not supported.",
     );
   }
 
@@ -41,7 +41,7 @@ class ChatCohereStandardIntegrationTests extends ChatModelIntegrationTests<
     this.skipTestMessage(
       "testStreamTokensWithToolCalls",
       "ChatCohere",
-      "Prompt does not always cause Cohere to invoke a tool. TODO: re-write inside this class with better prompting for cohere."
+      "Prompt does not always cause Cohere to invoke a tool. TODO: re-write inside this class with better prompting for cohere.",
     );
   }
 
@@ -49,7 +49,7 @@ class ChatCohereStandardIntegrationTests extends ChatModelIntegrationTests<
     this.skipTestMessage(
       "testModelCanUseToolUseAIMessageWithStreaming",
       "ChatCohere",
-      "Prompt does not always cause Cohere to invoke a tool. TODO: re-write inside this class with better prompting for cohere."
+      "Prompt does not always cause Cohere to invoke a tool. TODO: re-write inside this class with better prompting for cohere.",
     );
   }
 
@@ -57,7 +57,7 @@ class ChatCohereStandardIntegrationTests extends ChatModelIntegrationTests<
     this.skipTestMessage(
       "testStreamTools",
       "ChatCohere",
-      "Cohere only responds with the tool call in the final chunk. TODO: fix implementation to actually stream tools."
+      "Cohere only responds with the tool call in the final chunk. TODO: fix implementation to actually stream tools.",
     );
   }
 }

@@ -192,31 +192,31 @@ const inputSchema = z.object({
     .string()
     .optional()
     .describe(
-      "Natural language instructions for the crawler. Example: 'Python SDK'"
+      "Natural language instructions for the crawler. Example: 'Python SDK'",
     ),
   selectPaths: z
     .array(z.string())
     .optional()
     .describe(
-      "Regex patterns to select only URLs with specific path patterns. Example: ['/api/v1.*']"
+      "Regex patterns to select only URLs with specific path patterns. Example: ['/api/v1.*']",
     ),
   selectDomains: z
     .array(z.string())
     .optional()
     .describe(
-      "Regex patterns to select only URLs from specific domains or subdomains. Example: ['^docs\\.example\\.com$']"
+      "Regex patterns to select only URLs from specific domains or subdomains. Example: ['^docs\\.example\\.com$']",
     ),
   excludePaths: z
     .array(z.string())
     .optional()
     .describe(
-      "Regex patterns to exclude URLs with specific path patterns. Example: ['/private/.*', '/admin/.*']"
+      "Regex patterns to exclude URLs with specific path patterns. Example: ['/private/.*', '/admin/.*']",
     ),
   excludeDomains: z
     .array(z.string())
     .optional()
     .describe(
-      "Regex patterns to exclude specific domains or subdomains from crawling. Example: ['^private\\.example\\.com$']"
+      "Regex patterns to exclude specific domains or subdomains from crawling. Example: ['^private\\.example\\.com$']",
     ),
   allowExternal: z
     .boolean()
@@ -247,11 +247,11 @@ const inputSchema = z.object({
         "Media",
         "Events",
         "People",
-      ])
+      ]),
     )
     .optional()
     .describe(
-      "Filter URLs using predefined categories like 'Documentation', 'Blogs', etc."
+      "Filter URLs using predefined categories like 'Documentation', 'Blogs', etc.",
     ),
 });
 
@@ -348,7 +348,7 @@ export class TavilyCrawl extends StructuredTool<typeof inputSchema> {
 
   async _call(
     input: InferInteropZodOutput<typeof inputSchema>,
-    _runManager?: CallbackManagerForToolRun
+    _runManager?: CallbackManagerForToolRun,
   ): Promise<TavilyCrawlResponse | { error: string }> {
     try {
       const {

@@ -69,7 +69,7 @@ test("QdrantVectorStore adds vectors with custom payload", async () => {
         metadata: {},
       },
     ],
-    customPayload
+    customPayload,
   );
 
   // Verify that the Qdrant client's upsert method was called with the correct arguments
@@ -134,7 +134,7 @@ test("QdrantVectorStore adds vectors with multiple custom payload", async () => 
         metadata: {},
       },
     ],
-    customPayload
+    customPayload,
   );
 
   // Verify that the Qdrant client's upsert method was called with the correct arguments

@@ -40,7 +40,7 @@ describe("PineconeStore", () => {
   afterEach(async () => {
     if (namespaces.length) {
       const delAllPromise = namespaces.map((namespace) =>
-        pineconeStore.delete({ deleteAll: true, namespace })
+        pineconeStore.delete({ deleteAll: true, namespace }),
       );
       await Promise.all(delAllPromise);
     } else {
@@ -55,7 +55,7 @@ describe("PineconeStore", () => {
 
     await pineconeStore.addDocuments(
       [{ pageContent, metadata: {} }],
-      [documentId]
+      [documentId],
     );
 
     await sleep(PINECONE_SLEEP_LENGTH);
@@ -68,7 +68,7 @@ describe("PineconeStore", () => {
 
     await pineconeStore.addDocuments(
       [{ pageContent: `${pageContent} upserted`, metadata: {} }],
-      [documentId]
+      [documentId],
     );
     await sleep(PINECONE_SLEEP_LENGTH);
 
@@ -143,7 +143,7 @@ describe("PineconeStore", () => {
         k: 5,
         fetchK: 20,
         filter: { foo: id },
-      }
+      },
     );
 
     expect(results.length).toEqual(3);
@@ -187,7 +187,7 @@ describe("PineconeStore", () => {
       ],
       {
         ids: [id, id2],
-      }
+      },
     );
     await sleep(PINECONE_SLEEP_LENGTH);
     const indexStats = await pineconeStore.pineconeIndex.describeIndexStats();
@@ -216,13 +216,13 @@ describe("PineconeStore", () => {
       [{ pageContent, metadata: { foo: id1 } }],
       {
         namespace: namespaces[0],
-      }
+      },
     );
     await pineconeStore.addDocuments(
       [{ pageContent, metadata: { foo: id2 } }],
       {
         namespace: namespaces[1],
-      }
+      },
     );
     await sleep(PINECONE_SLEEP_LENGTH);
     const results = await pineconeStore.similaritySearch(pageContent, 1, {
@@ -259,7 +259,7 @@ describe("PineconeStore", () => {
 
     await store.addDocuments(
       [{ pageContent: `${pageContent} upserted`, metadata: {} }],
-      [documentId]
+      [documentId],
     );
     await sleep(PINECONE_SLEEP_LENGTH);
 

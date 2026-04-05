@@ -102,8 +102,8 @@ export class WeaviateTranslator<
       ) {
         throw new Error(
           `Comparator ${func} not allowed. Allowed operators: ${this.allowedComparators.join(
-            ", "
-          )}`
+            ", ",
+          )}`,
         );
       }
     } else if (func in Operators) {
@@ -113,8 +113,8 @@ export class WeaviateTranslator<
       ) {
         throw new Error(
           `Operator ${func} not allowed. Allowed operators: ${this.allowedOperators.join(
-            ", "
-          )}`
+            ", ",
+          )}`,
         );
       }
     } else {
@@ -189,7 +189,7 @@ export class WeaviateTranslator<
    * @returns A WeaviateStructuredQueryResult.
    */
   visitStructuredQuery(
-    query: StructuredQuery
+    query: StructuredQuery,
   ): this["VisitStructuredQueryOutput"] {
     let nextArg = {};
     if (query.filter) {
@@ -214,7 +214,7 @@ export class WeaviateTranslator<
   mergeFilters(
     defaultFilter: FilterValue | undefined,
     generatedFilter: FilterValue | undefined,
-    mergeType = "and"
+    mergeType = "and",
   ): FilterValue | undefined {
     if (isFilterEmpty(defaultFilter) && isFilterEmpty(generatedFilter)) {
       return undefined;

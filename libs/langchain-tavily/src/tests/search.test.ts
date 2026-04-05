@@ -23,11 +23,11 @@ class TestTavilySearchAPIWrapper extends TavilySearchAPIWrapper {
 
   // Mock the raw results method with the correct overload signatures
   async rawResults(
-    params: TavilySearchParamsWithSimpleImages
+    params: TavilySearchParamsWithSimpleImages,
   ): Promise<TavilySearchResponseWithSimpleImages>;
 
   async rawResults(
-    params: TavilySearchParamsWithImageDescriptions
+    params: TavilySearchParamsWithImageDescriptions,
   ): Promise<TavilySearchResponseWithImageDescriptions>;
 
   async rawResults(params: TavilySearchParams): Promise<TavilySearchResponse> {
@@ -79,7 +79,8 @@ describe("TavilySearch", () => {
 
     // Using a type assertion to access the property
     expect(
-      (tool as unknown as { apiWrapper: TestTavilySearchAPIWrapper }).apiWrapper
+      (tool as unknown as { apiWrapper: TestTavilySearchAPIWrapper })
+        .apiWrapper,
     ).toBe(mockWrapper);
   });
 
@@ -103,7 +104,7 @@ describe("TavilySearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilySearch({ apiWrapper: mockWrapper });
@@ -115,7 +116,7 @@ describe("TavilySearch", () => {
     expect(mockWrapper.rawResults).toHaveBeenCalledWith(
       expect.objectContaining({
         query: "test query",
-      })
+      }),
     );
 
     expect(result).toEqual(mockResult);
@@ -141,7 +142,7 @@ describe("TavilySearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilySearch({ apiWrapper: mockWrapper });
@@ -164,7 +165,7 @@ describe("TavilySearch", () => {
         includeImages: true,
         timeRange: "week",
         topic: "news",
-      })
+      }),
     );
   });
 
@@ -188,7 +189,7 @@ describe("TavilySearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     // Create a tool with custom defaults
@@ -224,7 +225,7 @@ describe("TavilySearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("API error"))
+        Promise.reject(new Error("API error")),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilySearch({ apiWrapper: mockWrapper });
@@ -247,7 +248,7 @@ describe("TavilySearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilySearch({ apiWrapper: mockWrapper });
@@ -257,7 +258,7 @@ describe("TavilySearch", () => {
 
     expect(result).toEqual({
       error: expect.stringContaining(
-        "No search results found for 'test query'"
+        "No search results found for 'test query'",
       ),
     });
   });
@@ -274,7 +275,7 @@ describe("TavilySearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.resolve(mockResult)
+        Promise.resolve(mockResult),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilySearch({
@@ -294,7 +295,7 @@ describe("TavilySearch", () => {
     });
     expect(result).toEqual({
       error: expect.stringContaining(
-        "Try a more detailed search using 'advanced' search_depth"
+        "Try a more detailed search using 'advanced' search_depth",
       ),
     });
   });
@@ -305,7 +306,7 @@ describe("TavilySearch", () => {
     mockWrapper.rawResults = vi
       .fn()
       .mockImplementation(() =>
-        Promise.reject(new Error("String error without message property"))
+        Promise.reject(new Error("String error without message property")),
       ) as typeof mockWrapper.rawResults;
 
     const tool = new TavilySearch({ apiWrapper: mockWrapper });
@@ -330,7 +331,7 @@ describe("TavilySearch", () => {
             results: [],
             response_time: 0.5,
           }),
-      } as Response)
+      } as Response),
     );
     global.fetch = mockFetch as typeof fetch;
 
