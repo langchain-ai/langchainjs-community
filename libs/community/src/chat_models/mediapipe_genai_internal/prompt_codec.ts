@@ -577,13 +577,21 @@ function escapeGemmaString(value: string): string {
 function toJsonText(text: string): string {
   // Split on the Gemma string delimiter to isolate structural vs string regions.
   // Even-indexed segments are structural (keys, braces, commas).
-  // Odd-indexed segments are string contents — leave them untouched.
+  // Odd-indexed segments are string contents — escape them as JSON string bodies.
   const segments = text.split(GEMMA_STRING_DELIMITER);
   for (let i = 0; i < segments.length; i += 2) {
     segments[i] = segments[i].replace(
       /([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)(\s*:)/g,
       '$1"$2"$3'
     );
+  }
+  for (let i = 1; i < segments.length; i += 2) {
+    segments[i] = segments[i]
+      .replace(/\\/g, "\\\\")
+      .replace(/"/g, '\\"')
+      .replace(/\n/g, "\\n")
+      .replace(/\r/g, "\\r")
+      .replace(/\t/g, "\\t");
   }
   return segments.join('"');
 }

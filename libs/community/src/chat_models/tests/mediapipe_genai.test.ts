@@ -19,7 +19,10 @@ import {
   type ChatMediaPipeGenAIInput,
 } from "../mediapipe_genai.js";
 import { Gemma4Codec } from "../mediapipe_genai_internal/gemma4_codec.js";
-import type { RenderedPrompt } from "../mediapipe_genai_internal/prompt_codec.js";
+import {
+  parseGemmaToolCall,
+  type RenderedPrompt,
+} from "../mediapipe_genai_internal/prompt_codec.js";
 
 const weatherTool = {
   type: "function" as const,
@@ -224,6 +227,21 @@ describe("Gemma4Codec", () => {
     expect(parsed.toolCalls[1]).toMatchObject({
       name: "population",
       arguments: { location: "Berlin" },
+    });
+  });
+
+  test("parses tool call arguments with nested quotes and newlines", () => {
+    const parsed = parseGemmaToolCall(
+      `<|tool_call>call:execute{command:<|"|>python -c "print('hello')"\nprint("done")<|"|>}<tool_call|>`
+        .replace("<|tool_call>", "")
+        .replace("<tool_call|>", "")
+    );
+
+    expect(parsed).toMatchObject({
+      name: "execute",
+      arguments: {
+        command: `python -c "print('hello')"\nprint("done")`,
+      },
     });
   });
 
