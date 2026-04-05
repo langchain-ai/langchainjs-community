@@ -187,7 +187,7 @@ importers:
     dependencies:
       '@langchain/classic':
         specifier: ^1.0.27
-        version: 1.0.27(@langchain/core@1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0)))(@opentelemetry/api@1.9.1)(cheerio@1.2.0)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(typeorm@0.3.28(better-sqlite3@12.6.2)(ioredis@5.10.1)(mongodb@6.21.0(socks@2.8.7))(mysql2@3.20.0(@types/node@18.19.130))(pg@8.20.0)(redis@4.7.1)(ts-node@10.9.2(@types/node@18.19.130)(typescript@5.8.3)))(ws@8.20.0(bufferutil@4.1.0))
+        version: 1.0.27(@langchain/core@1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0)))(@opentelemetry/api@1.9.1)(cheerio@1.2.0)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(typeorm@0.3.28(better-sqlite3@12.6.2)(ioredis@5.10.1)(mongodb@6.21.0(@aws-sdk/credential-providers@3.1024.0)(socks@2.8.7))(mysql2@3.20.0(@types/node@18.19.130))(pg@8.20.0)(redis@4.7.1)(ts-node@10.9.2(@types/node@18.19.130)(typescript@5.8.3)))(ws@8.20.0(bufferutil@4.1.0))
       '@langchain/openai':
         specifier: ^1.4.1
         version: 1.4.1(@langchain/core@1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0)))(ws@8.20.0(bufferutil@4.1.0))
@@ -497,7 +497,7 @@ importers:
         version: 0.1.6
       cohere-ai:
         specifier: '>=6.0.0'
-        version: 8.0.0(@aws-crypto/sha256-js@5.2.0)(@smithy/protocol-http@5.3.12)(@smithy/signature-v4@5.3.12)
+        version: 8.0.0(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-providers@3.1024.0)(@smithy/protocol-http@5.3.12)(@smithy/signature-v4@5.3.12)
       convex:
         specifier: ^1.32.0
         version: 1.34.1(bufferutil@4.1.0)(react@19.0.0)
@@ -593,7 +593,7 @@ importers:
         version: 2.4.5(@anthropic-ai/sdk@0.27.3)(@azure/identity@4.13.1)(@azure/search-documents@12.2.0)(@cloudflare/workers-types@4.20260401.1)(@google/genai@1.48.0(bufferutil@4.1.0))(@langchain/core@1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0)))(@mistralai/mistralai@1.15.1(bufferutil@4.1.0))(@qdrant/js-client-rest@1.17.0(typescript@5.8.3))(@supabase/supabase-js@2.101.1(bufferutil@4.1.0))(@types/jest@30.0.0)(@types/pg@8.20.0)(better-sqlite3@12.6.2)(cloudflare@4.5.0)(groq-sdk@0.3.0)(neo4j-driver@6.0.1)(ollama@0.5.18)(pg@8.20.0)(redis@4.7.1)(ws@8.20.0(bufferutil@4.1.0))
       mongodb:
         specifier: ^6.17.0
-        version: 6.21.0(socks@2.8.7)
+        version: 6.21.0(@aws-sdk/credential-providers@3.1024.0)(socks@2.8.7)
       mysql2:
         specifier: ^3.19.1
         version: 3.20.0(@types/node@18.19.130)
@@ -653,7 +653,7 @@ importers:
         version: 1.2.3
       typeorm:
         specifier: ^0.3.28
-        version: 0.3.28(better-sqlite3@12.6.2)(ioredis@5.10.1)(mongodb@6.21.0(socks@2.8.7))(mysql2@3.20.0(@types/node@18.19.130))(pg@8.20.0)(redis@4.7.1)(ts-node@10.9.2(@types/node@18.19.130)(typescript@5.8.3))
+        version: 0.3.28(better-sqlite3@12.6.2)(ioredis@5.10.1)(mongodb@6.21.0(@aws-sdk/credential-providers@3.1024.0)(socks@2.8.7))(mysql2@3.20.0(@types/node@18.19.130))(pg@8.20.0)(redis@4.7.1)(ts-node@10.9.2(@types/node@18.19.130)(typescript@5.8.3))
       typescript:
         specifier: ~5.8.3
         version: 5.8.3
@@ -689,7 +689,7 @@ importers:
         version: 4.13.1
       mongodb:
         specifier: ^7.1.0
-        version: 7.1.1(socks@2.8.7)
+        version: 7.1.1(@aws-sdk/credential-providers@3.1024.0)(socks@2.8.7)
     devDependencies:
       '@langchain/core':
         specifier: ^1.1.38
@@ -842,6 +842,89 @@ importers:
         specifier: ^3.25.76
         version: 3.25.76
 
+  libs/langchain-cohere:
+    dependencies:
+      cohere-ai:
+        specifier: ^7.14.0
+        version: 7.21.0
+      uuid:
+        specifier: ^10.0.0
+        version: 10.0.0
+    devDependencies:
+      '@cfworker/json-schema':
+        specifier: ^4.1.1
+        version: 4.1.1
+      '@langchain/core':
+        specifier: ^1.1.38
+        version: 1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@3.25.76))(ws@8.20.0(bufferutil@4.1.0))
+      '@langchain/standard-tests':
+        specifier: workspace:*
+        version: link:../../internal/standard-tests
+      '@langchain/tsconfig':
+        specifier: workspace:*
+        version: link:../../internal/tsconfig
+      '@tsconfig/recommended':
+        specifier: ^1.0.3
+        version: 1.0.13
+      '@vitest/coverage-v8':
+        specifier: ^3.2.4
+        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+      dotenv:
+        specifier: ^16.6.1
+        version: 16.6.1
+      dpdm:
+        specifier: ^3.14.0
+        version: 3.15.1
+      prettier:
+        specifier: ^3.5.0
+        version: 3.8.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
+      zod:
+        specifier: ^3.25.76
+        version: 3.25.76
+
+  libs/langchain-exa:
+    dependencies:
+      exa-js:
+        specifier: ^1.0.12
+        version: 1.10.2(ws@8.20.0(bufferutil@4.1.0))
+    devDependencies:
+      '@langchain/core':
+        specifier: ^1.1.38
+        version: 1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@3.25.76))(ws@8.20.0(bufferutil@4.1.0))
+      '@langchain/tsconfig':
+        specifier: workspace:*
+        version: link:../../internal/tsconfig
+      '@tsconfig/recommended':
+        specifier: ^1.0.3
+        version: 1.0.13
+      '@types/uuid':
+        specifier: ^9
+        version: 9.0.8
+      '@vitest/coverage-v8':
+        specifier: ^3.2.4
+        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.6.1
+      dpdm:
+        specifier: ^3.14.0
+        version: 3.15.1
+      prettier:
+        specifier: ^3.5.0
+        version: 3.8.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
+
   libs/langchain-mixedbread-ai:
     dependencies:
       '@mixedbread-ai/sdk':
@@ -885,6 +968,178 @@ importers:
       '@jest/globals':
         specifier: ^30.2.0
         version: 30.3.0
+      '@langchain/core':
+        specifier: ^1.1.38
+        version: 1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0))
+      '@langchain/openai':
+        specifier: ^1.4.1
+        version: 1.4.1(@langchain/core@1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0)))(ws@8.20.0(bufferutil@4.1.0))
+      '@langchain/tsconfig':
+        specifier: workspace:*
+        version: link:../../internal/tsconfig
+      '@tsconfig/recommended':
+        specifier: ^1.0.3
+        version: 1.0.13
+      '@types/uuid':
+        specifier: ^9
+        version: 9.0.8
+      '@vitest/coverage-v8':
+        specifier: ^3.2.4
+        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.6.1
+      dpdm:
+        specifier: ^3.14.0
+        version: 3.15.1
+      prettier:
+        specifier: ^3.5.0
+        version: 3.8.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
+
+  libs/langchain-pinecone:
+    dependencies:
+      flat:
+        specifier: ^5.0.2
+        version: 5.0.2
+      uuid:
+        specifier: ^10.0.0
+        version: 10.0.0
+    devDependencies:
+      '@faker-js/faker':
+        specifier: ^8.3.1
+        version: 8.4.1
+      '@langchain/core':
+        specifier: ^1.1.38
+        version: 1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0))
+      '@langchain/openai':
+        specifier: ^1.4.1
+        version: 1.4.1(@langchain/core@1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0)))(ws@8.20.0(bufferutil@4.1.0))
+      '@langchain/tsconfig':
+        specifier: workspace:*
+        version: link:../../internal/tsconfig
+      '@pinecone-database/pinecone':
+        specifier: ^5.0.2
+        version: 5.1.2
+      '@tsconfig/recommended':
+        specifier: ^1.0.3
+        version: 1.0.13
+      '@types/flat':
+        specifier: ^5.0.5
+        version: 5.0.5
+      '@types/uuid':
+        specifier: ^10.0.0
+        version: 10.0.0
+      '@vitest/coverage-v8':
+        specifier: ^3.2.4
+        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.6.1
+      dpdm:
+        specifier: ^3.14.0
+        version: 3.15.1
+      prettier:
+        specifier: ^3.5.0
+        version: 3.8.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
+
+  libs/langchain-qdrant:
+    dependencies:
+      '@qdrant/js-client-rest':
+        specifier: ^1.15.0
+        version: 1.17.0(typescript@5.8.3)
+      uuid:
+        specifier: ^10.0.0
+        version: 10.0.0
+    devDependencies:
+      '@faker-js/faker':
+        specifier: ^8.4.1
+        version: 8.4.1
+      '@langchain/core':
+        specifier: ^1.1.38
+        version: 1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0))
+      '@langchain/tsconfig':
+        specifier: workspace:*
+        version: link:../../internal/tsconfig
+      '@tsconfig/recommended':
+        specifier: ^1.0.3
+        version: 1.0.13
+      '@types/uuid':
+        specifier: ^9
+        version: 9.0.8
+      '@vitest/coverage-v8':
+        specifier: ^3.2.4
+        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.6.1
+      dpdm:
+        specifier: ^3.14.0
+        version: 3.15.1
+      prettier:
+        specifier: ^3.5.0
+        version: 3.8.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
+
+  libs/langchain-tavily:
+    dependencies:
+      zod:
+        specifier: ^3.25.76 || ^4
+        version: 3.25.76
+    devDependencies:
+      '@langchain/core':
+        specifier: ^1.1.38
+        version: 1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@3.25.76))(ws@8.20.0(bufferutil@4.1.0))
+      '@langchain/tsconfig':
+        specifier: workspace:*
+        version: link:../../internal/tsconfig
+      '@tsconfig/recommended':
+        specifier: ^1.0.3
+        version: 1.0.13
+      '@vitest/coverage-v8':
+        specifier: ^3.2.4
+        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.6.1
+      dpdm:
+        specifier: ^3.14.0
+        version: 3.15.1
+      prettier:
+        specifier: ^3.5.0
+        version: 3.8.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/debug@4.1.13)(@types/node@25.5.0)(jsdom@28.1.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
+
+  libs/langchain-weaviate:
+    dependencies:
+      uuid:
+        specifier: ^10.0.0
+        version: 10.0.0
+      weaviate-client:
+        specifier: ^3.5.2
+        version: 3.12.0
+    devDependencies:
       '@langchain/core':
         specifier: ^1.1.38
         version: 1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0))
@@ -1021,6 +1276,10 @@ packages:
   '@aws-crypto/util@5.2.0':
     resolution: {integrity: sha512-4RkU9EsI6ZpBve5fseQlGNUWKMa1RLPQ1dnjnQoe07ldfIzcsGb5hC5W0Dm7u423KWzawlrpbjXBrXCEv9zazQ==}
 
+  '@aws-sdk/client-cognito-identity@3.1024.0':
+    resolution: {integrity: sha512-PhbZl7TT+SBAsNxeC4vjRCqnkKYadRPKpsX4s0CtsVZz3QJ6UWBO7nBCHV5Pdv1f+YJD+UbCxGBj389vOPLmsw==}
+    engines: {node: '>=20.0.0'}
+
   '@aws-sdk/client-dynamodb@3.1022.0':
     resolution: {integrity: sha512-k7tJEp+nfj5zTvvPCmZl7GsoF8TIBxwiDS5KdMbTDVKqdg7uoM05P13lr9+HwwlfbYmzVzFIfaSalifOnkr91g==}
     engines: {node: '>=20.0.0'}
@@ -1037,6 +1296,10 @@ packages:
     resolution: {integrity: sha512-KKGm81DphnlgMEEwxLighZP5cz/+5xAKgOC5RiUYAH32X7wuj43/TbaAAd8uEQXo2ocdvIcs9FJ1tsZyMGS0DA==}
     engines: {node: '>=20.0.0'}
 
+  '@aws-sdk/client-sagemaker@3.1024.0':
+    resolution: {integrity: sha512-ePDhEbAwdx548SooO3EfzvcX7jbIklmjd8eCACw/Ab59nDQKVMX5hdGCD04N0lTIzvAradiof5U+Ce2HUA8/yQ==}
+    engines: {node: '>=20.0.0'}
+
   '@aws-sdk/client-sfn@3.1022.0':
     resolution: {integrity: sha512-dARai4WAJGhL2yPnh84/G8Dh9gz0yeB3hGJhiUQ4zauG/Ia6KBynP1ihALGaqRzSqaAdQy13xIFQUQj54q9q8g==}
     engines: {node: '>=20.0.0'}
@@ -1047,6 +1310,10 @@ packages:
 
   '@aws-sdk/crc64-nvme@3.972.5':
     resolution: {integrity: sha512-2VbTstbjKdT+yKi8m7b3a9CiVac+pL/IY2PHJwsaGkkHmuuqkJZIErPck1h6P3T9ghQMLSdMPyW6Qp7Di5swFg==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/credential-provider-cognito-identity@3.972.21':
+    resolution: {integrity: sha512-3ooy5gLnMLgWtkxz53P9R0RiSSCCHn576kyfy/L88QXOqS/G4wYTsqoNJBGZ0Kg46FlQ9jZHuZThbyeEeXgW/g==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/credential-provider-env@3.972.24':
@@ -1079,6 +1346,10 @@ packages:
 
   '@aws-sdk/credential-provider-web-identity@3.972.28':
     resolution: {integrity: sha512-d+6h0SD8GGERzKe27v5rOzNGKOl0D+l0bWJdqrxH8WSQzHzjsQFIAPgIeOTUwBHVsKKwtSxc91K/SWax6XgswQ==}
+    engines: {node: '>=20.0.0'}
+
+  '@aws-sdk/credential-providers@3.1024.0':
+    resolution: {integrity: sha512-5aVZ74iKJ3InT/s4H2tVzAjH48SdegJU0Y0RaAYToQbmrS1R17tipw0jVQrFzajX6W5sbG6xfLcTNIGL33ODMQ==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/dsql-signer@3.1022.0':
@@ -3902,6 +4173,10 @@ packages:
   '@petamoriken/float16@3.9.3':
     resolution: {integrity: sha512-8awtpHXCx/bNpFt4mt2xdkgtgVvKqty8VbjHI/WWWQuEw+KLzFot3f4+LkQY9YmOtq7A5GdOnqoIC8Pdygjk2g==}
 
+  '@pinecone-database/pinecone@5.1.2':
+    resolution: {integrity: sha512-z7737KUA1hXwd508q1+o4bnRxj0NpMmzA2beyaFm7Y+EC2TYLT5ABuYsn/qhiwiEsYp8v1qS596eBhhvgNagig==}
+    engines: {node: '>=18.0.0'}
+
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -5955,6 +6230,10 @@ packages:
     engines: {node: ^20.17.0 || >=22.9.0}
     hasBin: true
 
+  cohere-ai@7.21.0:
+    resolution: {integrity: sha512-AouvBkDho9gnEAnk5oY99p/VHfjP6AkDhZLv/tyB2TIFm7IEd6QQl00jaqBtAbOZnMT297Scq3pkqOUCTr886A==}
+    engines: {node: '>=18.0.0'}
+
   cohere-ai@8.0.0:
     resolution: {integrity: sha512-j6gHcQfdK/r9i3e7FM6NtWx8OR270E/PyEyDEVQeeJT212bSJbWvWFfIg7WAPOUMHatDbxOFYP2aKKWnj8zSYA==}
     engines: {node: '>=18.0.0'}
@@ -6420,6 +6699,10 @@ packages:
     resolution: {integrity: sha512-tE7ztYzXHIeyvc7N+hR3oi7FIbf/NIjVP9hmAt3yMXzrQ072/fpjGLx2GxNxGxUl5V73MEqYzioOMoVhGMJ5cA==}
     engines: {node: '>=10'}
 
+  dotenv@16.4.7:
+    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
+    engines: {node: '>=12'}
+
   dotenv@16.6.1:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
     engines: {node: '>=12'}
@@ -6663,6 +6946,9 @@ packages:
 
   evp_bytestokey@1.0.3:
     resolution: {integrity: sha512-/f2Go4TognH/KvCISP7OUsHn85hT9nUkxxA9BEWxFn+Oj9o8ZNLm/40hdlgSLyuOimsrTKLUMEorQexp/aPQeA==}
+
+  exa-js@1.10.2:
+    resolution: {integrity: sha512-nObBipoXKL5uL6Dc8Q3c9GA4xEfunQMdGGqtcCkQSNilzR6AExyVkBxTdpWqC20jKa3/dvXu6otXQLaRyZNqGw==}
 
   expand-template@2.0.3:
     resolution: {integrity: sha512-XYfuKMvj4O35f/pOXLObndIRvyQ+/+6AhODh+OKWj9S9498pHHn/IMszH+gt0fBCRWMNfk1ZSp5x3AifmnI2vg==}
@@ -8427,6 +8713,18 @@ packages:
 
   openai@4.104.0:
     resolution: {integrity: sha512-p99EFNsA/yX6UhVO93f5kJsDRLAg+CTA2RBqdHK4RtK8u5IJw32Hyb2dTGKbnnFmnuoBv5r7Z2CURI9sGZpSuA==}
+    hasBin: true
+    peerDependencies:
+      ws: ^8.18.0
+      zod: ^3.23.8
+    peerDependenciesMeta:
+      ws:
+        optional: true
+      zod:
+        optional: true
+
+  openai@5.23.2:
+    resolution: {integrity: sha512-MQBzmTulj+MM5O8SKEk/gL8a7s5mktS9zUtAkU257WjvobGc9nKcBuVwjyEEcb9SI8a8Y2G/mzn3vm9n1Jlleg==}
     hasBin: true
     peerDependencies:
       ws: ^8.18.0
@@ -10703,6 +11001,50 @@ snapshots:
       '@smithy/util-utf8': 2.3.0
       tslib: 2.8.1
 
+  '@aws-sdk/client-cognito-identity@3.1024.0':
+    dependencies:
+      '@aws-crypto/sha256-browser': 5.2.0
+      '@aws-crypto/sha256-js': 5.2.0
+      '@aws-sdk/core': 3.973.26
+      '@aws-sdk/credential-provider-node': 3.972.29
+      '@aws-sdk/middleware-host-header': 3.972.8
+      '@aws-sdk/middleware-logger': 3.972.8
+      '@aws-sdk/middleware-recursion-detection': 3.972.9
+      '@aws-sdk/middleware-user-agent': 3.972.28
+      '@aws-sdk/region-config-resolver': 3.972.10
+      '@aws-sdk/types': 3.973.6
+      '@aws-sdk/util-endpoints': 3.996.5
+      '@aws-sdk/util-user-agent-browser': 3.972.8
+      '@aws-sdk/util-user-agent-node': 3.973.14
+      '@smithy/config-resolver': 4.4.13
+      '@smithy/core': 3.23.13
+      '@smithy/fetch-http-handler': 5.3.15
+      '@smithy/hash-node': 4.2.12
+      '@smithy/invalid-dependency': 4.2.12
+      '@smithy/middleware-content-length': 4.2.12
+      '@smithy/middleware-endpoint': 4.4.28
+      '@smithy/middleware-retry': 4.4.46
+      '@smithy/middleware-serde': 4.2.16
+      '@smithy/middleware-stack': 4.2.12
+      '@smithy/node-config-provider': 4.3.12
+      '@smithy/node-http-handler': 4.5.1
+      '@smithy/protocol-http': 5.3.12
+      '@smithy/smithy-client': 4.12.8
+      '@smithy/types': 4.13.1
+      '@smithy/url-parser': 4.2.12
+      '@smithy/util-base64': 4.3.2
+      '@smithy/util-body-length-browser': 4.2.2
+      '@smithy/util-body-length-node': 4.2.3
+      '@smithy/util-defaults-mode-browser': 4.3.44
+      '@smithy/util-defaults-mode-node': 4.2.48
+      '@smithy/util-endpoints': 3.3.3
+      '@smithy/util-middleware': 4.2.12
+      '@smithy/util-retry': 4.2.13
+      '@smithy/util-utf8': 4.2.2
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - aws-crt
+
   '@aws-sdk/client-dynamodb@3.1022.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
@@ -10907,6 +11249,51 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
+  '@aws-sdk/client-sagemaker@3.1024.0':
+    dependencies:
+      '@aws-crypto/sha256-browser': 5.2.0
+      '@aws-crypto/sha256-js': 5.2.0
+      '@aws-sdk/core': 3.973.26
+      '@aws-sdk/credential-provider-node': 3.972.29
+      '@aws-sdk/middleware-host-header': 3.972.8
+      '@aws-sdk/middleware-logger': 3.972.8
+      '@aws-sdk/middleware-recursion-detection': 3.972.9
+      '@aws-sdk/middleware-user-agent': 3.972.28
+      '@aws-sdk/region-config-resolver': 3.972.10
+      '@aws-sdk/types': 3.973.6
+      '@aws-sdk/util-endpoints': 3.996.5
+      '@aws-sdk/util-user-agent-browser': 3.972.8
+      '@aws-sdk/util-user-agent-node': 3.973.14
+      '@smithy/config-resolver': 4.4.13
+      '@smithy/core': 3.23.13
+      '@smithy/fetch-http-handler': 5.3.15
+      '@smithy/hash-node': 4.2.12
+      '@smithy/invalid-dependency': 4.2.12
+      '@smithy/middleware-content-length': 4.2.12
+      '@smithy/middleware-endpoint': 4.4.28
+      '@smithy/middleware-retry': 4.4.46
+      '@smithy/middleware-serde': 4.2.16
+      '@smithy/middleware-stack': 4.2.12
+      '@smithy/node-config-provider': 4.3.12
+      '@smithy/node-http-handler': 4.5.1
+      '@smithy/protocol-http': 5.3.12
+      '@smithy/smithy-client': 4.12.8
+      '@smithy/types': 4.13.1
+      '@smithy/url-parser': 4.2.12
+      '@smithy/util-base64': 4.3.2
+      '@smithy/util-body-length-browser': 4.2.2
+      '@smithy/util-body-length-node': 4.2.3
+      '@smithy/util-defaults-mode-browser': 4.3.44
+      '@smithy/util-defaults-mode-node': 4.2.48
+      '@smithy/util-endpoints': 3.3.3
+      '@smithy/util-middleware': 4.2.12
+      '@smithy/util-retry': 4.2.13
+      '@smithy/util-utf8': 4.2.2
+      '@smithy/util-waiter': 4.2.14
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - aws-crt
+
   '@aws-sdk/client-sfn@3.1022.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
@@ -10971,6 +11358,16 @@ snapshots:
     dependencies:
       '@smithy/types': 4.13.1
       tslib: 2.8.1
+
+  '@aws-sdk/credential-provider-cognito-identity@3.972.21':
+    dependencies:
+      '@aws-sdk/nested-clients': 3.996.18
+      '@aws-sdk/types': 3.973.6
+      '@smithy/property-provider': 4.2.12
+      '@smithy/types': 4.13.1
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - aws-crt
 
   '@aws-sdk/credential-provider-env@3.972.24':
     dependencies:
@@ -11071,6 +11468,31 @@ snapshots:
       '@aws-sdk/types': 3.973.6
       '@smithy/property-provider': 4.2.12
       '@smithy/shared-ini-file-loader': 4.4.7
+      '@smithy/types': 4.13.1
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - aws-crt
+
+  '@aws-sdk/credential-providers@3.1024.0':
+    dependencies:
+      '@aws-sdk/client-cognito-identity': 3.1024.0
+      '@aws-sdk/core': 3.973.26
+      '@aws-sdk/credential-provider-cognito-identity': 3.972.21
+      '@aws-sdk/credential-provider-env': 3.972.24
+      '@aws-sdk/credential-provider-http': 3.972.26
+      '@aws-sdk/credential-provider-ini': 3.972.28
+      '@aws-sdk/credential-provider-login': 3.972.28
+      '@aws-sdk/credential-provider-node': 3.972.29
+      '@aws-sdk/credential-provider-process': 3.972.24
+      '@aws-sdk/credential-provider-sso': 3.972.28
+      '@aws-sdk/credential-provider-web-identity': 3.972.28
+      '@aws-sdk/nested-clients': 3.996.18
+      '@aws-sdk/types': 3.973.6
+      '@smithy/config-resolver': 4.4.13
+      '@smithy/core': 3.23.13
+      '@smithy/credential-provider-imds': 4.2.12
+      '@smithy/node-config-provider': 4.3.12
+      '@smithy/property-provider': 4.2.12
       '@smithy/types': 4.13.1
       tslib: 2.8.1
     transitivePeerDependencies:
@@ -13613,7 +14035,7 @@ snapshots:
       '@lancedb/lancedb-win32-arm64-msvc': 0.19.1
       '@lancedb/lancedb-win32-x64-msvc': 0.19.1
 
-  '@langchain/classic@1.0.27(@langchain/core@1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0)))(@opentelemetry/api@1.9.1)(cheerio@1.2.0)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(typeorm@0.3.28(better-sqlite3@12.6.2)(ioredis@5.10.1)(mongodb@6.21.0(socks@2.8.7))(mysql2@3.20.0(@types/node@18.19.130))(pg@8.20.0)(redis@4.7.1)(ts-node@10.9.2(@types/node@18.19.130)(typescript@5.8.3)))(ws@8.20.0(bufferutil@4.1.0))':
+  '@langchain/classic@1.0.27(@langchain/core@1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0)))(@opentelemetry/api@1.9.1)(cheerio@1.2.0)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(typeorm@0.3.28(better-sqlite3@12.6.2)(ioredis@5.10.1)(mongodb@6.21.0(@aws-sdk/credential-providers@3.1024.0)(socks@2.8.7))(mysql2@3.20.0(@types/node@18.19.130))(pg@8.20.0)(redis@4.7.1)(ts-node@10.9.2(@types/node@18.19.130)(typescript@5.8.3)))(ws@8.20.0(bufferutil@4.1.0))':
     dependencies:
       '@langchain/core': 1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0))
       '@langchain/openai': 1.4.1(@langchain/core@1.1.38(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0)))(ws@8.20.0(bufferutil@4.1.0))
@@ -13628,7 +14050,7 @@ snapshots:
     optionalDependencies:
       cheerio: 1.2.0
       langsmith: 0.5.15(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0))
-      typeorm: 0.3.28(better-sqlite3@12.6.2)(ioredis@5.10.1)(mongodb@6.21.0(socks@2.8.7))(mysql2@3.20.0(@types/node@18.19.130))(pg@8.20.0)(redis@4.7.1)(ts-node@10.9.2(@types/node@18.19.130)(typescript@5.8.3))
+      typeorm: 0.3.28(better-sqlite3@12.6.2)(ioredis@5.10.1)(mongodb@6.21.0(@aws-sdk/credential-providers@3.1024.0)(socks@2.8.7))(mysql2@3.20.0(@types/node@18.19.130))(pg@8.20.0)(redis@4.7.1)(ts-node@10.9.2(@types/node@18.19.130)(typescript@5.8.3))
     transitivePeerDependencies:
       - '@opentelemetry/api'
       - '@opentelemetry/exporter-trace-otlp-proto'
@@ -13648,7 +14070,7 @@ snapshots:
       mustache: 4.2.0
       p-queue: 6.6.2
       uuid: 11.1.0
-      zod: 4.3.6
+      zod: 3.25.76
     transitivePeerDependencies:
       - '@opentelemetry/api'
       - '@opentelemetry/exporter-trace-otlp-proto'
@@ -13668,7 +14090,7 @@ snapshots:
       mustache: 4.2.0
       p-queue: 6.6.2
       uuid: 11.1.0
-      zod: 4.3.6
+      zod: 3.25.76
     transitivePeerDependencies:
       - '@opentelemetry/api'
       - '@opentelemetry/exporter-trace-otlp-proto'
@@ -14343,6 +14765,8 @@ snapshots:
     optional: true
 
   '@petamoriken/float16@3.9.3': {}
+
+  '@pinecone-database/pinecone@5.1.2': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -16587,7 +17011,22 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  cohere-ai@8.0.0(@aws-crypto/sha256-js@5.2.0)(@smithy/protocol-http@5.3.12)(@smithy/signature-v4@5.3.12):
+  cohere-ai@7.21.0:
+    dependencies:
+      '@aws-crypto/sha256-js': 5.2.0
+      '@aws-sdk/client-sagemaker': 3.1024.0
+      '@aws-sdk/credential-providers': 3.1024.0
+      '@smithy/protocol-http': 5.3.12
+      '@smithy/signature-v4': 5.3.12
+      convict: 6.2.5
+      form-data: 4.0.5
+      form-data-encoder: 4.1.0
+      formdata-node: 6.0.3
+      readable-stream: 4.7.0
+    transitivePeerDependencies:
+      - aws-crt
+
+  cohere-ai@8.0.0(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-providers@3.1024.0)(@smithy/protocol-http@5.3.12)(@smithy/signature-v4@5.3.12):
     dependencies:
       convict: 6.2.5
       form-data: 4.0.5
@@ -16596,6 +17035,7 @@ snapshots:
       readable-stream: 4.7.0
     optionalDependencies:
       '@aws-crypto/sha256-js': 5.2.0
+      '@aws-sdk/credential-providers': 3.1024.0
       '@smithy/protocol-http': 5.3.12
       '@smithy/signature-v4': 5.3.12
 
@@ -17113,6 +17553,8 @@ snapshots:
     dependencies:
       is-obj: 2.0.0
 
+  dotenv@16.4.7: {}
+
   dotenv@16.6.1: {}
 
   dotenv@17.3.1: {}
@@ -17359,6 +17801,17 @@ snapshots:
     dependencies:
       md5.js: 1.3.5
       safe-buffer: 5.2.1
+
+  exa-js@1.10.2(ws@8.20.0(bufferutil@4.1.0)):
+    dependencies:
+      cross-fetch: 4.1.0
+      dotenv: 16.4.7
+      openai: 5.23.2(ws@8.20.0(bufferutil@4.1.0))(zod@3.25.76)
+      zod: 3.25.76
+      zod-to-json-schema: 3.25.2(zod@3.25.76)
+    transitivePeerDependencies:
+      - encoding
+      - ws
 
   expand-template@2.0.3: {}
 
@@ -19059,20 +19512,22 @@ snapshots:
       '@types/whatwg-url': 13.0.0
       whatwg-url: 14.2.0
 
-  mongodb@6.21.0(socks@2.8.7):
+  mongodb@6.21.0(@aws-sdk/credential-providers@3.1024.0)(socks@2.8.7):
     dependencies:
       '@mongodb-js/saslprep': 1.4.6
       bson: 6.10.4
       mongodb-connection-string-url: 3.0.2
     optionalDependencies:
+      '@aws-sdk/credential-providers': 3.1024.0
       socks: 2.8.7
 
-  mongodb@7.1.1(socks@2.8.7):
+  mongodb@7.1.1(@aws-sdk/credential-providers@3.1024.0)(socks@2.8.7):
     dependencies:
       '@mongodb-js/saslprep': 1.4.6
       bson: 7.2.0
       mongodb-connection-string-url: 7.0.1
     optionalDependencies:
+      '@aws-sdk/credential-providers': 3.1024.0
       socks: 2.8.7
 
   mri@1.2.0: {}
@@ -19389,6 +19844,11 @@ snapshots:
       zod: 4.3.6
     transitivePeerDependencies:
       - encoding
+
+  openai@5.23.2(ws@8.20.0(bufferutil@4.1.0))(zod@3.25.76):
+    optionalDependencies:
+      ws: 8.20.0(bufferutil@4.1.0)
+      zod: 3.25.76
 
   openai@6.3.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6):
     optionalDependencies:
@@ -21177,7 +21637,7 @@ snapshots:
 
   typedarray@0.0.6: {}
 
-  typeorm@0.3.28(better-sqlite3@12.6.2)(ioredis@5.10.1)(mongodb@6.21.0(socks@2.8.7))(mysql2@3.20.0(@types/node@18.19.130))(pg@8.20.0)(redis@4.7.1)(ts-node@10.9.2(@types/node@18.19.130)(typescript@5.8.3)):
+  typeorm@0.3.28(better-sqlite3@12.6.2)(ioredis@5.10.1)(mongodb@6.21.0(@aws-sdk/credential-providers@3.1024.0)(socks@2.8.7))(mysql2@3.20.0(@types/node@18.19.130))(pg@8.20.0)(redis@4.7.1)(ts-node@10.9.2(@types/node@18.19.130)(typescript@5.8.3)):
     dependencies:
       '@sqltools/formatter': 1.2.5
       ansis: 4.2.0
@@ -21197,7 +21657,7 @@ snapshots:
     optionalDependencies:
       better-sqlite3: 12.6.2
       ioredis: 5.10.1
-      mongodb: 6.21.0(socks@2.8.7)
+      mongodb: 6.21.0(@aws-sdk/credential-providers@3.1024.0)(socks@2.8.7)
       mysql2: 3.20.0(@types/node@18.19.130)
       pg: 8.20.0
       redis: 4.7.1

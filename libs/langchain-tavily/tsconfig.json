@@ -4,9 +4,11 @@
     "rootDir": "src",
     "outDir": "dist"
   },
-  "include": ["src/**/*"],
-  "exclude": ["dist", "node_modules"],
-  "references": [
-    { "path": "../../langchain-core" }
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
   ]
 }
