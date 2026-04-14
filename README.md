@@ -12,6 +12,7 @@ The repo also includes internal tooling used to build, test, and validate packag
   - `@langchain/azure-dynamic-sessions`
   - `@langchain/baidu-qianfan`
   - `@langchain/cerebras`
+  - `@langchain/google-cloud-sql-pg`
   - `@langchain/mixedbread-ai`
   - `@langchain/nomic`
   - `@langchain/yandex`
