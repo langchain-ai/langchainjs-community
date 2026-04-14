@@ -120,6 +120,9 @@
     "@writerai/writer-sdk": "^3.6.0",
     "@xata.io/client": "^0.30.1",
     "@xenova/transformers": "^2.17.2",
+    "@ydbjs/core": "^6.0.0",
+    "@ydbjs/query": "^6.0.0",
+    "@ydbjs/value": "^6.0.0",
     "@zilliz/milvus2-sdk-node": ">=2.3.5",
     "apify-client": "^2.22.2",
     "assemblyai": "^4.25.1",
@@ -248,6 +251,9 @@
     "@vercel/postgres": "*",
     "@writerai/writer-sdk": "^3.6.0",
     "@xata.io/client": "^0.30.1",
+    "@ydbjs/core": "^6.1.0",
+    "@ydbjs/query": "^6.0.7",
+    "@ydbjs/value": "^6.0.5",
     "@zilliz/milvus2-sdk-node": ">=2.3.5",
     "apify-client": "^2.22.2",
     "assemblyai": "^4.25.1",
@@ -469,6 +475,15 @@
       "optional": true
     },
     "@xata.io/client": {
+      "optional": true
+    },
+    "@ydbjs/core": {
+      "optional": true
+    },
+    "@ydbjs/query": {
+      "optional": true
+    },
+    "@ydbjs/value": {
       "optional": true
     },
     "@xenova/transformers": {
