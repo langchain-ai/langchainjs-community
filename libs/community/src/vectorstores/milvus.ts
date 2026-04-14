@@ -368,6 +368,7 @@ export class Milvus extends VectorStore {
 
     const searchResp = await this.client.search({
       collection_name: this.collectionName,
+      partition_names: this.partitionName ? [this.partitionName] : undefined,
       search_params: {
         anns_field: this.vectorField,
         topk: k,
@@ -724,8 +725,16 @@ export class Milvus extends VectorStore {
 
     if (hasCol === false) {
       throw new Error(
-        `Collection not found: ${this.collectionName}, please create collection before search.`
+        `Collection not found: ${this.collectionName}, please create collection before deletion.`
       );
+    }
+
+    // Milvus requires loaded collections before delete operations.
+    const loadResp = await this.client.loadCollectionSync({
+      collection_name: this.collectionName,
+    });
+    if (loadResp.error_code !== ErrorCode.SUCCESS) {
+      throw new Error(`Error loading collection: ${loadResp}`);
     }
 
     const { filter, ids } = params;
@@ -733,6 +742,7 @@ export class Milvus extends VectorStore {
     if (filter && !ids) {
       const deleteResp = await this.client.deleteEntities({
         collection_name: this.collectionName,
+        partition_name: this.partitionName,
         expr: filter,
       });
 
@@ -742,6 +752,7 @@ export class Milvus extends VectorStore {
     } else if (!filter && ids && ids.length > 0) {
       const deleteResp = await this.client.delete({
         collection_name: this.collectionName,
+        partition_name: this.partitionName,
         ids,
       });
 
