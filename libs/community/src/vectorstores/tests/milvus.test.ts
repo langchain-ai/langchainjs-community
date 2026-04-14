@@ -56,6 +56,11 @@ const { mockMilvusClient } = vi.hoisted(() => {
     error_code: "Success",
   };
 
+  const mockSearchResponse = {
+    status: { error_code: "Success" },
+    results: [],
+  };
+
   const client = {
     describeCollection: vi.fn(() => Promise.resolve(mockSchema)),
     insert: vi.fn(() => Promise.resolve(mockSuccessResponse)),
@@ -68,6 +73,10 @@ const { mockMilvusClient } = vi.hoisted(() => {
         value: true,
       })
     ),
+    loadCollectionSync: vi.fn(() => Promise.resolve(mockCreateSuccessResponse)),
+    search: vi.fn(() => Promise.resolve(mockSearchResponse)),
+    deleteEntities: vi.fn(() => Promise.resolve(mockSuccessResponse)),
+    delete: vi.fn(() => Promise.resolve(mockSuccessResponse)),
     loadCollection: vi.fn(() => Promise.resolve(mockSuccessResponse)),
     createPartition: vi.fn(() => Promise.resolve(mockSuccessResponse)),
     hasPartition: vi.fn(() => Promise.resolve(mockSuccessResponse)),
@@ -488,5 +497,85 @@ describe("Milvus", () => {
     expect(tagsField).toBeDefined();
     // JSON serialized {"category":"ai"} is 17 bytes, but default max is 65535
     expect(Number(tagsField.type_params.max_length)).toBe(65535);
+  });
+
+  test("Milvus search respects partitionName", async () => {
+    const { Milvus } = await import("../milvus.js");
+
+    const embeddings = new FakeEmbeddings();
+    const milvus = new Milvus(embeddings, {
+      collectionName: "test_collection",
+      partitionName: "alpha",
+      clientConfig: {
+        address: "localhost:19530",
+      },
+    });
+
+    await milvus.similaritySearchVectorWithScore([0, 1], 2);
+
+    expect(mockMilvusClient.search).toHaveBeenCalledTimes(1);
+    const searchCall = mockMilvusClient.search.mock.calls[0][0];
+    expect(searchCall.partition_names).toEqual(["alpha"]);
+  });
+
+  test("Milvus delete with filter loads collection and respects partitionName", async () => {
+    const { Milvus } = await import("../milvus.js");
+
+    const embeddings = new FakeEmbeddings();
+    const milvus = new Milvus(embeddings, {
+      collectionName: "test_collection",
+      partitionName: "alpha",
+      clientConfig: {
+        address: "localhost:19530",
+      },
+    });
+
+    await milvus.delete({ filter: 'topic == "cats"' });
+
+    expect(mockMilvusClient.loadCollectionSync).toHaveBeenCalledTimes(1);
+    expect(mockMilvusClient.deleteEntities).toHaveBeenCalledTimes(1);
+    const deleteCall = mockMilvusClient.deleteEntities.mock.calls[0][0];
+    expect(deleteCall.partition_name).toBe("alpha");
+  });
+
+  test("Milvus delete with ids loads collection and respects partitionName", async () => {
+    const { Milvus } = await import("../milvus.js");
+
+    const embeddings = new FakeEmbeddings();
+    const milvus = new Milvus(embeddings, {
+      collectionName: "test_collection",
+      partitionName: "alpha",
+      clientConfig: {
+        address: "localhost:19530",
+      },
+    });
+
+    await milvus.delete({ ids: ["doc-1"] });
+
+    expect(mockMilvusClient.loadCollectionSync).toHaveBeenCalledTimes(1);
+    expect(mockMilvusClient.delete).toHaveBeenCalledTimes(1);
+    const deleteCall = mockMilvusClient.delete.mock.calls[0][0];
+    expect(deleteCall.partition_name).toBe("alpha");
+  });
+
+  test("Milvus delete uses deletion-specific missing-collection error message", async () => {
+    const { Milvus } = await import("../milvus.js");
+
+    mockMilvusClient.hasCollection.mockResolvedValueOnce({
+      status: { error_code: ErrorCode.SUCCESS },
+      value: false,
+    });
+
+    const embeddings = new FakeEmbeddings();
+    const milvus = new Milvus(embeddings, {
+      collectionName: "missing_collection",
+      clientConfig: {
+        address: "localhost:19530",
+      },
+    });
+
+    await expect(milvus.delete({ ids: ["doc-1"] })).rejects.toThrow(
+      "Collection not found: missing_collection, please create collection before deletion."
+    );
   });
 });
