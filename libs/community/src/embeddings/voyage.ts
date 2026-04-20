@@ -219,6 +219,25 @@ export class VoyageEmbeddings
       });
 
       const json = await response.json();
+
+      if (!response.ok) {
+        // oxlint-disable-next-line typescript/no-explicit-any
+        const message =
+          // oxlint-disable-next-line typescript/no-explicit-any
+          (json as any)?.detail ??
+          // oxlint-disable-next-line typescript/no-explicit-any
+          (json as any)?.error?.message ??
+          JSON.stringify(json);
+        const err = new Error(
+          `Voyage AI API error (HTTP ${response.status}): ${message}`
+        );
+        // Attach status so AsyncCaller's defaultFailedAttemptHandler can
+        // skip retries for non-transient HTTP errors (4xx).
+        (err as NodeJS.ErrnoException & { status: number }).status =
+          response.status;
+        throw err;
+      }
+
       return json;
     };
 
