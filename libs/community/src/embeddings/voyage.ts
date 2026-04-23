@@ -221,7 +221,6 @@ export class VoyageEmbeddings
       const json = await response.json();
 
       if (!response.ok) {
-        // oxlint-disable-next-line typescript/no-explicit-any
         const message =
           // oxlint-disable-next-line typescript/no-explicit-any
           (json as any)?.detail ??
