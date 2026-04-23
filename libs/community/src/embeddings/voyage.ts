@@ -11,8 +11,8 @@ export interface VoyageEmbeddingsParams extends EmbeddingsParams {
 
   /**
    * Base URL for Voyage API requests.
-   * If your API key was created on the MongoDB Atlas UI, this should be 'https://ai.mongodb.com/v1'.
-   * If your API key was created on the Voyage AI Dashboard, this should be 'https://api.voyageai.com/v1'.
+   * If your API key was created on the MongoDB Atlas UI, it should look like `'https://ai.mongodb.com/v1'`.
+   * If your API key was created on the Voyage AI Dashboard, it should look like `'https://api.voyageai.com/v1'`.
    * @default "https://api.voyageai.com/v1"
    * @see https://www.mongodb.com/docs/voyageai/management/api-keys/?client-curl-default=curl#create-an-api-key
    */

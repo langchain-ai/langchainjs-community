@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
-import { VoyageEmbeddings } from "../voyage.js";
+import { VoyageEmbeddings } from "../voyage";
 
 describe("VoyageEmbeddings", () => {
   const fetchMock = vi.fn<typeof fetch>();
