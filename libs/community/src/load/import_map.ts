@@ -23,6 +23,7 @@ export * as chat_models__ibm from "../chat_models/ibm.js";
 export * as chat_models__iflytek_xinghuo from "../chat_models/iflytek_xinghuo/index.js";
 export * as chat_models__iflytek_xinghuo__web from "../chat_models/iflytek_xinghuo/web.js";
 export * as chat_models__llama_cpp from "../chat_models/llama_cpp.js";
+export * as chat_models__mediapipe_genai from "../chat_models/mediapipe_genai.js";
 export * as chat_models__minimax from "../chat_models/minimax.js";
 export * as chat_models__moonshot from "../chat_models/moonshot.js";
 export * as chat_models__novita from "../chat_models/novita.js";
