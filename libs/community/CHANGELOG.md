@@ -1,5 +1,35 @@
 # @langchain/community
 
+## 1.1.28
+
+### Patch Changes
+
+- [#44](https://github.com/langchain-ai/langchainjs-community/pull/44) [`f9a922e`](https://github.com/langchain-ai/langchainjs-community/commit/f9a922e81124db1ee0dcac8fada556886728ddd7) Thanks [@dependabot](https://github.com/apps/dependabot)! - chore(deps): bump fast-xml-parser from 5.5.9 to 5.7.0
+
+- [#30](https://github.com/langchain-ai/langchainjs-community/pull/30) [`9cd006c`](https://github.com/langchain-ai/langchainjs-community/commit/9cd006c629be032a0ad11dca3b21c9a6a0db9f51) Thanks [@christian-bromann](https://github.com/christian-bromann)! - fix(pdf-loader): support both pdf-parse v1 and v2
+
+- [#36](https://github.com/langchain-ai/langchainjs-community/pull/36) [`1e2e4bf`](https://github.com/langchain-ai/langchainjs-community/commit/1e2e4bf947ba0e1870df36f1610b0460edb77bf5) Thanks [@hntrl](https://github.com/hntrl)! - Fix Milvus collection loading before delete operations ([#9749](https://github.com/langchain-ai/langchainjs-community/issues/9749)) and partition name handling in search/delete ([#9748](https://github.com/langchain-ai/langchainjs-community/issues/9748))
+  - Added `loadCollectionSync()` call in the `delete()` method to ensure collection is loaded before delete operations
+  - Added `partition_names` parameter to `search()` call in `similaritySearchVectorWithScore()`
+  - Added `partition_name` parameter to both `deleteEntities()` and `delete()` calls
+  - Updated error message in delete method from "before search" to "before deletion"
+
+- [#41](https://github.com/langchain-ai/langchainjs-community/pull/41) [`5bd4246`](https://github.com/langchain-ai/langchainjs-community/commit/5bd424620443d786e3201d3690dece9ad103e702) Thanks [@RaschidJFR](https://github.com/RaschidJFR)! - Expose basePath option in VoyageEmbeddings class
+
+- [#43](https://github.com/langchain-ai/langchainjs-community/pull/43) [`b835751`](https://github.com/langchain-ai/langchainjs-community/commit/b83575157966f1d3a4394d0e2ead261d33bf4336) Thanks [@jkennedyvz](https://github.com/jkennedyvz)! - chore(deps): bump transitive dependencies to patch 6 security alerts
+
+  Updates pnpm overrides to resolve critical and high severity Dependabot
+  alerts in transitive dependencies reached via optional peerDependencies
+  and dev tooling:
+  - `protobufjs` `^7.2.5` -> `^7.5.5` (CVE-2026-41242)
+  - `basic-ftp` `>=5.2.0` -> `^5.3.0` (CVE-2026-39983, GHSA-rp42-5vxx-qpwr, GHSA-6v7q-wjvx-w8wg)
+  - `vite` new override `^7.3.2` (CVE-2026-39363, CVE-2026-39364, plus CVE-2026-39365 as a side effect)
+
+  No workspace package has these as direct dependencies; overrides affect
+  the monorepo lockfile only and do not change published package contents.
+
+- [#42](https://github.com/langchain-ai/langchainjs-community/pull/42) [`3657e90`](https://github.com/langchain-ai/langchainjs-community/commit/3657e90a19bd51312a0b3b429e17b9a696bca3e2) Thanks [@RaschidJFR](https://github.com/RaschidJFR)! - surface Voyage AI API errors in VoyageEmbeddings
+
 ## 1.1.27
 
 ### Patch Changes
