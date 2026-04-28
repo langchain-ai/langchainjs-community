@@ -109,7 +109,11 @@ function extractErrorMessage(body: unknown): string {
     const b = body as Record<string, unknown>;
     if (typeof b.detail === "string") return b.detail;
     const err = b.error;
-    if (typeof err === "object" && err !== null && typeof (err as Record<string, unknown>).message === "string") {
+    if (
+      typeof err === "object" &&
+      err !== null &&
+      typeof (err as Record<string, unknown>).message === "string"
+    ) {
       return (err as Record<string, unknown>).message as string;
     }
     return JSON.stringify(body);
@@ -266,7 +270,9 @@ export class VoyageEmbeddings
 
       if (!response.ok) {
         const message = extractErrorMessage(json);
-        const err = new Error(`Voyage AI API error (HTTP ${response.status}): ${message}`);
+        const err = new Error(
+          `Voyage AI API error (HTTP ${response.status}): ${message}`
+        );
         // Attach status so AsyncCaller's defaultFailedAttemptHandler can
         // skip retries for non-transient HTTP errors (4xx).
         (err as NodeJS.ErrnoException & { status: number }).status =
