@@ -24,8 +24,11 @@ overrides:
   '@hono/node-server': '>=1.19.10'
   express-rate-limit: '>=8.2.2'
   basic-ftp: ^5.3.0
-  axios: '>=0.30.3'
+  axios: '>=1.15.0'
   vite: ^7.3.2
+  '@xmldom/xmldom': '>=0.8.13 <0.9.0'
+  postcss: '>=8.5.10'
+  langsmith: '>=0.5.19'
 
 importers:
 
@@ -202,7 +205,7 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1
       langsmith:
-        specifier: '>=0.4.0 <1.0.0'
+        specifier: '>=0.5.19'
         version: 0.5.20(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0))
       math-expression-evaluator:
         specifier: ^2.0.0
@@ -5729,10 +5732,9 @@ packages:
   '@xenova/transformers@2.17.2':
     resolution: {integrity: sha512-lZmHqzrVIkSvZdKZEx7IYY51TK0WDrC8eR0c5IMnBsO8di8are1zzw8BlLhyO2TklZKLN5UffNGs1IJwT6oOqQ==}
 
-  '@xmldom/xmldom@0.8.12':
-    resolution: {integrity: sha512-9k/gHF6n/pAi/9tqr3m3aqkuiNosYTurLLUtc7xQ9sxB/wm7WPygCv8GYa6mS0fLJEHhqMC1ATYhz++U/lRHqg==}
+  '@xmldom/xmldom@0.8.13':
+    resolution: {integrity: sha512-KRYzxepc14G/CEpEGc3Yn+JKaAeT63smlDr+vjB8jRfgTBBI9wRj/nkQEO+ucV8p8I9bfKLWp37uHgFrbntPvw==}
     engines: {node: '>=10.0.0'}
-    deprecated: this version has critical issues, please update to the latest version
 
   '@xterm/xterm@5.5.0':
     resolution: {integrity: sha512-hqJHYaQb5OptNunnyAnkHyM8aCjZ1MEIDTQu1iIbbTD/xops91NB5yq1ZK/dC2JDbVWtF23zUtl9JE2NqwT87A==}
@@ -5987,8 +5989,8 @@ packages:
   aws4@1.13.2:
     resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
 
-  axios@1.14.0:
-    resolution: {integrity: sha512-3Y8yrqLSwjuzpXuZ0oIYZ/XGgLwUIBU3uLvbcpb0pidD9ctpShJd43KSlEEkVQg6DS0G9NKyzOvBfUtDKEyHvQ==}
+  axios@1.15.2:
+    resolution: {integrity: sha512-wLrXxPtcrPTsNlJmKjkPnNPK2Ihe0hn0wGSaTEiHRPxwjvJwT3hKmXF4dpqxmPO9SoNb2FsYXj/xEo0gHN+D5A==}
 
   azion@3.1.2:
     resolution: {integrity: sha512-Ngzxp7HO9p/odgyn79gdf67ONMelJuFJRZTTKHH7CP6CRI1Kz5vPhArv2Bxh6SPz++BC5WPiezehOLf9NwXA1g==}
@@ -8455,26 +8457,6 @@ packages:
   kuler@2.0.0:
     resolution: {integrity: sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==}
 
-  langsmith@0.5.18:
-    resolution: {integrity: sha512-3zuZUWffTHQ+73EAwnodADtf534VNEZUpXr9jC12qyG8/IQuJET7PRsCpTb9wX2lmBspakwLUpqpj3tNm/0bVA==}
-    peerDependencies:
-      '@opentelemetry/api': '*'
-      '@opentelemetry/exporter-trace-otlp-proto': '*'
-      '@opentelemetry/sdk-trace-base': '*'
-      openai: '*'
-      ws: '>=7'
-    peerDependenciesMeta:
-      '@opentelemetry/api':
-        optional: true
-      '@opentelemetry/exporter-trace-otlp-proto':
-        optional: true
-      '@opentelemetry/sdk-trace-base':
-        optional: true
-      openai:
-        optional: true
-      ws:
-        optional: true
-
   langsmith@0.5.20:
     resolution: {integrity: sha512-ULhLM8RswvQDXufLtNtvclHrWCBx8Cb5UPI6lAZC+8Dq59iHsVPz/3Ac9khWNm1VIvChRsuykixD/WrmzuuA3Q==}
     peerDependencies:
@@ -9642,8 +9624,8 @@ packages:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
     engines: {node: '>= 0.4'}
 
-  postcss@8.5.8:
-    resolution: {integrity: sha512-OW/rX8O/jXnm82Ey1k44pObPtdblfiuWnrd8X7GJ7emImCOstunGbXUpp7HdBrFQX6rJzn3sPT397Wp5aCwCHg==}
+  postcss@8.5.12:
+    resolution: {integrity: sha512-W62t/Se6rA0Az3DfCL0AqJwXuKwBeYg6nOaIgzP+xZ7N5BFCI7DYi1qs6ygUYT6rvfi6t9k65UMLJC+PHZpDAA==}
     engines: {node: ^10 || ^12 || >=14}
 
   postgres-array@2.0.0:
@@ -9973,7 +9955,7 @@ packages:
     resolution: {integrity: sha512-pOLi+Gdll3JekwuFjXO3fTq+L9lzMQGcSq7M5gIjExcl3Gu1hd4XXuf5o3+LuSBsaULQH7DiNbsqPd1chVpQGQ==}
     engines: {node: '>=10.7.0'}
     peerDependencies:
-      axios: '>=0.30.3'
+      axios: '>=1.15.0'
 
   retry-request@7.0.2:
     resolution: {integrity: sha512-dUOvLMJ0/JJYEn8NrpOaGNE7X3vpI5XlZS/u0ANjqtcZVKnIxP7IgCFwrKTxENw29emmwug53awKtaMm4i9g5w==}
@@ -14168,7 +14150,7 @@ snapshots:
 
   '@gradientai/nodejs-sdk@1.12.1':
     dependencies:
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       form-data: 4.0.5
     transitivePeerDependencies:
       - debug
@@ -14769,7 +14751,7 @@ snapshots:
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.21
-      langsmith: 0.5.18(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@3.25.76))(ws@8.20.0(bufferutil@4.1.0))
+      langsmith: 0.5.20(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@3.25.76))(ws@8.20.0(bufferutil@4.1.0))
       mustache: 4.2.0
       p-queue: 6.6.2
       uuid: 11.1.0
@@ -14789,7 +14771,7 @@ snapshots:
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.21
-      langsmith: 0.5.18(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0))
+      langsmith: 0.5.20(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0))
       mustache: 4.2.0
       p-queue: 6.6.2
       uuid: 11.1.0
@@ -14817,7 +14799,7 @@ snapshots:
 
   '@layerup/layerup-security@1.6.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6)':
     dependencies:
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       openai: 4.104.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6)
     transitivePeerDependencies:
       - debug
@@ -14928,7 +14910,7 @@ snapshots:
 
   '@mendable/firecrawl-js@4.18.1':
     dependencies:
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       firecrawl: 4.16.0
       typescript-event-target: 1.1.2
       zod: 3.25.76
@@ -14939,8 +14921,8 @@ snapshots:
   '@mistralai/mistralai@1.15.1(bufferutil@4.1.0)':
     dependencies:
       ws: 8.20.0(bufferutil@4.1.0)
-      zod: 4.3.6
-      zod-to-json-schema: 3.25.2(zod@4.3.6)
+      zod: 3.25.76
+      zod-to-json-schema: 3.25.2(zod@3.25.76)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -15498,7 +15480,7 @@ snapshots:
 
   '@premai/prem-sdk@0.3.100':
     dependencies:
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       form-data: 4.0.5
     transitivePeerDependencies:
       - debug
@@ -17003,7 +16985,7 @@ snapshots:
       - bare-buffer
       - react-native-b4a
 
-  '@xmldom/xmldom@0.8.12': {}
+  '@xmldom/xmldom@0.8.13': {}
 
   '@xterm/xterm@5.5.0':
     optional: true
@@ -17168,7 +17150,7 @@ snapshots:
       '@crawlee/types': 3.16.0
       ansi-colors: 4.1.3
       async-retry: 1.3.3
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       content-type: 1.0.5
       ow: 0.28.2
       proxy-agent: 6.5.0
@@ -17295,7 +17277,7 @@ snapshots:
 
   aws4@1.13.2: {}
 
-  axios@1.14.0(debug@4.4.3):
+  axios@1.15.2(debug@4.4.3):
     dependencies:
       follow-redirects: 1.15.11(debug@4.4.3)
       form-data: 4.0.5
@@ -17880,7 +17862,7 @@ snapshots:
 
   closevector-node@0.1.6:
     dependencies:
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       closevector-common: 0.1.3
       closevector-hnswlib-node: 0.1.1
       jsonwebtoken: 9.0.3
@@ -17905,7 +17887,7 @@ snapshots:
 
   closevector-web@0.1.6:
     dependencies:
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       closevector-browserify-zlib: 0.1.0-alpha.3
       closevector-common: 0.1.3
       closevector-crypto-jwt: 0.1.0-alpha.3
@@ -19005,7 +18987,7 @@ snapshots:
 
   firecrawl@4.16.0:
     dependencies:
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       typescript-event-target: 1.1.2
       zod: 3.25.76
       zod-to-json-schema: 3.25.2(zod@3.25.76)
@@ -19508,7 +19490,7 @@ snapshots:
       '@types/debug': 4.1.13
       '@types/node': 18.19.130
       '@types/tough-cookie': 4.0.5
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       camelcase: 6.3.0
       debug: 4.4.3(supports-color@8.1.1)
       dotenv: 16.6.1
@@ -19519,7 +19501,7 @@ snapshots:
       jsonwebtoken: 9.0.3
       load-esm: 1.0.3
       mime-types: 2.1.35
-      retry-axios: 2.6.0(axios@1.14.0)
+      retry-axios: 2.6.0(axios@1.15.2)
       tough-cookie: 4.1.4
     transitivePeerDependencies:
       - supports-color
@@ -20314,22 +20296,13 @@ snapshots:
 
   kuler@2.0.0: {}
 
-  langsmith@0.5.18(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@3.25.76))(ws@8.20.0(bufferutil@4.1.0)):
+  langsmith@0.5.20(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@3.25.76))(ws@8.20.0(bufferutil@4.1.0)):
     dependencies:
       p-queue: 6.6.2
       uuid: 10.0.0
     optionalDependencies:
       '@opentelemetry/api': 1.9.1
       openai: 6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@3.25.76)
-      ws: 8.20.0(bufferutil@4.1.0)
-
-  langsmith@0.5.18(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0)):
-    dependencies:
-      p-queue: 6.6.2
-      uuid: 10.0.0
-    optionalDependencies:
-      '@opentelemetry/api': 1.9.1
-      openai: 6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6)
       ws: 8.20.0(bufferutil@4.1.0)
 
   langsmith@0.5.20(@opentelemetry/api@1.9.1)(openai@6.33.0(ws@8.20.0(bufferutil@4.1.0))(zod@4.3.6))(ws@8.20.0(bufferutil@4.1.0)):
@@ -20568,7 +20541,7 @@ snapshots:
 
   mammoth@1.12.0:
     dependencies:
-      '@xmldom/xmldom': 0.8.12
+      '@xmldom/xmldom': 0.8.13
       argparse: 1.0.10
       base64-js: 1.5.1
       bluebird: 3.4.7
@@ -20640,7 +20613,7 @@ snapshots:
       '@supabase/supabase-js': 2.101.1(bufferutil@4.1.0)
       '@types/jest': 30.0.0
       '@types/pg': 8.20.0
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       better-sqlite3: 12.6.2
       cloudflare: 4.5.0
       groq-sdk: 0.3.0
@@ -20967,7 +20940,7 @@ snapshots:
 
   officeparser@6.0.7:
     dependencies:
-      '@xmldom/xmldom': 0.8.12
+      '@xmldom/xmldom': 0.8.13
       concat-stream: 2.0.0
       file-type: 21.3.4
       pdfjs-dist: 5.6.205
@@ -21521,7 +21494,7 @@ snapshots:
 
   possible-typed-array-names@1.1.0: {}
 
-  postcss@8.5.8:
+  postcss@8.5.12:
     dependencies:
       nanoid: 3.3.11
       picocolors: 1.1.1
@@ -21901,9 +21874,9 @@ snapshots:
       onetime: 7.0.0
       signal-exit: 4.1.0
 
-  retry-axios@2.6.0(axios@1.14.0):
+  retry-axios@2.6.0(axios@1.15.2):
     dependencies:
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
 
   retry-request@7.0.2:
     dependencies:
@@ -22342,7 +22315,7 @@ snapshots:
 
   sonix-speech-recognition@2.1.1:
     dependencies:
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       form-data: 4.0.5
     transitivePeerDependencies:
       - debug
@@ -23082,7 +23055,7 @@ snapshots:
   typesense@3.0.5(@babel/runtime@7.29.2):
     dependencies:
       '@babel/runtime': 7.29.2
-      axios: 1.14.0(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       loglevel: 1.9.2
       tslib: 2.8.1
     transitivePeerDependencies:
@@ -23347,7 +23320,7 @@ snapshots:
       esbuild: 0.28.0
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
-      postcss: 8.5.8
+      postcss: 8.5.12
       rollup: 4.60.1
       tinyglobby: 0.2.15
     optionalDependencies:
@@ -23362,7 +23335,7 @@ snapshots:
       esbuild: 0.28.0
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
-      postcss: 8.5.8
+      postcss: 8.5.12
       rollup: 4.60.1
       tinyglobby: 0.2.15
     optionalDependencies:
