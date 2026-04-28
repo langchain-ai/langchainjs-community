@@ -144,7 +144,7 @@
     "duck-duck-scrape": "^2.2.5",
     "epub2": "^3.0.1",
     "faiss-node": "^0.5.1",
-    "fast-xml-parser": "^5.5.7",
+    "fast-xml-parser": "^5.7.0",
     "firebase-admin": "^13.6.1",
     "google-auth-library": "^9.10.0",
     "googleapis": "^171.4.0",
