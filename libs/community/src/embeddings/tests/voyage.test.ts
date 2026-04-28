@@ -78,8 +78,13 @@ describe("VoyageEmbeddings", () => {
 
   test("uses basePath provided in constructor", async () => {
     const fetchMock = vi.fn<typeof fetch>().mockResolvedValue({
+      ok: true,
+      status: 200,
       json: async () => ({
-        data: [{ embedding: [0.1, 0.2, 0.3] }],
+        object: "list",
+        data: [{ object: "embedding", embedding: [0.1, 0.2, 0.3], index: 0 }],
+        model: "voyage-01",
+        usage: { total_tokens: 3 },
       }),
     } as Response);
     vi.stubGlobal("fetch", fetchMock);
