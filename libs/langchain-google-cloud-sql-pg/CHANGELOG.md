@@ -1,5 +1,11 @@
 # @langchain/google-cloud-sql-pg
 
+## 1.0.23
+
+### Patch Changes
+
+- [#39](https://github.com/langchain-ai/langchainjs-community/pull/39) [`217ad36`](https://github.com/langchain-ai/langchainjs-community/commit/217ad36df6b3d62f38f97319bdb5e4ae33afc8ec) Thanks [@hntrl](https://github.com/hntrl)! - fix(google-cloud-sql-pg): parameterize delete id bindings in vector store deletion
+
 ## 1.0.22
 
 ### Patch Changes
