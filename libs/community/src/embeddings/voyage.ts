@@ -85,6 +85,30 @@ export interface CreateVoyageEmbeddingRequest {
 }
 
 /**
+ * The shape of a successful response from the Voyage AI embeddings endpoint.
+ * @see https://docs.voyageai.com/reference/embeddings-api
+ */
+interface VoyageEmbeddingResponse {
+  object: "list";
+  data: Array<{ object: "embedding"; embedding: number[]; index: number }>;
+  model: string;
+  usage: { total_tokens: number };
+}
+
+function extractErrorMessage(body: unknown): string {
+  if (typeof body === "object" && body !== null) {
+    const b = body as Record<string, unknown>;
+    if (typeof b.detail === "string") return b.detail;
+    const err = b.error;
+    if (typeof err === "object" && err !== null && typeof (err as Record<string, unknown>).message === "string") {
+      return (err as Record<string, unknown>).message as string;
+    }
+    return JSON.stringify(body);
+  }
+  return `Unknown error: ${String(body)}`;
+}
+
+/**
  * A class for generating embeddings using the Voyage AI API.
  */
 export class VoyageEmbeddings
@@ -205,7 +229,9 @@ export class VoyageEmbeddings
    * @param request - An object with properties to configure the request.
    * @returns A Promise that resolves to the response from the Voyage AI API.
    */
-  private async embeddingWithRetry(request: CreateVoyageEmbeddingRequest) {
+  private async embeddingWithRetry(
+    request: CreateVoyageEmbeddingRequest
+  ): Promise<VoyageEmbeddingResponse> {
     const makeCompletionRequest = async () => {
       const url = `${this.apiUrl}`;
       const response = await fetch(url, {
@@ -218,18 +244,17 @@ export class VoyageEmbeddings
         body: JSON.stringify(request),
       });
 
-      const json = await response.json();
+      let json: unknown;
+      try {
+        json = await response.json();
+      } catch (error) {
+        console.error("Failed to parse JSON response:", error);
+        json = null;
+      }
 
       if (!response.ok) {
-        const message =
-          // oxlint-disable-next-line typescript/no-explicit-any
-          (json as any)?.detail ??
-          // oxlint-disable-next-line typescript/no-explicit-any
-          (json as any)?.error?.message ??
-          JSON.stringify(json);
-        const err = new Error(
-          `Voyage AI API error (HTTP ${response.status}): ${message}`
-        );
+        const message = extractErrorMessage(json);
+        const err = new Error(`Voyage AI API error (HTTP ${response.status}): ${message}`);
         // Attach status so AsyncCaller's defaultFailedAttemptHandler can
         // skip retries for non-transient HTTP errors (4xx).
         (err as NodeJS.ErrnoException & { status: number }).status =
@@ -237,7 +262,7 @@ export class VoyageEmbeddings
         throw err;
       }
 
-      return json;
+      return json as VoyageEmbeddingResponse;
     };
 
     return this.caller.call(makeCompletionRequest);
