@@ -2906,6 +2906,17 @@
         "default": "./dist/tools/stackexchange.js"
       }
     },
+    "./tools/unirate": {
+      "input": "./src/tools/unirate.ts",
+      "require": {
+        "types": "./dist/tools/unirate.d.cts",
+        "default": "./dist/tools/unirate.cjs"
+      },
+      "import": {
+        "types": "./dist/tools/unirate.d.ts",
+        "default": "./dist/tools/unirate.js"
+      }
+    },
     "./tools/wikipedia_query_run": {
       "input": "./src/tools/wikipedia_query_run.ts",
       "require": {

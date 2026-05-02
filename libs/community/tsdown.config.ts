@@ -36,6 +36,7 @@ export default getBuildConfig({
     "./src/tools/serpapi.ts",
     "./src/tools/serper.ts",
     "./src/tools/stackexchange.ts",
+    "./src/tools/unirate.ts",
     "./src/tools/wikipedia_query_run.ts",
     "./src/tools/wolframalpha.ts",
     "./src/agents/toolkits/aws_sfn.ts",
