@@ -10,9 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:langchain-ai/langchainjs.git"
+    "url": "git@github.com:langchain-ai/langchainjs-community.git"
   },
-  "homepage": "https://github.com/langchain-ai/langchainjs/tree/main/libs/community/langchain-azure-dynamic-sessions/",
+  "homepage": "https://github.com/langchain-ai/langchainjs/tree/main/libs/langchain-azure-dynamic-sessions/",
   "scripts": {
     "build": "turbo build:compile --filter @langchain/azure-dynamic-sessions --output-logs new-only",
     "build:compile": "tsdown",

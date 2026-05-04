@@ -10,9 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:langchain-ai/langchainjs.git"
+    "url": "git@github.com:langchain-ai/langchainjs-community.git"
   },
-  "homepage": "https://github.com/langchain-ai/langchainjs/tree/main/libs/community/langchain-azure-cosmosdb/",
+  "homepage": "https://github.com/langchain-ai/langchainjs-community/tree/main/libs/langchain-azure-cosmosdb/",
   "scripts": {
     "build": "turbo build:compile --filter @langchain/azure-cosmosdb --output-logs new-only",
     "build:compile": "tsdown",

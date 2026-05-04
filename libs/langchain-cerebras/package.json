@@ -10,9 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:langchain-ai/langchainjs.git"
+    "url": "git@github.com:langchain-ai/langchainjs-community.git"
   },
-  "homepage": "https://github.com/langchain-ai/langchainjs/tree/main/libs/community/langchain-cerebras/",
+  "homepage": "https://github.com/langchain-ai/langchainjs/tree/main/libs/langchain-cerebras/",
   "scripts": {
     "build": "turbo build:compile --filter @langchain/cerebras --output-logs new-only",
     "build:compile": "tsdown",
