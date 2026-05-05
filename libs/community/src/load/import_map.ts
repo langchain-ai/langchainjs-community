@@ -202,6 +202,7 @@ export * as tools__searxng_search from "../tools/searxng_search.js";
 export * as tools__serpapi from "../tools/serpapi.js";
 export * as tools__serper from "../tools/serper.js";
 export * as tools__stackexchange from "../tools/stackexchange.js";
+export * as tools__unirate from "../tools/unirate.js";
 export * as tools__wikipedia_query_run from "../tools/wikipedia_query_run.js";
 export * as tools__wolframalpha from "../tools/wolframalpha.js";
 export * as utils__cassandra from "../utils/cassandra.js";
