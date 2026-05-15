@@ -2686,6 +2686,17 @@
         "default": "./dist/tools/brave_search.js"
       }
     },
+    "./tools/snap_private_payments": {
+      "input": "./src/tools/snap_private_payments.ts",
+      "require": {
+        "types": "./dist/tools/snap_private_payments.d.cts",
+        "default": "./dist/tools/snap_private_payments.cjs"
+      },
+      "import": {
+        "types": "./dist/tools/snap_private_payments.d.ts",
+        "default": "./dist/tools/snap_private_payments.js"
+      }
+    },
     "./tools/calculator": {
       "input": "./src/tools/calculator.ts",
       "require": {
