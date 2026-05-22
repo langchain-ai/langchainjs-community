@@ -134,7 +134,6 @@ export default getBuildConfig({
     "./src/chat_models/iflytek_xinghuo/index.ts",
     "./src/chat_models/iflytek_xinghuo/web.ts",
     "./src/chat_models/llama_cpp.ts",
-    "./src/chat_models/minimax.ts",
     "./src/chat_models/moonshot.ts",
     "./src/chat_models/novita.ts",
     "./src/chat_models/perplexity.ts",
