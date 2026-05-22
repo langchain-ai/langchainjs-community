@@ -1,7 +1,10 @@
 import { getEnvironmentVariable } from "@langchain/core/utils/env";
 import { Embeddings, EmbeddingsParams } from "@langchain/core/embeddings";
 import { chunkArray } from "@langchain/core/utils/chunk_array";
-import { ConfigurationParameters } from "../chat_models/minimax.js";
+export interface ConfigurationParameters {
+  basePath?: string;
+  headers?: Record<string, string>;
+}
 
 /**
  * Interface for MinimaxEmbeddings parameters. Extends EmbeddingsParams and

@@ -937,17 +937,6 @@
         "default": "./dist/chat_models/llama_cpp.js"
       }
     },
-    "./chat_models/minimax": {
-      "input": "./src/chat_models/minimax.ts",
-      "require": {
-        "types": "./dist/chat_models/minimax.d.cts",
-        "default": "./dist/chat_models/minimax.cjs"
-      },
-      "import": {
-        "types": "./dist/chat_models/minimax.d.ts",
-        "default": "./dist/chat_models/minimax.js"
-      }
-    },
     "./chat_models/moonshot": {
       "input": "./src/chat_models/moonshot.ts",
       "require": {
