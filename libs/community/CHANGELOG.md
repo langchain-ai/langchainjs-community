@@ -1,5 +1,11 @@
 # @langchain/community
 
+## 1.1.30
+
+### Patch Changes
+
+- [#65](https://github.com/langchain-ai/langchainjs-community/pull/65) [`b58e005`](https://github.com/langchain-ai/langchainjs-community/commit/b58e005f9ea9febd3adb4748375858dd7047f988) Thanks [@hntrl](https://github.com/hntrl)! - fix deprecation readme
+
 ## 1.1.29
 
 ### Patch Changes
