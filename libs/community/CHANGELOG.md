@@ -1,5 +1,11 @@
 # @langchain/community
 
+## 1.1.29
+
+### Patch Changes
+
+- [#63](https://github.com/langchain-ai/langchainjs-community/pull/63) [`bb52506`](https://github.com/langchain-ai/langchainjs-community/commit/bb52506bc74ac25cbe747364cec5edb2e14e0b86) Thanks [@hntrl](https://github.com/hntrl)! - The community package is being sunsetted. See [#61](https://github.com/langchain-ai/langchain-community/issues/61) for details and guidance. Thank you to everyone who has contributed integrations, fixes, reviews, and maintenance over the years.
+
 ## 1.1.28
 
 ### Patch Changes
