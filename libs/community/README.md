@@ -2,6 +2,9 @@
 
 [![CI](https://github.com/langchain-ai/langchainjs/actions/workflows/ci.yml/badge.svg)](https://github.com/langchain-ai/langchainjs/actions/workflows/ci.yml) ![npm](https://img.shields.io/npm/dm/@langchain/community) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/langchain.svg?style=social&label=Follow%20%40LangChain)](https://x.com/langchain)
 
+> [!WARNING]
+> **`@langchain/community` is being sunset.** See [#61](https://github.com/langchain-ai/langchain-community/issues/61) for details and guidance. Thank you to everyone who has contributed integrations, fixes, reviews, and maintenance over the years.
+
 ## Quick Install
 
 ```bash

@@ -4,23 +4,8 @@ This repository contains the community workspace for LangChain.js. It includes t
 
 The repo also includes internal tooling used to build, test, and validate packages consistently across the workspace.
 
-## What's In This Repo
-
-- `libs/community`: the `@langchain/community` package source, tests, and package-level documentation
-- `libs/langchain-*`: standalone integration packages published from this repo, including:
-  - `@langchain/azure-cosmosdb`
-  - `@langchain/azure-dynamic-sessions`
-  - `@langchain/baidu-qianfan`
-  - `@langchain/cerebras`
-  - `@langchain/google-cloud-sql-pg`
-  - `@langchain/mixedbread-ai`
-  - `@langchain/nomic`
-  - `@langchain/yandex`
-- `internal/build`: shared build utilities built around `tsdown`
-- `internal/standard-tests`: shared standard test harnesses used by workspace packages
-- `internal/tsconfig`: shared TypeScript configuration for workspace packages
-- `.github/workflows`: CI for formatting, linting, unit tests, and scheduled standard integration tests
-- `.changeset`: release metadata and versioning files for Changesets
+> [!WARNING]
+> **The community repo is being sunset.** See [#61](https://github.com/langchain-ai/langchain-community/issues/61) for details and guidance. Thank you to everyone who has contributed integrations, fixes, reviews, and maintenance over the years.
 
 For end-user installation and package-specific usage examples, see the `README.md` file inside the relevant package under `libs/`.
 
