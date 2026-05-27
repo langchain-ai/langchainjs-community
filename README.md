@@ -5,7 +5,7 @@ This repository contains the community workspace for LangChain.js. It includes t
 The repo also includes internal tooling used to build, test, and validate packages consistently across the workspace.
 
 > [!WARNING]
-> **The community repo is being sunset.** See [#61](https://github.com/langchain-ai/langchain-community/issues/61) for details and guidance. Thank you to everyone who has contributed integrations, fixes, reviews, and maintenance over the years.
+> **The community repo is being sunset.** See [#61](https://github.com/langchain-ai/langchainjs-community/issues/61) for details and guidance. Thank you to everyone who has contributed integrations, fixes, reviews, and maintenance over the years.
 
 For end-user installation and package-specific usage examples, see the `README.md` file inside the relevant package under `libs/`.
 
